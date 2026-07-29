@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurt J. Foster</title>
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Reset & Base Styles --- */
+        :root {
+            --bg-color: #111111;
+            --card-color: #1a1a1a;
+            --border-color: #2c2c2c;
+            --primary-text-color: #f0f0f0;
+            --secondary-text-color: #a0a0a0;
+            --accent-color: #2DD4BF; /* Teal accent */
+            --font-family: 'Inter', sans-serif;
+            --avatar-size: 96px;     /* change to taste (orginally 72px)*/
+            --avatar-border: 4px;
+            --gap: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* CHANGED: Increased bottom padding for better spacing between sections */
+        section {
+            padding: 4rem 0 6rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--secondary-text-color);
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        /* --- Header / Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 1.5rem 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Container aligns avatar to the left of the name and centers vertically */
+        .profile{
+            display: inline-flex;
+            align-items: center;
+            gap: var(--gap);
+            /* adjust spacing/flow for small screens */
+            flex-wrap: nowrap;
+        }
+
+        /* Circular face image with consistent cropping and accent border */
+        .avatar{
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: 50%;
+            border: var(--avatar-border) solid var(--accent-color);
+            object-fit: cover;          /* crop to fill circle */
+            display: block;
+            background-color: #f3f4f6;  /* subtle fallback bg if image has transparency */
+        }
+
+        /* Name styles — adapt to your site's type scale */
+        .name{
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        /* Responsive: reduce avatar on narrow screens */
+        @media (max-width: 420px){
+            :root { --avatar-size: 56px; --avatar-border: 3px; --gap: 0.6rem; }
+            .name{ font-size: 1rem; }
+        }
+
+        /* Optional: use keyboard-focus-visible outline on avatar if clickable later */
+        .avatar:focus{
+            outline: 2px solid rgba(45,212,191,0.25);
+            outline-offset: 3px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-color);
+			border-radius: 8px;
+            background-color: transparent;
+            color: var(--primary-text-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+        }
+
+        /* --- Grid Layout for Cards --- */
+        /* CHANGED: Switched to a single-column layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Always one column */
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* --- Card Styling --- */
+        .card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+			border-radius: 8px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4); /* Glow effect */
+        }
+        
+        .card-main-info {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .card-logo {
+            width: 60px;
+            height: 60px;
+			border-radius: 8px;
+            background-color: #2c2c2c; /* Placeholder for logo */
+            flex-shrink: 0;
+        }
+        
+        .card-text-content {
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-text-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .card .company {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .date {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* --- Card Expansion on Click --- */
+        .card .details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out, opacity 0.5s ease-in, margin-top 0.6s ease-out;
+            flex-grow: 1;
+        }
+
+        .card.expanded .details {
+            max-height: 900px; /* Adjust as needed for content */
+            opacity: 1;
+            margin-top: 1.5rem; /* Add space when expanded */
+        }
+
+        .card .details ul {
+            list-style-position: inside;
+            padding-left: 5px;
+        }
+
+        .card .details li {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-text-color);
+        }
+        
+        /* --- "View More" Functionality --- */
+        .view-more-container {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .card-grid .card.hidden {
+            display: none;
+        }
+        
+        /* --- Animations for Showing/Hiding Cards --- */
+        /* ADDED: Keyframes for both fade-in and fade-out animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Class to trigger the fade-in animation */
+        .card.revealed {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* ADDED: Class to trigger the fade-out animation */
+        .card.hiding {
+            animation: fadeOut 0.6s ease-out forwards;
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+        
+        .footer p {
+            max-width: 800px;
+            margin: 0 auto 1rem;
+        }
+        
+        /* --- Responsive Adjustments --- */
+        /* This media query is no longer needed for the grid but kept for potential future use */
+        @media (max-width: 768px) {
+            /* Styles for smaller screens can go here if needed */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero container">
+        <div class="profile">
+            <img class="avatar" src="images/profile-pic.png" alt="Profile">
+            <h1 class="name" style="font-size: 36px;">Kurt J. Foster</h1>
+        </div>
+        <div class="subtitle">
+            <!--
+            <p>Welcome to my website. Here you will find my work history, education, and some projects I'm working on.</p><br>
+            -->
+            <p><b style="color:rgb(208, 208, 208);">I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.</b></p><br>
+            <p>With seven years of hands-on experience and a two-year technical degree, I bring practical skills that will add measurable value to your company.</p><br>
+            <p>My projects section showcases electro-mechanical projects with over 100 pages of documentation, schematics, and CAD files, including an assembly with more than 700 parts. All projects are open-sourced under the MIT License for unrestricted use.</p><br>
+            <p>In my free time, I enjoy spending time outdoors and exploring technical projects in optics and astronomy.</p>
+        </div>
+        <div class="hero-buttons">
+            <a href="#work" class="btn">WORK HISTORY</a>
+			<a href="#education" class="btn">EDUCATION</a>
+			<a href="#projects" class="btn">PROJECTS</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Work History Section -->
+        <section id="work" class="container">
+            <h2>Work History</h2>
+            <p>Detailed Work History</p>
+            <div class="card-grid" id="work-grid">
+                <!-- CHANGED: Made 3 cards visible initially -->
+                <!-- CHANGED: Education section in work history? Commenting out for now... -->
+                <!--
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/college-pic.png" alt="College picture logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Mechatronics Student</h3>
+                            <p class="company">Community College/University · Part-time</p>
+                            <p class="date">Jan 2025 - Present · 8 mos <br> Online Coursework</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><u>In Progress</u>:</p>
+						<p><b><i>Online Certificate, </i></b></p>
+						<p><b><i>Mechatronics for Manufacturing Engineering</i></b></p>
+						<br>
+						<p>Certificate in progress. Started this to stay up to date on emerging technologies within manufacturing, and to learn new skills within automation and robotics. The program covers intelligent system prototyping, sensors and actuators for mechatronic systems, microcontroller systems structure and programming, and digital control theory.</p>
+                    </div>
+                </div>
+                -->
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/ice-cream-logo.jpg" alt="Oregon Ice Cream Co. Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Manufacturing Maintenance Technician</h3>
+                            <p class="company">Oregon Ice Cream Co. · Full-time</p>
+                            <p class="date">Dec 2025 - Jul 2026 · 8 mos <br> Eugene, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <ul>
+                            <li>Troubleshot, repaired, and maintained mechanical, electrical, and pneumatics for manufacturing/packaging equipment.</li>
+                            <li>Performed daily inspections and preventive maintenance per established schedules.</li>
+                            <li>Quickly diagnosed mechanical issues to reduce equipment downtime and maintain product quality.</li>
+                            <li>Collaborated with production teams to support machine set-ups, changeovers, and calibrations.</li>
+                            <li>Used CMMS (Computerized Maintenance Management System) to log work orders and equipment history.</li>
+                            <li>Supported facility maintenance, including HVAC, refrigeration, plumbing, and general building systems.</li>
+                            <li>Performed safe start-up/shut-down of ammonia (R-717) refrigeration systems in accordance with safety standards.</li>
+                            <li>Participated in continuous improvement initiatives and supported capital projects as needed.</li>
+                            <li>Maintained a clean, safe, and organized work environment in compliance with GMP, OSHA, and food safety standards.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/ninkasi-logo.jpg" alt="Ninkasi Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Packaging Maintenance Technician</h3>
+                            <p class="company">Ninkasi Brewing Company · Full-time</p>
+                            <p class="date">Oct 2024 - Dec 2024 · 3 mos <br> Eugene, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <ul>
+                            <li>Performed equipment adjustments and enhancements as required by production demands.</li>
+                            <li>Ensured the Packaging Team understands and adheres to the preventive maintenance program.</li>
+                            <li>Followed preventative maintenance program, making improvements/updates as needed.</li>
+							<li>Performed preventative maintenance and trouble-shoot mechanical issues as they arise.</li>
+							<li>Reported to Facilities Manager to coordinate additional maintenance, as necessary</li>
+							<li>Maintained SOPs to meet changing machine specifications, training needs, and an evolving business.</li>
+							<li>Performed all tasks in an efficient, safe, and productive manner.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card"> <!-- This card is now visible -->
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Equipment Maintenance Technician</h3>
+                            <p class="company">Tesla, Inc. · Full-time</p>
+                            <p class="date">Apr 2024 - Jun 2024 · 3 mos <br> Sparks, Nevada, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Responsible for repairing manufacturing equipment in Powertrain Manufacturing.</p><br>
+						<p>Applied technical skills to install, maintain and repair high-speed high-volume mechanical and electrical systems, factory automation and robotics.</p><br>
+                        <ul>
+                            <li>Troubleshot and maintained 70+ large Fanuc industrial robots (welding, material handilng etc.) for the battery enclosure lines.</li>
+                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>
+							<li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>
+							<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>
+							<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>
+							<li>Communicated with supervisors and management for fast repair execution.</li>
+							<li>Talked with production associates on production ergonomics and improving machine output.</li>
+                        </ul><br>
+						<p><b>Work History:</b></p><br>
+						<p>
+							Apr—Jun 2021 • 3 mos<br>
+							Model 3/Y Battery Pack, Enclosure Weld<br><br>
+						</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Cards -->
+                <div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/hp-logo.jpg" alt="HP Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Repair and Maintenance Technician</h3>
+                            <p class="company">HP, Inc. (Kforce, Inc. Contractor) · Full-time</p>
+                            <p class="date">Aug 2023 - Dec 2023 · 5 mos <br> Corvallis, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Repairing industrial automated systems.</p><br>
+                        <ul>
+                            <li>Editing and troubleshooting PLC ladder logic and command language programs.</li>
+                            <li>Determining root cause analysis of circuitry, control panels, and mechanical systems.</li>
+							<li>Following through with timely repairs, updates, and documentation of issues resolved.</li>
+							<li>First responding troubleshooter diagnosing a wide variety of electromechanical issues.</li>
+							<li>Participating in the development of maintenance and operational documentation of equipment.</li>
+							<li>Evaluating spare part needs and use available systems to warehouse and track inventory/availability.</li>
+							<li>Interpreting mechanical drawings, schematics, printouts, specifications, and test procedures.</li>
+							<li>Ensuring measuring/diagnosing instruments are calibrated and verified on a regular basis.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/eg-logo.jpg" alt="EG Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Automation Systems Technician</h3>
+                            <p class="company">Automated Hydroponic Technologies, ABN · Full-time</p>
+                            <p class="date">Mar 2021 - Jul 2023 · 2 yrs 5 mos <br> Corvallis, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Gravity-fed nutrient dosing for hydroponics.</p><br>
+						<p>Utilized my automation experience to design, build, and test a UL-compliant 
+						consumer appliance that combines microcontrollers and industrial automation 
+						technology into a prototype product that could ideally sustain a hydroponics 
+						farming operation for years without major repairs required.</p><br>
+                        <p>Responsibilities:</p><br>
+						<ul>
+                            <li>Testing components at an individual level, keeping track of performance measured.</li>
+                            <li>Translating custom CAD to real world results, and constant iteration through the issues.</li>
+							<li>Taking the relevant safety precautions with machine start up, shut down, and troubleshooting.</li>
+							<li>Continuous improvement of design, as it progresses from test bed to prototype.</li>
+							<li>Updating ladder logic to fit individual component testing, and associated wiring changes.</li>
+							<li>Creating accurate analysis of data recorded, in order to optimize machine output in performance.</li>
+                        </ul><br>
+						<p>Direct-tasks:</p><br>
+						<ul>
+							<li>Adhering to UL standards of electrical design practices in prototype construction.</li>
+							<li>Created electrical, fluid, and mechanical drawings for assembly of fixtures & prototypes.</li>
+							<li>Used a variety of hand tools for assembly and construction of electro-mechanical systems.</li>
+							<li>Developed CAD and 2D engineering drawings for component fabrication and assembly.</li>
+							<li>Used continuous improvement for design to lower cost, increase quality of automated devices.</li>
+							<li>Programmed and wired PLC and microcontroller devices for real-time process control.</li>
+							<li>Used a variety of hand tools: WAGO Variocrimp, self-adjusting wire stripper, heat-guns, tap & die sets, metal jig saws, and other common shop tools.</li>
+							<li>Electrical wiring involving 3.3VDC to 120VAC for powering pumps, valves, and associated electrical equipment, all organized to be functional, safe & user friendly.</li>
+						</ul>
+                    </div>
+                </div>
+                <div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Equipment Maintenance Technician</h3>
+                            <p class="company">Tesla, Inc. · Full-time</p>
+                            <p class="date">Oct 2020 - Feb 2021 · 5 mos <br> Sparks, Nevada, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Responsible for repairing manufacturing equipment in Powertrain Manufacturing.</p><br>
+						<p>Applied technical skills to install, maintain and repair high speed high volume mechanical and electrical systems, factory automation and robotics.</p><br>
+                        <ul>
+                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>
+                            <li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>
+							<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>
+							<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>
+							<li>Communicated with supervisors and managment for fast repair execution.</li>
+							<li>Talked with production associates on production ergonomics and improving machine output.</li>
+                        </ul><br>
+						<p><b>Work History:</b></p><br>
+						<p>
+							Jan—Feb 2021 • 2 mos<br>
+							Model 3 Drive Unit, Final Assembly<br><br>
+							Oct—Dec 2020 • 3 mos<br>
+							Model 3 Drive Unit, Test Line & Raven Line<br><br>
+						</p>
+                    </div>
+                </div>
+				<div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/eg-logo.jpg" alt="EG Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Automation Systems Technician</h3>
+                            <p class="company">Automated Hydroponic Technologies, ABN · Full-time</p>
+                            <p class="date">Aug 2019 - Sep 2020 · 1 yr 2 mos <br> Corvallis, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Utilized automation for the advancement of easy to use and energy efficient farms.</p><br>
+						<p>First goal was getting product fit from prototypes of automated nutrient dosing systems.</p><br>
+						<ul>
+                            <li>Adhering to UL standards of electrical design practices in prototype construction.</li>
+                            <li>Created electrical, fluid, and mechanical drawings for assembly of fixtures & prototypes.</li>
+							<li>Used a variety of hand tools for assembly and construction of electro-mechanical systems.</li>
+							<li>Developed CAD and 2D engineering drawings for component fabrication and assembly.</li>
+							<li>Used continuous improvement for design to lower cost, increase quality of automated devices.</li>
+							<li>Programmed and wired PLC and microcontroller devices for real-time process control.</li>
+							<li>Used a variety of hand tools: WAGO Variocrimp, self-adjusting wire stripper, heat-guns, tap & die sets, metal jig saws, and other common shop tools.</li>
+							<li>Electrical wiring involving 12VDC to 120VAC for powering pumps, valves, and associated electrical equipment, all organized to be functional, safe & user friendly.</li>
+                        </ul><br>
+                    </div>
+                </div>
+				<div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Equipment Maintenance Technician</h3>
+                            <p class="company">Tesla, Inc. · Full-time</p>
+                            <p class="date">Jun 2018 - Jul 2019 · 1 yr 2 mos <br> Sparks, Nevada, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Troubleshot & maintained machinery for a fast production ramp.</p><br>
+						<p>Worked within Powertrain Manufacturing, from batteries to drive units.</p><br>
+                        <ul>
+                            <li>Diagnosed equipment failures and suggested improvements to process engineering.</li>
+                            <li>Saved 500+ DUs from fallout in q2 2019 ($1mm+ savings according to Sr. Process Engineer).</li>
+							<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>
+							<li>Mentored production associates on equipment updates and safe throughput.</li>
+							<li>Replaced required mechanical and electrical components of production equipment.</li>
+							<li>Acted with the first intent being on creating a safe working environment for everyone.</li>
+                        </ul><br>
+						<p><b>Work History:</b></p><br>
+						<p>
+							Jan—Jul 2019 • 7 mos<br>
+							Model 3 Drive Unit, Test Line<br><br>
+							Sep—Dec 2018 • 4 mos<br>
+							Model 3 Drive Unit, Final Assembly<br><br>
+							Jun—Aug 2018 • 3 mos<br>
+							Model 3 Battery Module, <br>Clamshell Current Collector Attach<br>
+						</p>
+                    </div>
+                </div>
+				<div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/ac-logo.jpg" alt="AC Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Automation Technician Intern</h3>
+                            <p class="company">Andrews Cooper, Inc. · Part-time</p>
+                            <p class="date">Mar 2018 - May 2018 · 3 mos <br> Corvallis, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Built custom manufacturing equipment.</p><br>
+						<p>Assembled and tested equipment for the Daimler electric truck, and assembled test cells for the optical alignment of the Steam VR headset.</p><br>
+                        <ul>
+                            <li>Kept high-level attention to detail when fabricating/assembling complex robotic machinery.</li>
+                            <li>Drilled, tapped, fastened components for industrial electrical panels and pneumatic panels.</li>
+							<li>Wired control panels using electrical diagrams, red-lined issues and reported to engineering.</li>
+							<li>Stripped, crimped, assembled, MIL-Spec multi-pin connectors up to 56-pin.</li>
+							<li>Followed work procedures associated with procurement for timely machine assembly.</li>
+                        </ul><br>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <button class="btn view-more-btn" data-target="work-grid">View More</button>
+            </div>
+        </section>
+
+		<br><br><br>
+
+        <!-- Education Section -->
+        <section id="education" class="container">
+            <h2>Education</h2>
+			<p>My Completed Education</p>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/lbcc-logo.jpg" alt="LBCC Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Associate of Applied Science, <br> Industrial Automation Technology</h3>
+                            <p class="company">Linn-Benton Community College</p>
+                            <p class="date">Sep 2016 - Jun 2018 · 1 yr 10 mos <br> Albany, Oregon, United States</p>
+                        </div>
+                    </div>
+                    <div class="details">
+						<p><u>Grade</u>: 3.94/4.00</p><br>
+                        <p><u>Accreditation</u>: <i>Northwest Commission on Colleges and Universities</i></p><br>
+						<p>Learned the fundamentals of Programmable Logic Controllers, industrial maintenance, electrical troubleshooting, hydraulic/pneumatic assembly and testing, process-control/instrumentation, and electromechanical assembly and testing. Covered low and high voltage electrical systems.</p><br>
+						<p><u>Capstone project</u>: Two wafer handling robot arms (donated by HP Inc.) were integrated into a production line scenario utilizing two Arduino UNO's and an Allen-Bradley ControlLogix 5000 Series PLC. Required C++ and Ladder Logic program design, electrical prototyping and testing, and some circuit analysis.</p><br>
+						<p><u>Electives</u>:</p>
+						<ul>
+						  <li>Computer Science Orientation</li>
+						  <li>Microcontrollers in Research and Design</li>
+						  <li>Engineering Orientation</li>
+						  <li>Preparatory Chemistry</li>
+						  <li>Introduction to AutoCAD</li>
+						</ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+		
+		<br><br><br>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container">
+            <h2>Projects</h2>
+            <p>Electrical and Mechanical Projects</p>
+            <div class="card-grid" id="project-grid">
+                <!-- CHANGED: Made 3 cards visible initially -->
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/optical.png" alt="Bincoscope Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Portable Meter-class Binoculars</h3>
+                            <p class="company">Open Source Project</p>
+                            <p class="date"><i>Status: Early Design Phase</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>A fully open-source, open-hardware telescope project which is currently in the early design phase. First milestone is testing a scaled down model to verify the optical system is feasible. Please follow <a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg" target="_blank">this link</a> to see the intended design, it's my ray-trace example of 0.4 meter binoculars.</p><br>
+						<p><u>Basic principle is</u>: Concave primary mirror, concave secondary mirror, and a Nasmyth style tertiary flat mirror. With a fast focal ratio primary mirror, sub-f/3.0, it allows for minimal obstruction of the light path, plus combining that with a Gregorian secondary mirror in a binocular format allows for the upright image to be displayed for the user at the back end of the telescope. So no matter the size of the binoculars, the user will see a bright up-right image with both eyes open, just like a small hand-held pair of binoculars.</p><br>
+						<p><u>Links for more information</u>:</p>
+                        <p><a href="https://cad.onshape.com/documents/5d92fe101b7e9bf07639868a/w/6050646a7c17f19ee574ff94/e/09aea8e79783908266cad741?renderMode=0&uiState=68a01c25741a8612ebbe3385" target="_blank">3d-cad.stp <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a <i>very</i> work-in-progress)</p>
+                        <p><a href="docs/portable-meter-class-binoculars-v1.0.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a work-in-progress)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/dosing.png" alt="Dosing Unit Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Automatic Dosing Unit</h3>
+                            <p class="company">Open Source Project</p>
+                            <p class="date"><i>Status: Assembly & Testing Phase</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>A fully open-source, open-hardware project with the slated goal of becoming a UL-compliant device for automated gravity-fed dosing. Applications for this project include; nutrient dosing for a hydropnics/aquaponics, continuous culture feeding in bioreactors or fermenters, microfluidic experiments, controlled reagent delivery, and wastewater chemical treatment.<br><br>
+                        <p>Project is currently in a build-out and long term testing phase. The goal with this phase is placing various components under stressful environmental conditions in order to improve reliability. Since this project incorporates hundreds of components, and I did all the design, building, and testing myself, there is a high probability of individual component failure. Isolating these failures now is main intended goal of this phase.</p><br>
+                        <p><u>Links for more information</u>:</p>
+                        <p><a href="https://cad.onshape.com/documents/14566fd902a0be0d8c1e67b7/w/0ff7ca55352d42e768777c6e/e/b31f96b639cae0abea585bb0?renderMode=0&leftPanel=false&uiState=67afa1f73da8d76be352a58f" target="_blank">3d-cad.stp <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Contains 700+ parts in main assembly)</p>
+                        <p><a href="docs/automatic-dosing-unit-v2.0.pdf" target="_blank">electrical.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Machine-tool grade wiring schematic)</p>
+                        <p>mechanical.pdf (coming soon)</p>
+                    </div>
+                </div>
+                <div class="card"> <!-- This card is now visible -->
+                    <div class="card-main-info">
+                        <div class="card-logo">
+                            <img src="images/bearing.png" alt="Dosing Unit Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="card-text-content">
+                             <h3>Bearing Supply & Placement Machine</h3>
+                            <p class="company">Academic Project</p>
+                            <p class="date"><i>Status: Completed</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Operation of the machine is for rejecting short-width bearings and accepting a tall-width bearings. The tall bearing would then be picked up and placed into a bearing housing on a conveyor line. The system uses 5 electrically actuated directional control valves to power 5 pneumatic cylinders and requires 12 sensors for operation.</p><br>
+                        <p><u>Links for more information</u>:</p>
+                        <p><a href="docs/bearing-supply.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
+                    </div>
+                </div>
+
+                <!-- Hidden Cards -->
+                <div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+                            <img src="images/transfer.png" alt="Transfer" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="card-text-content">
+                            <h3>Automated Parts Transfer System</h3>
+                            <p class="company">Academic Project</p>
+                            <p class="date"><i>Status: Completed</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>During my second year as a Mechatronics student at Linn Benton Community College, I developed and assembled a prototype version of an automated process that involved communication between two Arduino's and a Programmable Logic Controller. Utilized two dual-axis (rotational and linear acting) wafer handling machines which were used as robot arms.</p><br>
+                        <p><u>Links for more information</u>:</p>
+                        <p><a href="docs/parts-transfer.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
+                    </div>
+                </div>
+				<div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+                            <img src="images/bike.png" alt="Transfer" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="card-text-content">
+                            <h3>Aluminum Mountain Bike Frame</h3>
+                            <p class="company">Academic Project</p>
+                            <p class="date"><i>Status: Completed</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>I designed, built and tested a fully functional 6061 Aluminum Mountain Bicycle Frame. Some of the challenges included: learning to TIG weld aluminum, reverse engineering of bicycle frame components, project scope and aesthetics.</p><br>
+                        <p><u>Links for more information</u>:</p>
+                        <p><a href="docs/mountain-bike.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
+                    </div>
+                </div>
+				<div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+                            <img src="images/telescope.png" alt="Telescope image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="card-text-content">
+                            <h3>Truss-style Newtonian Telescope</h3>
+                            <p class="company">Open Source Project</p>
+                            <p class="date"><i>Status: Coming Soon</i></p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>Hobby project buliding a smaller 8" aperture version of the legendary Obsession Telescopes. Since I was 14-years old when I started this project, I needed some guidance, so I consulted Kreige and Berry's book, <a href="https://web.archive.org/web/20251107025252/https://www.goodreads.com/en/book/show/180768.The_Dobsonian_Telescope" target="_blank">The Dobsonian Telescope</a>.</p><br>
+                        <p>The CAD model I drew up on the PTC OnShape platform is linked below, and it accurately matches the size of the telescope components. This CAD model however is not yet complete, as doing this can be very time consuming. It's currently lacking a primary mirror cell in the CAD model and much of the components of the secondary cage.</p><br>
+                        <p><u>Tools and technologies used</u>:</p>
+                        <ul>
+                            <li>Annealed telescope optical blanks with 1800°F kiln</li>
+                            <li>Reverse engineering of existing plans to fit specific size requirements</li>
+                            <li>Utilized a CNC wood router for side rocker construction</li>
+                            <li>100+ hrs hand grinding the telescope mirror</li>
+                            <li>Extremely stiff frictional bearing mounts for altitude and azimuth axis control</li>
+                            <li>Tight dimensional tolerancing of wood/metal structures</li>
+                            <li>Materials used: plate and borosilicate glass, marine grade plywood, birch plywood, aluminum, and steel</li>
+                            <li>Mechanical skills: trigonometric calculating for truss design, cantilever loading</li>
+                        </ul><br>
+                        <p><u>Links for more information</u>:</p>
+                        <p><a href="https://cad.onshape.com/documents/bb61efcd8cafd93c45bcd32e/w/658a7cc72aebc31515716086/e/ccf98e5e25786474bdabf02e" target="_blank">3d-cad.stp <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Contains 80+ parts in one assembly)</p>
+                        <p>documentation.pdf (coming soon)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <button class="btn view-more-btn" data-target="project-grid">View More</button>
+            </div>
+        </section>
+		
+		<br><br><br>
+		
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, Notepad++ for programming, Git for version control, DigitalOcean for website hosting, various IDE's for microcontroller programming. Thank you for visiting my site.</p>
+        <p>&copy; 2025 by Kurt J. Foster</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Card Click-to-Toggle Functionality ---
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(card => {
+                card.addEventListener('click', function(event) {
+                    // Don't toggle if a link inside the details was clicked
+                    if (event.target.tagName === 'A' || event.target.closest('a')) {
+                        return;
+                    }
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // --- "View More" Button Functionality ---
+            // CHANGED: Rewrote this section to handle the new fade-out animation
+            const viewMoreButtons = document.querySelectorAll('.view-more-btn');
+            viewMoreButtons.forEach(button => {
+                const targetGridId = button.getAttribute('data-target');
+                const grid = document.getElementById(targetGridId);
+                if (!grid) return;
+
+                // Select only the cards that are initially hidden
+                const cardsToToggle = grid.querySelectorAll('.card.hidden');
+                
+                // If there are no hidden cards, hide the button entirely
+                if (cardsToToggle.length === 0) {
+                    if(button.parentNode) {
+                        button.parentNode.style.display = 'none';
+                    }
+                    return;
+                }
+
+                button.addEventListener('click', function() {
+                    const isExpanded = this.textContent.trim() === 'View Less';
+
+                    if (isExpanded) {
+                        // --- HIDE CARDS (View Less) ---
+                        this.textContent = 'View More';
+                        cardsToToggle.forEach(card => {
+                            card.classList.remove('expanded'); // Collapse details
+                            card.classList.remove('revealed'); // This class has the fadeIn animation
+                            card.classList.add('hiding');      // This class triggers the fadeOut animation
+
+                            // Use an event listener to set display:none after the animation finishes
+                            card.addEventListener('animationend', (e) => {
+                                // Check if the animation that ended is the fadeOut
+                                if (e.animationName === 'fadeOut') {
+                                    card.style.display = 'none'; // Hide the element
+                                    card.classList.remove('hiding'); // Clean up class
+                                }
+                            }, { once: true }); // Listener runs once and removes itself
+                        });
+                    } else {
+                        // --- SHOW CARDS (View More) ---
+                        this.textContent = 'View Less';
+                        cardsToToggle.forEach((card, index) => {
+                            card.style.display = 'flex'; // Make element visible to animate it
+                            // Stagger the animation for a nice effect
+                            setTimeout(() => {
+                                card.classList.add('revealed');
+                            }, index * 100); 
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
