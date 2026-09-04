@@ -7,10 +7,10 @@
 
     <link rel="icon" type="image/png" href="images/favicon.png">
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter (body), Space Grotesk (display), JetBrains Mono (technical readouts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,16 +18,31 @@
     <style>
         /* --- CSS Reset & Base Styles --- */
         :root {
-            --bg-color: #111111;
-            --card-color: #1a1a1a;
-            --border-color: #2c2c2c;
-            --primary-text-color: #f0f0f0;
-            --secondary-text-color: #a0a0a0;
+            --bg-color: #0a0d0e;
+            --bg-color-raised: #0e1214;
+            --card-color: #14191b;
+            --card-color-hover: #171d1f;
+            --border-color: #262d30;
+            --border-color-strong: #333c40;
+            --primary-text-color: #eef2f2;
+            --secondary-text-color: #92999c;
             --accent-color: #2DD4BF; /* Teal accent */
+            --accent-color-dim: rgba(45, 212, 191, 0.14);
+            --status-progress: #60a5fa;
+            --status-done: #34d399;
+            --status-early: #f2b155;
+            --status-soon: #7c8589;
+
             --font-family: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
+
             --avatar-size: 96px;     /* change to taste (orginally 72px)*/
             --avatar-border: 4px;
             --gap: 1rem;
+            --nav-height: 68px;
+            --radius: 10px;
+            --container-padding: 2rem;
         }
 
         * {
@@ -40,35 +55,79 @@
             scroll-behavior: smooth;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--primary-text-color);
             font-family: var(--font-family);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: var(--accent-color-dim);
+            color: var(--primary-text-color);
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 var(--container-padding);
         }
 
-        /* CHANGED: Increased bottom padding for better spacing between sections */
+        /* Anchor targets sit below the sticky nav */
+        section[id] {
+            scroll-margin-top: var(--nav-height);
+        }
+
         section {
             padding: 4rem 0 6rem;
         }
 
         h1, h2, h3 {
+            font-family: var(--font-display);
             font-weight: 600;
             line-height: 1.2;
         }
 
         h2 {
-            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 500;
             color: var(--accent-color);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
+        }
+
+        h2::before {
+            content: '';
+            width: 22px;
+            height: 1px;
+            background: var(--accent-color);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1 1 auto;
+            height: 1px;
+            background: var(--border-color);
         }
 
         p {
@@ -85,18 +144,259 @@
             color: #ffffff;
         }
 
+        a:focus-visible,
+        button:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* --- Sticky Nav --- */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            background: rgba(10, 13, 14, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .site-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--primary-text-color);
+            text-decoration: none;
+        }
+
+        .nav-brand:hover {
+            color: var(--primary-text-color);
+        }
+
+        .nav-brand .nav-brand-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            color: var(--secondary-text-color);
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.25rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-text-color);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        /* --- Nav Icon Links (email / resume / LinkedIn / blog) --- */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-left: 1.75rem;
+            padding-left: 1.75rem;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .nav-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            transition: color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-color);
+            background-color: var(--accent-color-dim);
+        }
+
+        @media (max-width: 700px) {
+            .nav-icons {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+            }
+
+            .nav-toggle {
+                margin-left: 0.75rem;
+            }
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin: 0 auto;
+            background: var(--primary-text-color);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .site-nav.open .nav-toggle span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .site-nav.open .nav-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        .site-nav.open .nav-toggle span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                background: var(--bg-color-raised);
+                border-bottom: 1px solid var(--border-color);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .site-nav.open .nav-links {
+                max-height: 240px;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 1rem var(--container-padding);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+        }
+
         /* --- Header / Hero Section --- */
         .hero {
-            min-height: 100vh;
+            position: relative;
+            min-height: calc(100dvh - var(--nav-height));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             text-align: left;
+            isolation: isolate;
+        }
+
+        /* Decorative schematic grid, kept on its own layer so it never fades page text */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 48px 48px;
+            background-position: center top;
+            -webkit-mask-image: linear-gradient(to bottom, black, black 55%, transparent 92%);
+            mask-image: linear-gradient(to bottom, black, black 55%, transparent 92%);
+            opacity: 0.6;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-size: clamp(2.25rem, 7vw, 4.5rem);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-eyebrow .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color-dim);
         }
 
         .hero .subtitle {
@@ -152,40 +452,47 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--border-color);
-			border-radius: 8px;
-            background-color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.4rem;
+            border: 1px solid var(--border-color-strong);
+            border-radius: 8px;
+            background-color: var(--card-color);
             color: var(--primary-text-color);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             cursor: pointer;
         }
 
         .btn:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+            background-color: transparent;
+            color: var(--accent-color);
             border-color: var(--accent-color);
+            transform: translateY(-1px);
         }
 
         /* --- Grid Layout for Cards --- */
-        /* CHANGED: Switched to a single-column layout */
         .card-grid {
             display: grid;
             grid-template-columns: 1fr; /* Always one column */
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 2rem;
         }
 
         /* --- Card Styling --- */
         .card {
+            position: relative;
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
             padding: 1.5rem;
-			border-radius: 8px;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            border-radius: var(--radius);
+            transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -194,43 +501,139 @@
 
         .card:hover {
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4); /* Glow effect */
+            background-color: var(--card-color-hover);
+            box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(45, 212, 191, 0.15);
+            transform: translateY(-2px);
         }
-        
+
+        .card::after {
+            /* Small expand/collapse indicator, mirrors an HMI toggle affordance */
+            content: '+';
+            position: absolute;
+            top: 1.4rem;
+            right: 1.5rem;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            border: 1px solid var(--border-color-strong);
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.25s ease, border-color 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .card:hover::after {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .card.expanded::after {
+            transform: rotate(135deg);
+        }
+
         .card-main-info {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             align-items: flex-start;
+            padding-right: 2rem;
         }
         
         .card-logo {
-            width: 60px;
-            height: 60px;
-			border-radius: 8px;
+            width: 52px;
+            height: 52px;
+            border-radius: 8px;
             background-color: #2c2c2c; /* Placeholder for logo */
             flex-shrink: 0;
+            border: 1px solid var(--border-color);
         }
         
         .card-text-content {
             flex-grow: 1;
+            min-width: 0;
         }
 
         .card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary-text-color);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
 
         .card .company {
             color: var(--accent-color);
             font-weight: 500;
+            font-size: 0.92rem;
             margin-bottom: 0.5rem;
         }
 
         .card .date {
-            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.2px;
             color: var(--secondary-text-color);
             margin-bottom: 1rem;
+        }
+
+        /* --- Status readouts (HMI-style indicator for project state) --- */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--secondary-text-color);
+            margin-bottom: 1rem;
+        }
+
+        .status .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 0 3px currentColor;
+            opacity: 0.9;
+        }
+
+        .status-done { color: var(--status-done); }
+        .status-progress { color: var(--status-progress); }
+        .status-early { color: var(--status-early); }
+        .status-soon { color: var(--status-soon); }
+
+        .status .status-dot { box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent); }
+
+        .badge-current {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--status-done);
+            border: 1px solid var(--status-done);
+            border-radius: 20px;
+            padding: 0.15rem 0.6rem;
+            margin-left: 0.6rem;
+            vertical-align: middle;
+        }
+
+        .badge-current .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--status-done);
+            box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.25);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
         
         /* --- Card Expansion on Click --- */
@@ -261,7 +664,17 @@
         /* --- "View More" Functionality --- */
         .view-more-container {
             text-align: center;
-            margin-top: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .view-more-btn::after {
+            content: '▾';
+            font-size: 0.7rem;
+            transition: transform 0.25s ease;
+        }
+
+        .view-more-btn.is-expanded::after {
+            transform: rotate(180deg);
         }
 
         .card-grid .card.hidden {
@@ -293,9 +706,9 @@
         /* --- Footer --- */
         .footer {
             text-align: center;
-            padding: 4rem 2rem 2rem;
+            padding: 3.5rem 2rem 2.5rem;
             border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--secondary-text-color);
         }
         
@@ -303,28 +716,94 @@
             max-width: 800px;
             margin: 0 auto 1rem;
         }
-        
+
+        .footer .footer-tools {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            line-height: 1.7;
+        }
+
+        .footer .copyright {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            color: #5c6366;
+        }
+
         /* --- Responsive Adjustments --- */
-        /* This media query is no longer needed for the grid but kept for potential future use */
         @media (max-width: 768px) {
-            /* Styles for smaller screens can go here if needed */
+            :root {
+                --container-padding: 1.25rem;
+            }
+
+            section {
+                padding: 2.75rem 0 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+                margin: 1.25rem 0;
+            }
+
+            .hero-buttons .btn {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+
+            .card-main-info {
+                padding-right: 1.75rem;
+            }
+
+            .card::after {
+                top: 1.15rem;
+                right: 1.25rem;
+            }
+
+            .footer {
+                padding: 3rem 1.25rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-logo {
+                width: 44px;
+                height: 44px;
+            }
+
+            .card-main-info {
+                gap: 0.9rem;
+            }
+
+            .card h3 {
+                font-size: 1rem;
+            }
+
+            .nav-brand .nav-brand-tag {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Sticky Nav -->
+    <nav class="site-nav" id="site-nav">
+        <div class="container">
+            <a href="#" class="nav-brand">Kurt J. Foster <span class="nav-brand-tag">// INDUSTRIAL AUTOMATION</span></a>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <header class="hero container">
         <div class="profile">
-            <img class="avatar" src="images/profile-pic.png" alt="Profile">
             <h1 class="name" style="font-size: 36px;">Kurt J. Foster</h1>
         </div>
         <div class="subtitle">
-            <!--
-            <p>Welcome to my website. Here you will find my work history, education, and some projects I'm working on.</p><br>
-            -->
             <p><b style="color:rgb(208, 208, 208);">I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.</b></p><br>
-            <p>With seven years of hands-on experience and a two-year technical degree, I bring practical skills that will add measurable value to your company.</p><br>
             <p>My projects section showcases electro-mechanical projects with over 100 pages of documentation, schematics, and CAD files, including an assembly with more than 700 parts. All projects are open-sourced under the MIT License for unrestricted use.</p><br>
             <p>In my free time, I enjoy spending time outdoors and exploring technical projects in optics and astronomy.</p>
         </div>
@@ -341,29 +820,37 @@
             <h2>Work History</h2>
             <p>Detailed Work History</p>
             <div class="card-grid" id="work-grid">
-                <!-- CHANGED: Made 3 cards visible initially -->
-                <!-- CHANGED: Education section in work history? Commenting out for now... -->
-                <!--
+            <!--
                 <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
-							<img src="images/college-pic.png" alt="College picture logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
 						</div>
                         <div class="card-text-content">
-                            <h3>Mechatronics Student</h3>
-                            <p class="company">Community College/University · Part-time</p>
-                            <p class="date">Jan 2025 - Present · 8 mos <br> Online Coursework</p>
+                            <h3>Equipment Maintenance Technician<span class="badge-current"><span class="status-dot"></span>Current</span></h3>
+                            <p class="company">Tesla, Inc. · Full-time</p>
+                            <p class="date">Sep 2026 - Present · 1 mos <br> Sparks, Nevada, United States</p>
                         </div>
                     </div>
                     <div class="details">
-                        <p><u>In Progress</u>:</p>
-						<p><b><i>Online Certificate, </i></b></p>
-						<p><b><i>Mechatronics for Manufacturing Engineering</i></b></p>
-						<br>
-						<p>Certificate in progress. Started this to stay up to date on emerging technologies within manufacturing, and to learn new skills within automation and robotics. The program covers intelligent system prototyping, sensors and actuators for mechatronic systems, microcontroller systems structure and programming, and digital control theory.</p>
+                        <p>Responsible for repairing manufacturing equipment in Battery Manufacturing.</p><br>
+						<p>Applied technical skills to install, maintain and repair high-speed high-volume mechanical and electrical systems, factory automation and robotics.</p><br>
+                        <ul>
+                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>
+							<li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>
+							<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>
+							<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>
+							<li>Communicated with supervisors and management for fast repair execution.</li>
+							<li>Talked with production associates on production ergonomics and improving machine output.</li>
+                        </ul><br>
+						<p><b>Work History:</b></p><br>
+						<p>
+							Sep—Present 2026 • 1 mos<br>
+							Energy Production Lines<br><br>
+						</p>
                     </div>
                 </div>
-                -->
+            -->
                 <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -412,7 +899,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card"> <!-- This card is now visible -->
+
+                <!-- Hidden Cards -->
+                <div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
 							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
@@ -442,8 +931,6 @@
 						</p>
                     </div>
                 </div>
-
-                <!-- Hidden Cards -->
                 <div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -472,7 +959,7 @@
                 <div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
-							<img src="images/eg-logo.jpg" alt="EG Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+							<img src="images/eg-logo.jpg" alt="Enriched Gravity, ABN. Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
 						</div>
                         <div class="card-text-content">
                             <h3>Automation Systems Technician</h3>
@@ -542,7 +1029,7 @@
 				<div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
-							<img src="images/eg-logo.jpg" alt="EG Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+							<img src="images/eg-logo.jpg" alt="Enriched Gravity, ABN Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
 						</div>
                         <div class="card-text-content">
                             <h3>Automation Systems Technician</h3>
@@ -642,7 +1129,7 @@
                         <div class="card-text-content">
                             <h3>Associate of Applied Science, <br> Industrial Automation Technology</h3>
                             <p class="company">Linn-Benton Community College</p>
-                            <p class="date">Sep 2016 - Jun 2018 · 1 yr 10 mos <br> Albany, Oregon, United States</p>
+                            <p class="date">2016 - 2018 · 2 yrs <br> Albany, Oregon, United States</p>
                         </div>
                     </div>
                     <div class="details">
@@ -674,31 +1161,12 @@
                 <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
-							<img src="images/optical.png" alt="Bincoscope Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-						</div>
-                        <div class="card-text-content">
-                            <h3>Portable Meter-class Binoculars</h3>
-                            <p class="company">Open Source Project</p>
-                            <p class="date"><i>Status: Early Design Phase</i></p>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <p>A fully open-source, open-hardware telescope project which is currently in the early design phase. First milestone is testing a scaled down model to verify the optical system is feasible. Please follow <a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg" target="_blank">this link</a> to see the intended design, it's my ray-trace example of 0.4 meter binoculars.</p><br>
-						<p><u>Basic principle is</u>: Concave primary mirror, concave secondary mirror, and a Nasmyth style tertiary flat mirror. With a fast focal ratio primary mirror, sub-f/3.0, it allows for minimal obstruction of the light path, plus combining that with a Gregorian secondary mirror in a binocular format allows for the upright image to be displayed for the user at the back end of the telescope. So no matter the size of the binoculars, the user will see a bright up-right image with both eyes open, just like a small hand-held pair of binoculars.</p><br>
-						<p><u>Links for more information</u>:</p>
-                        <p><a href="https://cad.onshape.com/documents/5d92fe101b7e9bf07639868a/w/6050646a7c17f19ee574ff94/e/09aea8e79783908266cad741?renderMode=0&uiState=68a01c25741a8612ebbe3385" target="_blank">3d-cad.stp <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a <i>very</i> work-in-progress)</p>
-                        <p><a href="docs/portable-meter-class-binoculars-v1.0.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a work-in-progress)</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-main-info">
-                        <div class="card-logo">
 							<img src="images/dosing.png" alt="Dosing Unit Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
 						</div>
                         <div class="card-text-content">
                             <h3>Automatic Dosing Unit</h3>
                             <p class="company">Open Source Project</p>
-                            <p class="date"><i>Status: Assembly & Testing Phase</i></p>
+                            <p class="status status-progress"><span class="status-dot"></span>Assembly & Testing Phase</p>
                         </div>
                     </div>
                     <div class="details">
@@ -710,7 +1178,7 @@
                         <p>mechanical.pdf (coming soon)</p>
                     </div>
                 </div>
-                <div class="card"> <!-- This card is now visible -->
+                <div class="card"> 
                     <div class="card-main-info">
                         <div class="card-logo">
                             <img src="images/bearing.png" alt="Dosing Unit Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
@@ -718,7 +1186,7 @@
                         <div class="card-text-content">
                              <h3>Bearing Supply & Placement Machine</h3>
                             <p class="company">Academic Project</p>
-                            <p class="date"><i>Status: Completed</i></p>
+                            <p class="status status-done"><span class="status-dot"></span>Completed</p>
                         </div>
                     </div>
                     <div class="details">
@@ -727,9 +1195,7 @@
                         <p><a href="docs/bearing-supply.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
                     </div>
                 </div>
-
-                <!-- Hidden Cards -->
-                <div class="card hidden">
+                <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
                             <img src="images/transfer.png" alt="Transfer" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
@@ -737,7 +1203,7 @@
                         <div class="card-text-content">
                             <h3>Automated Parts Transfer System</h3>
                             <p class="company">Academic Project</p>
-                            <p class="date"><i>Status: Completed</i></p>
+                            <p class="status status-done"><span class="status-dot"></span>Completed</p>
                         </div>
                     </div>
                     <div class="details">
@@ -746,6 +1212,8 @@
                         <p><a href="docs/parts-transfer.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
                     </div>
                 </div>
+
+                <!-- Hidden Cards -->
 				<div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -754,13 +1222,32 @@
                         <div class="card-text-content">
                             <h3>Aluminum Mountain Bike Frame</h3>
                             <p class="company">Academic Project</p>
-                            <p class="date"><i>Status: Completed</i></p>
+                            <p class="status status-done"><span class="status-dot"></span>Completed</p>
                         </div>
                     </div>
                     <div class="details">
                         <p>I designed, built and tested a fully functional 6061 Aluminum Mountain Bicycle Frame. Some of the challenges included: learning to TIG weld aluminum, reverse engineering of bicycle frame components, project scope and aesthetics.</p><br>
                         <p><u>Links for more information</u>:</p>
                         <p><a href="docs/mountain-bike.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></p>
+                    </div>
+                </div>
+                <div class="card hidden">
+                    <div class="card-main-info">
+                        <div class="card-logo">
+							<img src="images/optical.png" alt="Bincoscope Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+						</div>
+                        <div class="card-text-content">
+                            <h3>Portable Meter-class Binoculars</h3>
+                            <p class="company">Open Source Project</p>
+                            <p class="status status-early"><span class="status-dot"></span>Early Design Phase</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>A fully open-source, open-hardware telescope project which is currently in the early design phase. First milestone is testing a scaled down model to verify the optical system is feasible. Please follow <a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg" target="_blank">this link</a> to see the intended design, it's my ray-trace example of 0.4 meter binoculars.</p><br>
+						<p><u>Basic principle is</u>: Concave primary mirror, concave secondary mirror, and a Nasmyth style tertiary flat mirror. With a fast focal ratio primary mirror, sub-f/3.0, it allows for minimal obstruction of the light path, plus combining that with a Gregorian secondary mirror in a binocular format allows for the upright image to be displayed for the user at the back end of the telescope. So no matter the size of the binoculars, the user will see a bright up-right image with both eyes open, just like a small hand-held pair of binoculars.</p><br>
+						<p><u>Links for more information</u>:</p>
+                        <p><a href="https://cad.onshape.com/documents/5d92fe101b7e9bf07639868a/w/6050646a7c17f19ee574ff94/e/09aea8e79783908266cad741?renderMode=0&uiState=68a01c25741a8612ebbe3385" target="_blank">3d-cad.stp <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a <i>very</i> work-in-progress)</p>
+                        <p><a href="docs/portable-meter-class-binoculars-v1.0.pdf" target="_blank">documentation.pdf <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> (Currently a work-in-progress)</p>
                     </div>
                 </div>
 				<div class="card hidden">
@@ -771,7 +1258,7 @@
                         <div class="card-text-content">
                             <h3>Truss-style Newtonian Telescope</h3>
                             <p class="company">Open Source Project</p>
-                            <p class="date"><i>Status: Coming Soon</i></p>
+                            <p class="status status-soon"><span class="status-dot"></span>Coming Soon</p>
                         </div>
                     </div>
                     <div class="details">
@@ -805,13 +1292,54 @@
 
     <!-- Footer Section -->
     <footer class="footer">
-        <p>Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site.</p>
-        <p>&copy; 2026 by Kurt J. Foster</p>
+        <p class="footer-tools">Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site.</p>
+        <p class="copyright">&copy; 2026 by Kurt J. Foster</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
+            // --- Mobile Nav Toggle ---
+            const siteNav = document.getElementById('site-nav');
+            const navToggle = document.getElementById('nav-toggle');
+            const navLinks = document.getElementById('nav-links');
+
+            if (navToggle && siteNav) {
+                navToggle.addEventListener('click', function() {
+                    const isOpen = siteNav.classList.toggle('open');
+                    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                // Close the mobile menu after a nav link is tapped
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        siteNav.classList.remove('open');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            // --- Scroll-spy: highlight the current section in the nav ---
+            const navAnchors = navLinks ? Array.from(navLinks.querySelectorAll('a')) : [];
+            const spySections = navAnchors
+                .map(a => document.querySelector(a.getAttribute('href')))
+                .filter(Boolean);
+
+            if (spySections.length && 'IntersectionObserver' in window) {
+                const spyObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const link = navLinks.querySelector(`a[href="#${entry.target.id}"]`);
+                        if (!link) return;
+                        if (entry.isIntersecting) {
+                            navAnchors.forEach(a => a.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+                spySections.forEach(section => spyObserver.observe(section));
+            }
+
             // --- Card Click-to-Toggle Functionality ---
             const allCards = document.querySelectorAll('.card');
             allCards.forEach(card => {
@@ -849,6 +1377,7 @@
                     if (isExpanded) {
                         // --- HIDE CARDS (View Less) ---
                         this.textContent = 'View More';
+                        this.classList.remove('is-expanded');
                         cardsToToggle.forEach(card => {
                             card.classList.remove('expanded'); // Collapse details
                             card.classList.remove('revealed'); // This class has the fadeIn animation
@@ -866,6 +1395,7 @@
                     } else {
                         // --- SHOW CARDS (View More) ---
                         this.textContent = 'View Less';
+                        this.classList.add('is-expanded');
                         cardsToToggle.forEach((card, index) => {
                             card.style.display = 'flex'; // Make element visible to animate it
                             // Stagger the animation for a nice effect
