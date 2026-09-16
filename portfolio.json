@@ -1,7 +1,7 @@
 {
   "intro": "I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.\n\nMy projects section showcases electro-mechanical projects with over 100 pages of documentation, schematics, and CAD files, including an assembly with more than 700 parts. All projects are open-sourced under the MIT License for unrestricted use.\n\nIn my free time, I enjoy spending time outdoors and exploring technical projects in optics and astronomy.",
   "source": "https://kfost.com/",
-  "tools": "Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site.",
+  "tools": "Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site. This entire website was made in just 30 minutes using GPT-6 Astra on the Max setting. It did it in one shot from a two paragraph description.",
   "work": [
     {
       "id": "work-0",
