@@ -1,0 +1,155 @@
+{
+  "intro": "I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.\n\nMy projects section showcases electro-mechanical projects with over 100 pages of documentation, schematics, and CAD files, including an assembly with more than 700 parts. All projects are open-sourced under the MIT License for unrestricted use.\n\nIn my free time, I enjoy spending time outdoors and exploring technical projects in optics and astronomy.",
+  "source": "https://kfost.com/",
+  "tools": "Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site.",
+  "work": [
+    {
+      "id": "work-0",
+      "title": "Manufacturing Maintenance Technician",
+      "company": "Oregon Ice Cream Co. · Full-time",
+      "date": "Dec 2025 - Jul 2026 · 8 mos Eugene, Oregon, United States",
+      "status": "",
+      "html": "\n                        <ul>\n                            <li>Troubleshot, repaired, and maintained mechanical, electrical, and pneumatics for manufacturing/packaging equipment.</li>\n                            <li>Performed daily inspections and preventive maintenance per established schedules.</li>\n                            <li>Quickly diagnosed mechanical issues to reduce equipment downtime and maintain product quality.</li>\n                            <li>Collaborated with production teams to support machine set-ups, changeovers, and calibrations.</li>\n                            <li>Used CMMS (Computerized Maintenance Management System) to log work orders and equipment history.</li>\n                            <li>Supported facility maintenance, including HVAC, refrigeration, plumbing, and general building systems.</li>\n                            <li>Performed safe start-up/shut-down of ammonia (R-717) refrigeration systems in accordance with safety standards.</li>\n                            <li>Participated in continuous improvement initiatives and supported capital projects as needed.</li>\n                            <li>Maintained a clean, safe, and organized work environment in compliance with GMP, OSHA, and food safety standards.</li>\n                        </ul>\n                    ",
+      "image": "assets/portfolio/ice-cream-logo.jpg"
+    },
+    {
+      "id": "work-1",
+      "title": "Packaging Maintenance Technician",
+      "company": "Ninkasi Brewing Company · Full-time",
+      "date": "Oct 2024 - Dec 2024 · 3 mos Eugene, Oregon, United States",
+      "status": "",
+      "html": "\n                        <ul>\n                            <li>Performed equipment adjustments and enhancements as required by production demands.</li>\n                            <li>Ensured the Packaging Team understands and adheres to the preventive maintenance program.</li>\n                            <li>Followed preventative maintenance program, making improvements/updates as needed.</li>\n\t\t\t\t\t\t\t<li>Performed preventative maintenance and trouble-shoot mechanical issues as they arise.</li>\n\t\t\t\t\t\t\t<li>Reported to Facilities Manager to coordinate additional maintenance, as necessary</li>\n\t\t\t\t\t\t\t<li>Maintained SOPs to meet changing machine specifications, training needs, and an evolving business.</li>\n\t\t\t\t\t\t\t<li>Performed all tasks in an efficient, safe, and productive manner.</li>\n                        </ul>\n                    ",
+      "image": "assets/portfolio/ninkasi-logo.jpg"
+    },
+    {
+      "id": "work-2",
+      "title": "Equipment Maintenance Technician",
+      "company": "Tesla, Inc. · Full-time",
+      "date": "Apr 2024 - Jun 2024 · 3 mos Sparks, Nevada, United States",
+      "status": "",
+      "html": "\n                        <p>Responsible for repairing manufacturing equipment in Powertrain Manufacturing.</p><br>\n\t\t\t\t\t\t<p>Applied technical skills to install, maintain and repair high-speed high-volume mechanical and electrical systems, factory automation and robotics.</p><br>\n                        <ul>\n                            <li>Troubleshot and maintained 70+ large Fanuc industrial robots (welding, material handilng etc.) for the battery enclosure lines.</li>\n                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>\n\t\t\t\t\t\t\t<li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>\n\t\t\t\t\t\t\t<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>\n\t\t\t\t\t\t\t<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>\n\t\t\t\t\t\t\t<li>Communicated with supervisors and management for fast repair execution.</li>\n\t\t\t\t\t\t\t<li>Talked with production associates on production ergonomics and improving machine output.</li>\n                        </ul><br>\n\t\t\t\t\t\t<p><b>Work History:</b></p><br>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\tApr—Jun 2021 • 3 mos<br>\n\t\t\t\t\t\t\tModel 3/Y Battery Pack, Enclosure Weld<br><br>\n\t\t\t\t\t\t</p>\n                    ",
+      "image": "assets/portfolio/tesla-logo.jpg"
+    },
+    {
+      "id": "work-3",
+      "title": "Repair and Maintenance Technician",
+      "company": "HP, Inc. (Kforce, Inc. Contractor) · Full-time",
+      "date": "Aug 2023 - Dec 2023 · 5 mos Corvallis, Oregon, United States",
+      "status": "",
+      "html": "\n                        <p>Repairing industrial automated systems.</p><br>\n                        <ul>\n                            <li>Editing and troubleshooting PLC ladder logic and command language programs.</li>\n                            <li>Determining root cause analysis of circuitry, control panels, and mechanical systems.</li>\n\t\t\t\t\t\t\t<li>Following through with timely repairs, updates, and documentation of issues resolved.</li>\n\t\t\t\t\t\t\t<li>First responding troubleshooter diagnosing a wide variety of electromechanical issues.</li>\n\t\t\t\t\t\t\t<li>Participating in the development of maintenance and operational documentation of equipment.</li>\n\t\t\t\t\t\t\t<li>Evaluating spare part needs and use available systems to warehouse and track inventory/availability.</li>\n\t\t\t\t\t\t\t<li>Interpreting mechanical drawings, schematics, printouts, specifications, and test procedures.</li>\n\t\t\t\t\t\t\t<li>Ensuring measuring/diagnosing instruments are calibrated and verified on a regular basis.</li>\n                        </ul>\n                    ",
+      "image": "assets/portfolio/hp-logo.jpg"
+    },
+    {
+      "id": "work-4",
+      "title": "Automation Systems Technician",
+      "company": "Enriched Gravity, ABN · Full-time",
+      "date": "Mar 2021 - Jul 2023 · 2 yrs 5 mos Corvallis, Oregon, United States",
+      "status": "",
+      "html": "\n                        <p>Gravity-fed nutrient dosing for hydroponics.</p><br>\n\t\t\t\t\t\t<p>Utilized my automation experience to design, build, and test a UL-compliant \n\t\t\t\t\t\tconsumer appliance that combines microcontrollers and industrial automation \n\t\t\t\t\t\ttechnology into a prototype product that could ideally sustain a hydroponics \n\t\t\t\t\t\tfarming operation for years without major repairs required.</p><br>\n                        <p>Responsibilities:</p><br>\n\t\t\t\t\t\t<ul>\n                            <li>Testing components at an individual level, keeping track of performance measured.</li>\n                            <li>Translating custom CAD to real world results, and constant iteration through the issues.</li>\n\t\t\t\t\t\t\t<li>Taking the relevant safety precautions with machine start up, shut down, and troubleshooting.</li>\n\t\t\t\t\t\t\t<li>Continuous improvement of design, as it progresses from test bed to prototype.</li>\n\t\t\t\t\t\t\t<li>Updating ladder logic to fit individual component testing, and associated wiring changes.</li>\n\t\t\t\t\t\t\t<li>Creating accurate analysis of data recorded, in order to optimize machine output in performance.</li>\n                        </ul><br>\n\t\t\t\t\t\t<p>Direct-tasks:</p><br>\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li>Adhering to UL standards of electrical design practices in prototype construction.</li>\n\t\t\t\t\t\t\t<li>Created electrical, fluid, and mechanical drawings for assembly of fixtures &amp; prototypes.</li>\n\t\t\t\t\t\t\t<li>Used a variety of hand tools for assembly and construction of electro-mechanical systems.</li>\n\t\t\t\t\t\t\t<li>Developed CAD and 2D engineering drawings for component fabrication and assembly.</li>\n\t\t\t\t\t\t\t<li>Used continuous improvement for design to lower cost, increase quality of automated devices.</li>\n\t\t\t\t\t\t\t<li>Programmed and wired PLC and microcontroller devices for real-time process control.</li>\n\t\t\t\t\t\t\t<li>Used a variety of hand tools: WAGO Variocrimp, self-adjusting wire stripper, heat-guns, tap &amp; die sets, metal jig saws, and other common shop tools.</li>\n\t\t\t\t\t\t\t<li>Electrical wiring involving 3.3VDC to 120VAC for powering pumps, valves, and associated electrical equipment, all organized to be functional, safe &amp; user friendly.</li>\n\t\t\t\t\t\t</ul>\n                    ",
+      "image": "assets/portfolio/eg-logo.jpg"
+    },
+    {
+      "id": "work-5",
+      "title": "Equipment Maintenance Technician",
+      "company": "Tesla, Inc. · Full-time",
+      "date": "Oct 2020 - Feb 2021 · 5 mos Sparks, Nevada, United States",
+      "status": "",
+      "html": "\n                        <p>Responsible for repairing manufacturing equipment in Powertrain Manufacturing.</p><br>\n\t\t\t\t\t\t<p>Applied technical skills to install, maintain and repair high speed high volume mechanical and electrical systems, factory automation and robotics.</p><br>\n                        <ul>\n                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>\n                            <li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>\n\t\t\t\t\t\t\t<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>\n\t\t\t\t\t\t\t<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>\n\t\t\t\t\t\t\t<li>Communicated with supervisors and management for fast repair execution.</li>\n\t\t\t\t\t\t\t<li>Talked with production associates on production ergonomics and improving machine output.</li>\n                        </ul><br>\n\t\t\t\t\t\t<p><b>Work History:</b></p><br>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\tJan—Feb 2021 • 2 mos<br>\n\t\t\t\t\t\t\tModel 3 Drive Unit, Final Assembly<br><br>\n\t\t\t\t\t\t\tOct—Dec 2020 • 3 mos<br>\n\t\t\t\t\t\t\tModel 3 Drive Unit, Test Line &amp; Raven Line<br><br>\n\t\t\t\t\t\t</p>\n                    ",
+      "image": "assets/portfolio/tesla-logo.jpg"
+    },
+    {
+      "id": "work-6",
+      "title": "Automation Systems Technician",
+      "company": "Enriched Gravity, ABN · Full-time",
+      "date": "Aug 2019 - Sep 2020 · 1 yr 2 mos Corvallis, Oregon, United States",
+      "status": "",
+      "html": "\n                        <p>Utilized automation for the advancement of easy to use and energy efficient farms.</p><br>\n\t\t\t\t\t\t<p>First goal was getting product fit from prototypes of automated nutrient dosing systems.</p><br>\n\t\t\t\t\t\t<ul>\n                            <li>Adhering to UL standards of electrical design practices in prototype construction.</li>\n                            <li>Created electrical, fluid, and mechanical drawings for assembly of fixtures &amp; prototypes.</li>\n\t\t\t\t\t\t\t<li>Used a variety of hand tools for assembly and construction of electro-mechanical systems.</li>\n\t\t\t\t\t\t\t<li>Developed CAD and 2D engineering drawings for component fabrication and assembly.</li>\n\t\t\t\t\t\t\t<li>Used continuous improvement for design to lower cost, increase quality of automated devices.</li>\n\t\t\t\t\t\t\t<li>Programmed and wired PLC and microcontroller devices for real-time process control.</li>\n\t\t\t\t\t\t\t<li>Used a variety of hand tools: WAGO Variocrimp, self-adjusting wire stripper, heat-guns, tap &amp; die sets, metal jig saws, and other common shop tools.</li>\n\t\t\t\t\t\t\t<li>Electrical wiring involving 12VDC to 120VAC for powering pumps, valves, and associated electrical equipment, all organized to be functional, safe &amp; user friendly.</li>\n                        </ul><br>\n                    ",
+      "image": "assets/portfolio/eg-logo.jpg"
+    },
+    {
+      "id": "work-7",
+      "title": "Equipment Maintenance Technician",
+      "company": "Tesla, Inc. · Full-time",
+      "date": "Jun 2018 - Jul 2019 · 1 yr 2 mos Sparks, Nevada, United States",
+      "status": "",
+      "html": "\n                        <p>Troubleshot &amp; maintained machinery for a fast production ramp.</p><br>\n\t\t\t\t\t\t<p>Worked within Powertrain Manufacturing, from batteries to drive units.</p><br>\n                        <ul>\n                            <li>Diagnosed equipment failures and suggested improvements to process engineering.</li>\n                            <li>Saved 500+ DUs from fallout in q2 2019 ($1mm+ savings according to Sr. Process Engineer).</li>\n\t\t\t\t\t\t\t<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>\n\t\t\t\t\t\t\t<li>Mentored production associates on equipment updates and safe throughput.</li>\n\t\t\t\t\t\t\t<li>Replaced required mechanical and electrical components of production equipment.</li>\n\t\t\t\t\t\t\t<li>Acted with the first intent being on creating a safe working environment for everyone.</li>\n                        </ul><br>\n\t\t\t\t\t\t<p><b>Work History:</b></p><br>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\tJan—Jul 2019 • 7 mos<br>\n\t\t\t\t\t\t\tModel 3 Drive Unit, Test Line<br><br>\n\t\t\t\t\t\t\tSep—Dec 2018 • 4 mos<br>\n\t\t\t\t\t\t\tModel 3 Drive Unit, Final Assembly<br><br>\n\t\t\t\t\t\t\tJun—Aug 2018 • 3 mos<br>\n\t\t\t\t\t\t\tModel 3 Battery Module, <br>Clamshell Current Collector Attach<br>\n\t\t\t\t\t\t</p>\n                    ",
+      "image": "assets/portfolio/tesla-logo.jpg"
+    },
+    {
+      "id": "work-8",
+      "title": "Automation Technician Intern",
+      "company": "Andrews Cooper, Inc. · Part-time",
+      "date": "Mar 2018 - May 2018 · 3 mos Corvallis, Oregon, United States",
+      "status": "",
+      "html": "\n                        <p>Built custom manufacturing equipment.</p><br>\n\t\t\t\t\t\t<p>Assembled and tested equipment for the Daimler electric truck, and assembled test cells for the optical alignment of the Steam VR headset.</p><br>\n                        <ul>\n                            <li>Kept high-level attention to detail when fabricating/assembling complex robotic machinery.</li>\n                            <li>Drilled, tapped, fastened components for industrial electrical panels and pneumatic panels.</li>\n\t\t\t\t\t\t\t<li>Wired control panels using electrical diagrams, red-lined issues and reported to engineering.</li>\n\t\t\t\t\t\t\t<li>Stripped, crimped, assembled, MIL-Spec multi-pin connectors up to 56-pin.</li>\n\t\t\t\t\t\t\t<li>Followed work procedures associated with procurement for timely machine assembly.</li>\n                        </ul><br>\n                    ",
+      "image": "assets/portfolio/ac-logo.jpg"
+    }
+  ],
+  "education": [
+    {
+      "id": "education-0",
+      "title": "Associate of Applied Science, Industrial Automation Technology",
+      "company": "Linn-Benton Community College",
+      "date": "2016 - 2018 · 2 yrs Albany, Oregon, United States",
+      "status": "",
+      "html": "\n\t\t\t\t\t\t<p><u>Grade</u>: 3.94/4.00</p><br>\n                        <p><u>Accreditation</u>: <i>Northwest Commission on Colleges and Universities</i></p><br>\n\t\t\t\t\t\t<p>Learned the fundamentals of Programmable Logic Controllers, industrial maintenance, electrical troubleshooting, hydraulic/pneumatic assembly and testing, process-control/instrumentation, and electromechanical assembly and testing. Covered low and high voltage electrical systems.</p><br>\n\t\t\t\t\t\t<p><u>Capstone project</u>: Two wafer handling robot arms (donated by HP Inc.) were integrated into a production line scenario utilizing two Arduino UNO&#x27;s and an Allen-Bradley ControlLogix 5000 Series PLC. Required C++ and Ladder Logic program design, electrical prototyping and testing, and some circuit analysis.</p><br>\n\t\t\t\t\t\t<p><u>Electives</u>:</p>\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t  <li>Computer Science Orientation</li>\n\t\t\t\t\t\t  <li>Microcontrollers in Research and Design</li>\n\t\t\t\t\t\t  <li>Engineering Orientation</li>\n\t\t\t\t\t\t  <li>Preparatory Chemistry</li>\n\t\t\t\t\t\t  <li>Introduction to AutoCAD</li>\n\t\t\t\t\t\t</ul>\n                    ",
+      "image": "assets/portfolio/lbcc-logo.jpg"
+    }
+  ],
+  "projects": [
+    {
+      "id": "projects-0",
+      "title": "Automatic Dosing Unit",
+      "company": "Open Source Project",
+      "date": "",
+      "status": "Assembly & Testing Phase",
+      "html": "\n                        <p>A fully open-source, open-hardware project with the slated goal of becoming a UL-compliant device for automated gravity-fed dosing. Applications for this project include; nutrient dosing for a hydropnics/aquaponics, continuous culture feeding in bioreactors or fermenters, microfluidic experiments, controlled reagent delivery, and wastewater chemical treatment.<br><br>\n                        <p>Project is currently in a build-out and long term testing phase. The goal with this phase is placing various components under stressful environmental conditions in order to improve reliability. Since this project incorporates hundreds of components, and I did all the design, building, and testing myself, there is a high probability of individual component failure. Isolating these failures now is main intended goal of this phase.</p><br>\n                        <p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://cad.onshape.com/documents/14566fd902a0be0d8c1e67b7/w/0ff7ca55352d42e768777c6e/e/b31f96b639cae0abea585bb0?renderMode=0&amp;leftPanel=false&amp;uiState=67afa1f73da8d76be352a58f\" target=\"_blank\" rel=\"noopener noreferrer\">3d-cad.stp <i></i></a> (Contains 700+ parts in main assembly)</p>\n                        <p><a href=\"https://kfost.com/docs/automatic-dosing-unit-v2.0.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">electrical.pdf <i></i></a> (Machine-tool grade wiring schematic)</p>\n                        <p>mechanical.pdf (coming soon)</p>\n                    </p>",
+      "image": "assets/portfolio/dosing.png"
+    },
+    {
+      "id": "projects-1",
+      "title": "Bearing Supply & Placement Machine",
+      "company": "Academic Project",
+      "date": "",
+      "status": "Completed",
+      "html": "\n                        <p>Operation of the machine is for rejecting short-width bearings and accepting a tall-width bearings. The tall bearing would then be picked up and placed into a bearing housing on a conveyor line. The system uses 5 electrically actuated directional control valves to power 5 pneumatic cylinders and requires 12 sensors for operation.</p><br>\n                        <p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://kfost.com/docs/bearing-supply.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">documentation.pdf <i></i></a></p>\n                    ",
+      "image": "assets/portfolio/bearing.png"
+    },
+    {
+      "id": "projects-2",
+      "title": "Automated Parts Transfer System",
+      "company": "Academic Project",
+      "date": "",
+      "status": "Completed",
+      "html": "\n                        <p>During my second year as a Mechatronics student at Linn Benton Community College, I developed and assembled a prototype version of an automated process that involved communication between two Arduino&#x27;s and a Programmable Logic Controller. Utilized two dual-axis (rotational and linear acting) wafer handling machines which were used as robot arms.</p><br>\n                        <p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://kfost.com/docs/parts-transfer.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">documentation.pdf <i></i></a></p>\n                    ",
+      "image": "assets/portfolio/transfer.png"
+    },
+    {
+      "id": "projects-3",
+      "title": "Aluminum Mountain Bike Frame",
+      "company": "Academic Project",
+      "date": "",
+      "status": "Completed",
+      "html": "\n                        <p>I designed, built and tested a fully functional 6061 Aluminum Mountain Bicycle Frame. Some of the challenges included: learning to TIG weld aluminum, reverse engineering of bicycle frame components, project scope and aesthetics.</p><br>\n                        <p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://kfost.com/docs/mountain-bike.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">documentation.pdf <i></i></a></p>\n                    ",
+      "image": "assets/portfolio/bike.png"
+    },
+    {
+      "id": "projects-4",
+      "title": "Portable Meter-class Binoculars",
+      "company": "Open Source Project",
+      "date": "",
+      "status": "Early Design Phase",
+      "html": "\n                        <p>A fully open-source, open-hardware telescope project which is currently in the early design phase. First milestone is testing a scaled down model to verify the optical system is feasible. Please follow <a href=\"https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg\" target=\"_blank\" rel=\"noopener noreferrer\">this link</a> to see the intended design, it&#x27;s my ray-trace example of 0.4 meter binoculars.</p><br>\n\t\t\t\t\t\t<p><u>Basic principle is</u>: Concave primary mirror, concave secondary mirror, and a Nasmyth style tertiary flat mirror. With a fast focal ratio primary mirror, sub-f/3.0, it allows for minimal obstruction of the light path, plus combining that with a Gregorian secondary mirror in a binocular format allows for the upright image to be displayed for the user at the back end of the telescope. So no matter the size of the binoculars, the user will see a bright up-right image with both eyes open, just like a small hand-held pair of binoculars.</p><br>\n\t\t\t\t\t\t<p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://cad.onshape.com/documents/5d92fe101b7e9bf07639868a/w/6050646a7c17f19ee574ff94/e/09aea8e79783908266cad741?renderMode=0&amp;uiState=68a01c25741a8612ebbe3385\" target=\"_blank\" rel=\"noopener noreferrer\">3d-cad.stp <i></i></a> (Currently a <i>very</i> work-in-progress)</p>\n                        <p><a href=\"https://kfost.com/docs/portable-meter-class-binoculars-v1.0.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">documentation.pdf <i></i></a> (Currently a work-in-progress)</p>\n                    ",
+      "image": "assets/portfolio/optical.png"
+    },
+    {
+      "id": "projects-5",
+      "title": "Truss-style Newtonian Telescope",
+      "company": "Open Source Project",
+      "date": "",
+      "status": "Coming Soon",
+      "html": "\n                        <p>Hobby project buliding a smaller 8&quot; aperture version of the legendary Obsession Telescopes. Since I was 14-years old when I started this project, I needed some guidance, so I consulted Kreige and Berry&#x27;s book, <a href=\"https://web.archive.org/web/20251107025252/https://www.goodreads.com/en/book/show/180768.The_Dobsonian_Telescope\" target=\"_blank\" rel=\"noopener noreferrer\">The Dobsonian Telescope</a>.</p><br>\n                        <p>The CAD model I drew up on the PTC OnShape platform is linked below, and it accurately matches the size of the telescope components. This CAD model however is not yet complete, as doing this can be very time consuming. It&#x27;s currently lacking a primary mirror cell in the CAD model and much of the components of the secondary cage.</p><br>\n                        <p><u>Tools and technologies used</u>:</p>\n                        <ul>\n                            <li>Annealed telescope optical blanks with 1800°F kiln</li>\n                            <li>Reverse engineering of existing plans to fit specific size requirements</li>\n                            <li>Utilized a CNC wood router for side rocker construction</li>\n                            <li>100+ hrs hand grinding the telescope mirror</li>\n                            <li>Extremely stiff frictional bearing mounts for altitude and azimuth axis control</li>\n                            <li>Tight dimensional tolerancing of wood/metal structures</li>\n                            <li>Materials used: plate and borosilicate glass, marine grade plywood, birch plywood, aluminum, and steel</li>\n                            <li>Mechanical skills: trigonometric calculating for truss design, cantilever loading</li>\n                        </ul><br>\n                        <p><u>Links for more information</u>:</p>\n                        <p><a href=\"https://cad.onshape.com/documents/bb61efcd8cafd93c45bcd32e/w/658a7cc72aebc31515716086/e/ccf98e5e25786474bdabf02e\" target=\"_blank\" rel=\"noopener noreferrer\">3d-cad.stp <i></i></a> (Contains 80+ parts in one assembly)</p>\n                        <p>documentation.pdf (coming soon)</p>\n                    ",
+      "image": "assets/portfolio/telescope.png"
+    }
+  ]
+}
