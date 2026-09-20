@@ -1,2 +1,349 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#008080"><meta name="description" content="Explore Kurt J. Foster’s world inside an interactive Windows 98 desktop. Open the portfolio, make something in Paint, play Minesweeper, and watch out for Agent Smith."><title>Kurt J. Foster</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23008080' d='M0 0h32v32H0z'/%3E%3Cpath fill='%23ffffaa' stroke='%23000' d='M3 8h11l3 4h12v15H3z'/%3E%3Cpath fill='%23ffd45b' stroke='%23000' d='M3 14h27l-4 13H3z'/%3E%3C/svg%3E"><link rel="stylesheet" href="styles.css"></head><body><main id="desktop" aria-label="Windows 98 desktop"><div id="desktop-icons"></div><div id="windows"></div></main><div id="menus"></div><div id="overlay"></div><footer id="taskbar"><button id="start-button" class="raised"><span class="flag-logo">▦</span><b>Start</b></button><div class="task-separator"></div><button id="show-desktop" class="quick-launch" title="Show desktop" aria-label="Show desktop">▣</button><div class="task-separator"></div><div id="tasks"></div><div id="tray" class="sunken"><button id="sound-toggle" aria-label="Sound off" title="Sound off">♪</button><span id="clock"></span></div></footer><script type="module" src="app.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Kurt J. Foster — automation and equipment maintenance specialist. Work experience, education, and open-source electrical and mechanical projects.">
+  <meta name="theme-color" content="#fcfcfc">
+  <title>Kurt J. Foster</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23212529'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-size='18' font-weight='700' fill='white'%3Ekf%3C/text%3E%3C/svg%3E">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('kfost-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.dataset.theme = saved;
+        }
+      } catch (_) { /* System colors still work when storage is unavailable. */ }
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #fcfcfc;
+      --text: #33383e;
+      --heading: #171b20;
+      --muted: #626a73;
+      --line: #dce0e4;
+      --link: #5c626a;
+      --selected: #e9edf1;
+      --focus: #5c626a;
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #17191c;
+      --text: #c9cdd3;
+      --heading: #f0f1f3;
+      --muted: #9da5b0;
+      --line: #373c43;
+      --link: #b8bec7;
+      --selected: #30353b;
+      --focus: #b8bec7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --background: #17191c;
+        --text: #c9cdd3;
+        --heading: #f0f1f3;
+        --muted: #9da5b0;
+        --line: #373c43;
+        --link: #b8bec7;
+        --selected: #30353b;
+        --focus: #b8bec7;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 2rem; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+      overflow-wrap: break-word;
+    }
+    .page { max-width: 51rem; padding: 0 1.75rem; margin: 0 auto; }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 5px; border-radius: 2px; }
+    .skip-link { position: absolute; top: -10rem; left: 1rem; padding: .6rem 1rem; background: var(--background); z-index: 2; }
+    .skip-link:focus { top: .75rem; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2.5rem; }
+    .wordmark { font-size: .9375rem; font-weight: 600; color: var(--heading); text-decoration: none; }
+    .theme-controls { display: flex; padding: 3px; margin: 0; border: 1px solid var(--line); border-radius: 6px; gap: 2px; }
+    .theme-controls button { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; padding: .3rem .65rem; border: 0; border-radius: 3px; font: inherit; font-size: .875rem; line-height: 1.3; color: var(--muted); background: transparent; cursor: pointer; }
+    .theme-controls button[aria-pressed="true"] { color: var(--heading); background: var(--selected); }
+    .theme-controls svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .intro { padding: 3.25rem 0 2.6rem; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { color: var(--heading); font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.35rem, 6vw, 3rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; }
+    .subtitle { margin-top: .65rem; color: var(--muted); font-size: 1.0625rem; }
+    .about { margin-top: 1.7rem; max-width: 65ch; font-size: 1.0625rem; line-height: 1.75; }
+    .about + .about { margin-top: .85rem; }
+    nav { display: flex; flex-wrap: wrap; column-gap: 1.55rem; row-gap: .35rem; margin-top: 1.65rem; }
+    nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }
+    section { padding: 0 0 2.9rem; scroll-margin-top: 1.5rem; }
+    h2 { padding-bottom: .8rem; margin-bottom: 1.7rem; border-bottom: 1px solid var(--line); color: var(--heading); font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -.02em; }
+    h3 { color: var(--heading); font-size: 1.0625rem; font-weight: 600; line-height: 1.5; }
+    .experience { display: grid; grid-template-columns: 10.25rem minmax(0, 1fr); gap: 1.5rem; margin-top: 1.75rem; }
+    .experience:first-of-type { margin-top: 0; }
+    .date { padding-top: .1rem; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
+    .role { margin-top: .1rem; }
+    .location, .project-status { margin-top: .12rem; color: var(--muted); font-size: .875rem; }
+    .description { margin-top: .6rem; }
+    .education-details p + p { margin-top: .7rem; }
+    .education-details .role { margin-top: .1rem; }
+    .education-details .location { margin-top: .15rem; }
+    .section-intro { margin: -.3rem 0 1.7rem; }
+    .project { margin-top: 1.8rem; }
+    .project:first-of-type { margin-top: 0; }
+    .project-links { display: flex; flex-wrap: wrap; column-gap: 1.35rem; row-gap: .15rem; margin-top: .35rem; }
+    .project-links a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }
+    footer { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding: 1.25rem 0 2.5rem; font-size: .875rem; color: var(--muted); }
+    footer a { min-height: 2.75rem; display: inline-flex; align-items: center; }
+    @media (max-width: 620px) {
+      .page { padding: 0 1.25rem; }
+      .topbar { padding-top: 1.25rem; }
+      .intro { padding-top: 2.5rem; padding-bottom: 2rem; }
+      .experience { grid-template-columns: minmax(0, 1fr); gap: .25rem; margin-top: 1.8rem; }
+      .date { margin-bottom: .1rem; }
+      section { padding-bottom: 2.3rem; }
+    }
+    @media (max-width: 340px) {
+      .theme-controls svg { display: none; }
+      .theme-controls button { padding-inline: .5rem; }
+    }
+    @media print {
+      :root, :root[data-theme], :root:not([data-theme="light"]) { --background: white; --text: #222; --heading: #000; --muted: #444; --line: #ccc; --link: #222; color-scheme: light; }
+      body { font-size: 10pt; }
+      .page { max-width: none; padding: 0; }
+      .topbar { padding-top: 0; }
+      .theme-controls, nav, .skip-link, footer a { display: none; }
+      .intro { padding: 1rem 0 1.5rem; }
+      h1 { font-size: 28pt; }
+      h2 { break-after: avoid; }
+      article { break-inside: avoid; }
+      .experience { grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }
+      a { text-decoration: underline; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="Kurt J. Foster, back to top">kfost.com</a>
+      <fieldset class="theme-controls" hidden>
+        <legend class="visually-hidden">Reading theme</legend>
+        <button type="button" data-theme-choice="light" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>
+          Light
+        </button>
+        <button type="button" data-theme-choice="dark" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.6 13A8.6 8.6 0 0 1 11 3.4 8.7 8.7 0 1 0 20.6 13Z"/></svg>
+          Dark
+        </button>
+      </fieldset>
+    </header>
+
+    <main id="main">
+      <div class="intro">
+        <h1>Kurt J. Foster</h1>
+        <p class="subtitle">Automation &amp; equipment maintenance</p>
+        <p class="about">I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.</p>
+        <p class="about">I also design and build electrical and mechanical projects, from automated dosing systems to telescopes. Outside of work, I enjoy the outdoors, optics, and astronomy.</p>
+        <nav aria-label="On this page">
+          <a href="#work">Work experience</a>
+          <a href="#education">Education</a>
+          <a href="#projects">Projects</a>
+        </nav>
+      </div>
+
+      <section id="work" aria-labelledby="work-heading">
+        <h2 id="work-heading">Work experience</h2>
+        <article class="experience">
+          <p class="date">Dec 2025 – Jul 2026</p>
+          <div>
+            <h3>Oregon Ice Cream Co.</h3>
+            <p class="role">Manufacturing Maintenance Technician</p>
+            <p class="location">Eugene, OR</p>
+            <p class="description">Maintained and repaired manufacturing and packaging equipment, including mechanical, electrical, and pneumatic systems. Supported preventive maintenance, machine changeovers, facility systems, and ammonia refrigeration.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Oct – Dec 2024</p>
+          <div>
+            <h3>Ninkasi Brewing Company</h3>
+            <p class="role">Packaging Maintenance Technician</p>
+            <p class="location">Eugene, OR</p>
+            <p class="description">Troubleshot packaging equipment, made production adjustments, and improved preventive maintenance procedures. Kept operating procedures aligned with equipment changes and training needs.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Apr – Jun 2024</p>
+          <div>
+            <h3>Tesla</h3>
+            <p class="role">Equipment Maintenance Technician</p>
+            <p class="location">Sparks, NV</p>
+            <p class="description">Maintained powertrain manufacturing equipment and more than 70 FANUC industrial robots on battery enclosure lines. Diagnosed machine faults and repaired electrical systems from 24 VDC to 480 VAC.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Aug – Dec 2023</p>
+          <div>
+            <h3>HP · Kforce contractor</h3>
+            <p class="role">Repair and Maintenance Technician</p>
+            <p class="location">Corvallis, OR</p>
+            <p class="description">Repaired industrial automation systems, edited PLC ladder logic, and diagnosed electrical and mechanical faults. Documented repairs, interpreted schematics, and supported spare-parts planning.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Mar 2021 – Jul 2023</p>
+          <div>
+            <h3>Enriched Gravity</h3>
+            <p class="role">Automation Systems Technician</p>
+            <p class="location">Corvallis, OR</p>
+            <p class="description">Designed, built, and tested automated gravity-fed nutrient dosing prototypes for hydroponics. Developed CAD models and electrical drawings, programmed PLCs and microcontrollers, and tested components for reliability.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Oct 2020 – Feb 2021</p>
+          <div>
+            <h3>Tesla</h3>
+            <p class="role">Equipment Maintenance Technician</p>
+            <p class="location">Sparks, NV</p>
+            <p class="description">Maintained automated equipment in powertrain manufacturing, including Model 3 drive unit assembly, test, and Raven lines. Diagnosed breakdowns and restored mechanical and electrical systems.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Aug 2019 – Sep 2020</p>
+          <div>
+            <h3>Enriched Gravity</h3>
+            <p class="role">Automation Systems Technician</p>
+            <p class="location">Corvallis, OR</p>
+            <p class="description">Developed nutrient dosing prototypes for automated farming. Created mechanical, electrical, and fluid drawings; assembled equipment; and wired and programmed process-control systems.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Jun 2018 – Jul 2019</p>
+          <div>
+            <h3>Tesla</h3>
+            <p class="role">Equipment Maintenance Technician</p>
+            <p class="location">Sparks, NV</p>
+            <p class="description">Supported the production ramp across Model 3 battery module and drive unit lines. Diagnosed equipment failures, repaired automated machinery, and helped recover more than 500 drive units from fallout in Q2 2019.</p>
+          </div>
+        </article>
+        <article class="experience">
+          <p class="date">Mar – May 2018</p>
+          <div>
+            <h3>Andrews Cooper</h3>
+            <p class="role">Automation Technician Intern</p>
+            <p class="location">Corvallis, OR</p>
+            <p class="description">Assembled and tested custom manufacturing equipment for the Daimler electric truck and optical-alignment test cells for the Steam VR headset. Built control panels and wired complex connectors.</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="education" aria-labelledby="education-heading">
+        <h2 id="education-heading">Education</h2>
+        <article class="experience">
+          <p class="date">2016 – 2018</p>
+          <div class="education-details">
+            <h3>Linn-Benton Community College</h3>
+            <p class="role">A.A.S., Industrial Automation Technology</p>
+            <p class="location">Albany, OR · GPA 3.94 / 4.00</p>
+            <p>Studied PLCs, electrical troubleshooting, industrial maintenance, hydraulics and pneumatics, process control, and electromechanical assembly.</p>
+            <p>For my capstone, I integrated two wafer-handling robot arms into a production-line prototype using Arduino UNOs, an Allen-Bradley ControlLogix 5000 Series PLC, C++, and ladder logic.</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <p class="section-intro">Open-source electrical and mechanical projects, with more than 100 pages of documentation, schematics, and CAD files. All projects are shared under the MIT License.</p>
+        <article class="project">
+          <h3>Automatic Dosing Unit</h3>
+          <p class="project-status">Open source · Assembly &amp; testing</p>
+          <p class="description">An automated gravity-fed dosing system for hydroponics and other fluid-delivery applications. I designed, built, and tested the system, including a CAD assembly with more than 700 parts. Current work focuses on long-term component reliability.</p>
+          <div class="project-links"><a href="https://kfost.com/docs/automatic-dosing-unit-v2.0.pdf">Electrical schematic (PDF)</a></div>
+        </article>
+        <article class="project">
+          <h3>Bearing Supply &amp; Placement Machine</h3>
+          <p class="project-status">Academic project · Completed</p>
+          <p class="description">A pneumatic machine that sorts bearings by width, then places accepted bearings into housings on a conveyor. The system uses five directional control valves, five pneumatic cylinders, and twelve sensors.</p>
+          <div class="project-links"><a href="https://kfost.com/docs/bearing-supply.pdf">Documentation (PDF)</a></div>
+        </article>
+        <article class="project">
+          <h3>Automated Parts Transfer System</h3>
+          <p class="project-status">Academic project · Completed</p>
+          <p class="description">A prototype production line using two dual-axis wafer-handling robots, two Arduino UNOs, and an Allen-Bradley ControlLogix PLC. Developed as my industrial automation capstone.</p>
+          <div class="project-links"><a href="https://kfost.com/docs/parts-transfer.pdf">Documentation (PDF)</a></div>
+        </article>
+        <article class="project">
+          <h3>Aluminum Mountain Bike Frame</h3>
+          <p class="project-status">Academic project · Completed</p>
+          <p class="description">A functional 6061 aluminum mountain bike frame that I designed, built, and tested. The work combined reverse engineering, component design, and learning to TIG weld aluminum.</p>
+          <div class="project-links"><a href="https://kfost.com/docs/mountain-bike.pdf">Documentation (PDF)</a></div>
+        </article>
+        <article class="project">
+          <h3>Portable Meter-class Binoculars</h3>
+          <p class="project-status">Open source · Early design</p>
+          <p class="description">A binocular telescope concept with an upright image for both eyes. The design combines concave primary and secondary mirrors with a Nasmyth-style tertiary mirror; a scaled-down model is the first optical test.</p>
+          <div class="project-links"><a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg">Ray-trace model</a>
+              <a href="https://kfost.com/docs/portable-meter-class-binoculars-v1.0.pdf">Documentation (PDF)</a></div>
+        </article>
+        <article class="project">
+          <h3>Truss-style Newtonian Telescope</h3>
+          <p class="project-status">Open source · CAD in progress</p>
+          <p class="description">An 8-inch truss-style Newtonian telescope, including a hand-ground mirror, CNC-routed wood components, and an Onshape assembly with more than 80 parts. The CAD model is still being completed.</p>
+        </article>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>© 2026 Kurt J. Foster</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const controls = document.querySelector('.theme-controls');
+      const buttons = controls.querySelectorAll('button');
+      const system = window.matchMedia('(prefers-color-scheme: dark)');
+      let preference = root.dataset.theme || null;
+      const applyTheme = () => {
+        const theme = preference || (system.matches ? 'dark' : 'light');
+        root.dataset.theme = theme;
+        for (const button of buttons) {
+          button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+        }
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#17191c' : '#fcfcfc';
+      };
+      for (const button of buttons) {
+        button.addEventListener('click', () => {
+          preference = button.dataset.themeChoice;
+          try { localStorage.setItem('kfost-theme', preference); } catch (_) {}
+          applyTheme();
+        });
+      }
+      system.addEventListener('change', () => { if (!preference) applyTheme(); });
+      window.addEventListener('storage', event => {
+        if (event.key === 'kfost-theme' || event.key === null) {
+          preference = event.newValue === 'dark' || event.newValue === 'light' ? event.newValue : null;
+          applyTheme();
+        }
+      });
+      applyTheme();
+      controls.hidden = false;
+    })();
+  </script>
+</body>
+</html>
