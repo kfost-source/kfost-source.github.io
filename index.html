@@ -1,349 +1,943 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Kurt J. Foster — automation and equipment maintenance specialist. Work experience, education, and open-source electrical and mechanical projects.">
-  <meta name="theme-color" content="#fcfcfc">
-  <title>Kurt J. Foster</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23212529'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-size='18' font-weight='700' fill='white'%3Ekf%3C/text%3E%3C/svg%3E">
-  <script>
-    (() => {
-      try {
-        const saved = localStorage.getItem('kfost-theme');
-        if (saved === 'light' || saved === 'dark') {
-          document.documentElement.dataset.theme = saved;
-        }
-      } catch (_) { /* System colors still work when storage is unavailable. */ }
-    })();
-  </script>
-  <style>
-    :root {
-      color-scheme: light;
-      --background: #fcfcfc;
-      --text: #33383e;
-      --heading: #171b20;
-      --muted: #626a73;
-      --line: #dce0e4;
-      --link: #5c626a;
-      --selected: #e9edf1;
-      --focus: #5c626a;
-    }
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      --background: #17191c;
-      --text: #c9cdd3;
-      --heading: #f0f1f3;
-      --muted: #9da5b0;
-      --line: #373c43;
-      --link: #b8bec7;
-      --selected: #30353b;
-      --focus: #b8bec7;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        color-scheme: dark;
-        --background: #17191c;
-        --text: #c9cdd3;
-        --heading: #f0f1f3;
-        --muted: #9da5b0;
-        --line: #373c43;
-        --link: #b8bec7;
-        --selected: #30353b;
-        --focus: #b8bec7;
-      }
-    }
-    * { box-sizing: border-box; }
-    [hidden] { display: none !important; }
-    html { scroll-padding-top: 2rem; }
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.7;
-      -webkit-text-size-adjust: 100%;
-      overflow-wrap: break-word;
-    }
-    .page { max-width: 51rem; padding: 0 1.75rem; margin: 0 auto; }
-    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .22em; }
-    a:hover { text-decoration-thickness: 2px; }
-    :focus-visible { outline: 2px solid var(--focus); outline-offset: 5px; border-radius: 2px; }
-    .skip-link { position: absolute; top: -10rem; left: 1rem; padding: .6rem 1rem; background: var(--background); z-index: 2; }
-    .skip-link:focus { top: .75rem; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2.5rem; }
-    .wordmark { font-size: .9375rem; font-weight: 600; color: var(--heading); text-decoration: none; }
-    .theme-controls { display: flex; padding: 3px; margin: 0; border: 1px solid var(--line); border-radius: 6px; gap: 2px; }
-    .theme-controls button { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; padding: .3rem .65rem; border: 0; border-radius: 3px; font: inherit; font-size: .875rem; line-height: 1.3; color: var(--muted); background: transparent; cursor: pointer; }
-    .theme-controls button[aria-pressed="true"] { color: var(--heading); background: var(--selected); }
-    .theme-controls svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    .intro { padding: 3.25rem 0 2.6rem; }
-    h1, h2, h3, p { margin: 0; }
-    h1 { color: var(--heading); font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.35rem, 6vw, 3rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; }
-    .subtitle { margin-top: .65rem; color: var(--muted); font-size: 1.0625rem; }
-    .about { margin-top: 1.7rem; max-width: 65ch; font-size: 1.0625rem; line-height: 1.75; }
-    .about + .about { margin-top: .85rem; }
-    nav { display: flex; flex-wrap: wrap; column-gap: 1.55rem; row-gap: .35rem; margin-top: 1.65rem; }
-    nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }
-    section { padding: 0 0 2.9rem; scroll-margin-top: 1.5rem; }
-    h2 { padding-bottom: .8rem; margin-bottom: 1.7rem; border-bottom: 1px solid var(--line); color: var(--heading); font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -.02em; }
-    h3 { color: var(--heading); font-size: 1.0625rem; font-weight: 600; line-height: 1.5; }
-    .experience { display: grid; grid-template-columns: 10.25rem minmax(0, 1fr); gap: 1.5rem; margin-top: 1.75rem; }
-    .experience:first-of-type { margin-top: 0; }
-    .date { padding-top: .1rem; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
-    .role { margin-top: .1rem; }
-    .location, .project-status { margin-top: .12rem; color: var(--muted); font-size: .875rem; }
-    .description { margin-top: .6rem; }
-    .education-details p + p { margin-top: .7rem; }
-    .education-details .role { margin-top: .1rem; }
-    .education-details .location { margin-top: .15rem; }
-    .section-intro { margin: -.3rem 0 1.7rem; }
-    .project { margin-top: 1.8rem; }
-    .project:first-of-type { margin-top: 0; }
-    .project-links { display: flex; flex-wrap: wrap; column-gap: 1.35rem; row-gap: .15rem; margin-top: .35rem; }
-    .project-links a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }
-    footer { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding: 1.25rem 0 2.5rem; font-size: .875rem; color: var(--muted); }
-    footer a { min-height: 2.75rem; display: inline-flex; align-items: center; }
-    @media (max-width: 620px) {
-      .page { padding: 0 1.25rem; }
-      .topbar { padding-top: 1.25rem; }
-      .intro { padding-top: 2.5rem; padding-bottom: 2rem; }
-      .experience { grid-template-columns: minmax(0, 1fr); gap: .25rem; margin-top: 1.8rem; }
-      .date { margin-bottom: .1rem; }
-      section { padding-bottom: 2.3rem; }
-    }
-    @media (max-width: 340px) {
-      .theme-controls svg { display: none; }
-      .theme-controls button { padding-inline: .5rem; }
-    }
-    @media print {
-      :root, :root[data-theme], :root:not([data-theme="light"]) { --background: white; --text: #222; --heading: #000; --muted: #444; --line: #ccc; --link: #222; color-scheme: light; }
-      body { font-size: 10pt; }
-      .page { max-width: none; padding: 0; }
-      .topbar { padding-top: 0; }
-      .theme-controls, nav, .skip-link, footer a { display: none; }
-      .intro { padding: 1rem 0 1.5rem; }
-      h1 { font-size: 28pt; }
-      h2 { break-after: avoid; }
-      article { break-inside: avoid; }
-      .experience { grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }
-      a { text-decoration: underline; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" data-i18n-content="meta" content="Kurt J. Foster — automation and equipment maintenance specialist. Work experience, education, and open-source electrical and mechanical projects.">
+<meta name="theme-color" content="#fcfcfc">
+<title>Kurt J. Foster</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23212529'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-size='18' font-weight='700' fill='white'%3Ekf%3C/text%3E%3C/svg%3E">
+<script>     (() => {       try {         const saved = localStorage.getItem('kfost-theme');         if (saved === 'light' || saved === 'dark') {           document.documentElement.dataset.theme = saved;         }       } catch (_) { /* System colors still work when storage is unavailable. */ }     })();   </script>
+<style>     :root {       color-scheme: light;       --background: #fcfcfc;       --text: #33383e;       --heading: #171b20;       --muted: #626a73;       --line: #dce0e4;       --link: #5c626a;       --selected: #e9edf1;       --focus: #5c626a;     }     :root[data-theme="dark"] {       color-scheme: dark;       --background: #17191c;       --text: #c9cdd3;       --heading: #f0f1f3;       --muted: #9da5b0;       --line: #373c43;       --link: #b8bec7;       --selected: #30353b;       --focus: #b8bec7;     }     @media (prefers-color-scheme: dark) {       :root:not([data-theme="light"]) {         color-scheme: dark;         --background: #17191c;         --text: #c9cdd3;         --heading: #f0f1f3;         --muted: #9da5b0;         --line: #373c43;         --link: #b8bec7;         --selected: #30353b;         --focus: #b8bec7;       }     }     * { box-sizing: border-box; }     [hidden] { display: none !important; }     html { scroll-padding-top: 2rem; }     body {       margin: 0;       background: var(--background);       color: var(--text);       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;       font-size: 1rem;       line-height: 1.7;       -webkit-text-size-adjust: 100%;       overflow-wrap: break-word;     }     .page { max-width: 51rem; padding: 0 1.75rem; margin: 0 auto; }     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .22em; }     a:hover { text-decoration-thickness: 2px; }     :focus-visible { outline: 2px solid var(--focus); outline-offset: 5px; border-radius: 2px; }     .skip-link { position: absolute; top: -10rem; left: 1rem; padding: .6rem 1rem; background: var(--background); z-index: 2; }     .skip-link:focus { top: .75rem; }     .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2.5rem; }     .wordmark { font-size: .9375rem; font-weight: 600; color: var(--heading); text-decoration: none; }     .theme-controls { display: flex; padding: 3px; margin: 0; border: 1px solid var(--line); border-radius: 6px; gap: 2px; }     .theme-controls button { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; padding: .3rem .65rem; border: 0; border-radius: 3px; font: inherit; font-size: .875rem; line-height: 1.3; color: var(--muted); background: transparent; cursor: pointer; }     .theme-controls button[aria-pressed="true"] { color: var(--heading); background: var(--selected); }     .theme-controls svg { width: 1rem; height: 1rem; flex-shrink: 0; }     .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }     .intro { padding: 3.25rem 0 2.6rem; }     h1, h2, h3, p { margin: 0; }     h1 { color: var(--heading); font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.35rem, 6vw, 3rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; }     .subtitle { margin-top: .65rem; color: var(--muted); font-size: 1.0625rem; }     .about { margin-top: 1.7rem; max-width: 65ch; font-size: 1.0625rem; line-height: 1.75; }     .about + .about { margin-top: .85rem; }     nav { display: flex; flex-wrap: wrap; column-gap: 1.55rem; row-gap: .35rem; margin-top: 1.65rem; }     nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }     section { padding: 0 0 2.9rem; scroll-margin-top: 1.5rem; }     h2 { padding-bottom: .8rem; margin-bottom: 1.7rem; border-bottom: 1px solid var(--line); color: var(--heading); font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -.02em; }     h3 { color: var(--heading); font-size: 1.0625rem; font-weight: 600; line-height: 1.5; }     .experience { display: grid; grid-template-columns: 10.25rem minmax(0, 1fr); gap: 1.5rem; margin-top: 1.75rem; }     .experience:first-of-type { margin-top: 0; }     .date { padding-top: .1rem; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }     .role { margin-top: .1rem; }     .location, .project-status { margin-top: .12rem; color: var(--muted); font-size: .875rem; }     .description { margin-top: .6rem; }     .education-details p + p { margin-top: .7rem; }     .education-details .role { margin-top: .1rem; }     .education-details .location { margin-top: .15rem; }     .section-intro { margin: -.3rem 0 1.7rem; }     .project { margin-top: 1.8rem; }     .project:first-of-type { margin-top: 0; }     .project-links { display: flex; flex-wrap: wrap; column-gap: 1.35rem; row-gap: .15rem; margin-top: .35rem; }     .project-links a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .9375rem; }     footer { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding: 1.25rem 0 2.5rem; font-size: .875rem; color: var(--muted); }     footer a { min-height: 2.75rem; display: inline-flex; align-items: center; }     @media (max-width: 620px) {       .page { padding: 0 1.25rem; }       .topbar { padding-top: 1.25rem; }       .intro { padding-top: 2.5rem; padding-bottom: 2rem; }       .experience { grid-template-columns: minmax(0, 1fr); gap: .25rem; margin-top: 1.8rem; }       .date { margin-bottom: .1rem; }       section { padding-bottom: 2.3rem; }     }     @media (max-width: 340px) {       .theme-controls svg { display: none; }       .theme-controls button { padding-inline: .5rem; }     }     @media print {       :root, :root[data-theme], :root:not([data-theme="light"]) { --background: white; --text: #222; --heading: #000; --muted: #444; --line: #ccc; --link: #222; color-scheme: light; }       body { font-size: 10pt; }       .page { max-width: none; padding: 0; }       .topbar { padding-top: 0; }       .theme-controls, nav, .skip-link, footer a { display: none; }       .intro { padding: 1rem 0 1.5rem; }       h1 { font-size: 28pt; }       h2 { break-after: avoid; }       article { break-inside: avoid; }       .experience { grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }       a { text-decoration: underline; }     }   
+/* Compact language control; all assets and translations are inline. */
+.topbar { flex-wrap: wrap; gap: .7rem .75rem; }
+.display-controls { display: flex; align-items: center; gap: .5rem; margin-inline-start: auto; }
+.theme-controls { min-inline-size: 0; }
+.theme-controls button { min-width: 2.5rem; white-space: nowrap; }
+.language-widget { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .35rem; width: 5.5rem; height: 3rem; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); background: var(--background); flex-shrink: 0; }
+.language-widget:hover { color: var(--heading); background: var(--selected); }
+.language-widget:focus-within { outline: 2px solid var(--focus); outline-offset: 4px; }
+.language-widget > svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.language-widget > .language-chevron { width: .75rem; height: .75rem; }
+#language-code { font-size: .8125rem; font-weight: 600; line-height: 1; }
+#language-select { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; font: inherit; font-size: 1rem; }
+#language-select option { color: var(--text); background: var(--background); }
+:root:lang(ar) body, :root:lang(ur) body { font-family: 'Noto Sans Arabic', Tahoma, 'Segoe UI', Arial, sans-serif; }
+:root:lang(hi) body { font-family: 'Noto Sans Devanagari', 'Segoe UI', Arial, sans-serif; }
+:root:lang(bn) body { font-family: 'Noto Sans Bengali', 'Segoe UI', Arial, sans-serif; }
+:root[dir='rtl'] h2 { letter-spacing: normal; }
+@media (max-width: 560px) {
+  .theme-controls button span { display: none; }
+  .theme-controls button { padding-inline: .6rem; min-width: 2.5rem; }
+  .theme-controls svg { display: block; }
+}
+@media print { .display-controls, #language-status { display: none !important; } }
+</style>
 </head>
 <body id="top">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="page">
-    <header class="topbar">
-      <a class="wordmark" href="#top" aria-label="Kurt J. Foster, back to top">kfost.com</a>
-      <fieldset class="theme-controls" hidden>
-        <legend class="visually-hidden">Reading theme</legend>
-        <button type="button" data-theme-choice="light" aria-pressed="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>
-          Light
-        </button>
-        <button type="button" data-theme-choice="dark" aria-pressed="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.6 13A8.6 8.6 0 0 1 11 3.4 8.7 8.7 0 1 0 20.6 13Z"/></svg>
-          Dark
-        </button>
-      </fieldset>
-    </header>
-
-    <main id="main">
-      <div class="intro">
-        <h1>Kurt J. Foster</h1>
-        <p class="subtitle">Automation &amp; equipment maintenance</p>
-        <p class="about">I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.</p>
-        <p class="about">I also design and build electrical and mechanical projects, from automated dosing systems to telescopes. Outside of work, I enjoy the outdoors, optics, and astronomy.</p>
-        <nav aria-label="On this page">
-          <a href="#work">Work experience</a>
-          <a href="#education">Education</a>
-          <a href="#projects">Projects</a>
-        </nav>
-      </div>
-
-      <section id="work" aria-labelledby="work-heading">
-        <h2 id="work-heading">Work experience</h2>
-        <article class="experience">
-          <p class="date">Dec 2025 – Jul 2026</p>
-          <div>
-            <h3>Oregon Ice Cream Co.</h3>
-            <p class="role">Manufacturing Maintenance Technician</p>
-            <p class="location">Eugene, OR</p>
-            <p class="description">Maintained and repaired manufacturing and packaging equipment, including mechanical, electrical, and pneumatic systems. Supported preventive maintenance, machine changeovers, facility systems, and ammonia refrigeration.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Oct – Dec 2024</p>
-          <div>
-            <h3>Ninkasi Brewing Company</h3>
-            <p class="role">Packaging Maintenance Technician</p>
-            <p class="location">Eugene, OR</p>
-            <p class="description">Troubleshot packaging equipment, made production adjustments, and improved preventive maintenance procedures. Kept operating procedures aligned with equipment changes and training needs.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Apr – Jun 2024</p>
-          <div>
-            <h3>Tesla</h3>
-            <p class="role">Equipment Maintenance Technician</p>
-            <p class="location">Sparks, NV</p>
-            <p class="description">Maintained powertrain manufacturing equipment and more than 70 FANUC industrial robots on battery enclosure lines. Diagnosed machine faults and repaired electrical systems from 24 VDC to 480 VAC.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Aug – Dec 2023</p>
-          <div>
-            <h3>HP · Kforce contractor</h3>
-            <p class="role">Repair and Maintenance Technician</p>
-            <p class="location">Corvallis, OR</p>
-            <p class="description">Repaired industrial automation systems, edited PLC ladder logic, and diagnosed electrical and mechanical faults. Documented repairs, interpreted schematics, and supported spare-parts planning.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Mar 2021 – Jul 2023</p>
-          <div>
-            <h3>Enriched Gravity</h3>
-            <p class="role">Automation Systems Technician</p>
-            <p class="location">Corvallis, OR</p>
-            <p class="description">Designed, built, and tested automated gravity-fed nutrient dosing prototypes for hydroponics. Developed CAD models and electrical drawings, programmed PLCs and microcontrollers, and tested components for reliability.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Oct 2020 – Feb 2021</p>
-          <div>
-            <h3>Tesla</h3>
-            <p class="role">Equipment Maintenance Technician</p>
-            <p class="location">Sparks, NV</p>
-            <p class="description">Maintained automated equipment in powertrain manufacturing, including Model 3 drive unit assembly, test, and Raven lines. Diagnosed breakdowns and restored mechanical and electrical systems.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Aug 2019 – Sep 2020</p>
-          <div>
-            <h3>Enriched Gravity</h3>
-            <p class="role">Automation Systems Technician</p>
-            <p class="location">Corvallis, OR</p>
-            <p class="description">Developed nutrient dosing prototypes for automated farming. Created mechanical, electrical, and fluid drawings; assembled equipment; and wired and programmed process-control systems.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Jun 2018 – Jul 2019</p>
-          <div>
-            <h3>Tesla</h3>
-            <p class="role">Equipment Maintenance Technician</p>
-            <p class="location">Sparks, NV</p>
-            <p class="description">Supported the production ramp across Model 3 battery module and drive unit lines. Diagnosed equipment failures, repaired automated machinery, and helped recover more than 500 drive units from fallout in Q2 2019.</p>
-          </div>
-        </article>
-        <article class="experience">
-          <p class="date">Mar – May 2018</p>
-          <div>
-            <h3>Andrews Cooper</h3>
-            <p class="role">Automation Technician Intern</p>
-            <p class="location">Corvallis, OR</p>
-            <p class="description">Assembled and tested custom manufacturing equipment for the Daimler electric truck and optical-alignment test cells for the Steam VR headset. Built control panels and wired complex connectors.</p>
-          </div>
-        </article>
-      </section>
-
-      <section id="education" aria-labelledby="education-heading">
-        <h2 id="education-heading">Education</h2>
-        <article class="experience">
-          <p class="date">2016 – 2018</p>
-          <div class="education-details">
-            <h3>Linn-Benton Community College</h3>
-            <p class="role">A.A.S., Industrial Automation Technology</p>
-            <p class="location">Albany, OR · GPA 3.94 / 4.00</p>
-            <p>Studied PLCs, electrical troubleshooting, industrial maintenance, hydraulics and pneumatics, process control, and electromechanical assembly.</p>
-            <p>For my capstone, I integrated two wafer-handling robot arms into a production-line prototype using Arduino UNOs, an Allen-Bradley ControlLogix 5000 Series PLC, C++, and ladder logic.</p>
-          </div>
-        </article>
-      </section>
-
-      <section id="projects" aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Projects</h2>
-        <p class="section-intro">Open-source electrical and mechanical projects, with more than 100 pages of documentation, schematics, and CAD files. All projects are shared under the MIT License.</p>
-        <article class="project">
-          <h3>Automatic Dosing Unit</h3>
-          <p class="project-status">Open source · Assembly &amp; testing</p>
-          <p class="description">An automated gravity-fed dosing system for hydroponics and other fluid-delivery applications. I designed, built, and tested the system, including a CAD assembly with more than 700 parts. Current work focuses on long-term component reliability.</p>
-          <div class="project-links"><a href="https://kfost.com/docs/automatic-dosing-unit-v2.0.pdf">Electrical schematic (PDF)</a></div>
-        </article>
-        <article class="project">
-          <h3>Bearing Supply &amp; Placement Machine</h3>
-          <p class="project-status">Academic project · Completed</p>
-          <p class="description">A pneumatic machine that sorts bearings by width, then places accepted bearings into housings on a conveyor. The system uses five directional control valves, five pneumatic cylinders, and twelve sensors.</p>
-          <div class="project-links"><a href="https://kfost.com/docs/bearing-supply.pdf">Documentation (PDF)</a></div>
-        </article>
-        <article class="project">
-          <h3>Automated Parts Transfer System</h3>
-          <p class="project-status">Academic project · Completed</p>
-          <p class="description">A prototype production line using two dual-axis wafer-handling robots, two Arduino UNOs, and an Allen-Bradley ControlLogix PLC. Developed as my industrial automation capstone.</p>
-          <div class="project-links"><a href="https://kfost.com/docs/parts-transfer.pdf">Documentation (PDF)</a></div>
-        </article>
-        <article class="project">
-          <h3>Aluminum Mountain Bike Frame</h3>
-          <p class="project-status">Academic project · Completed</p>
-          <p class="description">A functional 6061 aluminum mountain bike frame that I designed, built, and tested. The work combined reverse engineering, component design, and learning to TIG weld aluminum.</p>
-          <div class="project-links"><a href="https://kfost.com/docs/mountain-bike.pdf">Documentation (PDF)</a></div>
-        </article>
-        <article class="project">
-          <h3>Portable Meter-class Binoculars</h3>
-          <p class="project-status">Open source · Early design</p>
-          <p class="description">A binocular telescope concept with an upright image for both eyes. The design combines concave primary and secondary mirrors with a Nasmyth-style tertiary mirror; a scaled-down model is the first optical test.</p>
-          <div class="project-links"><a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg">Ray-trace model</a>
-              <a href="https://kfost.com/docs/portable-meter-class-binoculars-v1.0.pdf">Documentation (PDF)</a></div>
-        </article>
-        <article class="project">
-          <h3>Truss-style Newtonian Telescope</h3>
-          <p class="project-status">Open source · CAD in progress</p>
-          <p class="description">An 8-inch truss-style Newtonian telescope, including a hand-ground mirror, CNC-routed wood components, and an Onshape assembly with more than 80 parts. The CAD model is still being completed.</p>
-        </article>
-      </section>
-
-    </main>
-
-    <footer>
-      <p>© 2026 Kurt J. Foster</p>
-      <a href="#top">Back to top</a>
-    </footer>
-  </div>
-  <script>
-    (() => {
-      const root = document.documentElement;
-      const controls = document.querySelector('.theme-controls');
-      const buttons = controls.querySelectorAll('button');
-      const system = window.matchMedia('(prefers-color-scheme: dark)');
-      let preference = root.dataset.theme || null;
-      const applyTheme = () => {
-        const theme = preference || (system.matches ? 'dark' : 'light');
-        root.dataset.theme = theme;
-        for (const button of buttons) {
-          button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
-        }
-        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#17191c' : '#fcfcfc';
-      };
-      for (const button of buttons) {
-        button.addEventListener('click', () => {
-          preference = button.dataset.themeChoice;
-          try { localStorage.setItem('kfost-theme', preference); } catch (_) {}
-          applyTheme();
-        });
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+<div class="page">
+<header class="topbar">
+<a class="wordmark" href="#top" dir="ltr" translate="no" aria-label="Kurt J. Foster, back to top" data-i18n-aria-label="topLabel">kfost.com</a>
+<div class="display-controls" dir="ltr"><fieldset class="theme-controls" hidden>
+<legend class="visually-hidden" data-i18n="theme">Reading theme</legend>
+<button type="button" data-theme-choice="light" aria-label="Light" data-i18n-aria-label="light" aria-pressed="false">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg><span data-i18n="light">Light</span>
+</button>
+<button type="button" data-theme-choice="dark" aria-label="Dark" data-i18n-aria-label="dark" aria-pressed="false">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.6 13A8.6 8.6 0 0 1 11 3.4 8.7 8.7 0 1 0 20.6 13Z"/></svg><span data-i18n="dark">Dark</span>
+</button>
+</fieldset><div class="language-widget" hidden>
+<label class="visually-hidden" for="language-select" data-i18n="language">Language</label>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a17 17 0 0 1 0 18 17 17 0 0 1 0-18Z"/></svg>
+<span id="language-code" aria-hidden="true">EN</span>
+<svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+<select id="language-select" dir="ltr" title="Language: English">
+<option value="en" lang="en" dir="ltr">English</option>
+<option value="zh-Hans" lang="zh-Hans" dir="ltr">简体中文</option>
+<option value="hi" lang="hi" dir="ltr">हिन्दी</option>
+<option value="es" lang="es" dir="ltr">Español</option>
+<option value="ar" lang="ar" dir="rtl">العربية</option>
+<option value="fr" lang="fr" dir="ltr">Français</option>
+<option value="bn" lang="bn" dir="ltr">বাংলা</option>
+<option value="pt" lang="pt" dir="ltr">Português</option>
+<option value="id" lang="id" dir="ltr">Bahasa Indonesia</option>
+<option value="ur" lang="ur" dir="rtl">اردو</option>
+</select>
+</div></div>
+</header>
+<main id="main">
+<div class="intro">
+<h1><bdi dir="ltr" lang="en" translate="no">Kurt J. Foster</bdi></h1>
+<p class="subtitle" data-i18n="subtitle">Automation &amp; equipment maintenance</p>
+<p class="about" data-i18n="about1">I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.</p>
+<p class="about" data-i18n="about2">I also design and build electrical and mechanical projects, from automated dosing systems to telescopes. Outside of work, I enjoy the outdoors, optics, and astronomy.</p>
+<nav aria-label="On this page" data-i18n-aria-label="navLabel">
+<a href="#work" data-i18n="work">Work experience</a>
+<a href="#education" data-i18n="education">Education</a>
+<a href="#projects" data-i18n="projects">Projects</a>
+</nav>
+</div>
+<section id="work" aria-labelledby="work-heading">
+<h2 id="work-heading" data-i18n="work">Work experience</h2>
+<article class="experience">
+<p class="date" data-start="2025-12" data-end="2026-07">Dec 2025 – Jul 2026</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Oregon Ice Cream Co.</bdi></h3>
+<p class="role" data-i18n="roleManufacturing">Manufacturing Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Eugene, OR</bdi></p>
+<p class="description" data-i18n="work1">Maintained and repaired manufacturing and packaging equipment, including mechanical, electrical, and pneumatic systems. Supported preventive maintenance, machine changeovers, facility systems, and ammonia refrigeration.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2024-10" data-end="2024-12">Oct – Dec 2024</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Ninkasi Brewing Company</bdi></h3>
+<p class="role" data-i18n="rolePackaging">Packaging Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Eugene, OR</bdi></p>
+<p class="description" data-i18n="work2">Troubleshot packaging equipment, made production adjustments, and improved preventive maintenance procedures. Kept operating procedures aligned with equipment changes and training needs.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2024-04" data-end="2024-06">Apr – Jun 2024</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Tesla</bdi></h3>
+<p class="role" data-i18n="roleEquipment">Equipment Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Sparks, NV</bdi></p>
+<p class="description" data-i18n="work3">Maintained powertrain manufacturing equipment and more than 70 FANUC industrial robots on battery enclosure lines. Diagnosed machine faults and repaired electrical systems from 24 VDC to 480 VAC.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2023-08" data-end="2023-12">Aug – Dec 2023</p>
+<div>
+<h3 data-i18n="hp">HP · Kforce contractor</h3>
+<p class="role" data-i18n="roleRepair">Repair and Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Corvallis, OR</bdi></p>
+<p class="description" data-i18n="work4">Repaired industrial automation systems, edited PLC ladder logic, and diagnosed electrical and mechanical faults. Documented repairs, interpreted schematics, and supported spare-parts planning.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2021-03" data-end="2023-07">Mar 2021 – Jul 2023</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Enriched Gravity</bdi></h3>
+<p class="role" data-i18n="roleAutomation">Automation Systems Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Corvallis, OR</bdi></p>
+<p class="description" data-i18n="work5">Designed, built, and tested automated gravity-fed nutrient dosing prototypes for hydroponics. Developed CAD models and electrical drawings, programmed PLCs and microcontrollers, and tested components for reliability.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2020-10" data-end="2021-02">Oct 2020 – Feb 2021</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Tesla</bdi></h3>
+<p class="role" data-i18n="roleEquipment">Equipment Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Sparks, NV</bdi></p>
+<p class="description" data-i18n="work6">Maintained automated equipment in powertrain manufacturing, including Model 3 drive unit assembly, test, and Raven lines. Diagnosed breakdowns and restored mechanical and electrical systems.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2019-08" data-end="2020-09">Aug 2019 – Sep 2020</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Enriched Gravity</bdi></h3>
+<p class="role" data-i18n="roleAutomation">Automation Systems Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Corvallis, OR</bdi></p>
+<p class="description" data-i18n="work7">Developed nutrient dosing prototypes for automated farming. Created mechanical, electrical, and fluid drawings; assembled equipment; and wired and programmed process-control systems.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2018-06" data-end="2019-07">Jun 2018 – Jul 2019</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Tesla</bdi></h3>
+<p class="role" data-i18n="roleEquipment">Equipment Maintenance Technician</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Sparks, NV</bdi></p>
+<p class="description" data-i18n="work8">Supported the production ramp across Model 3 battery module and drive unit lines. Diagnosed equipment failures, repaired automated machinery, and helped recover more than 500 drive units from fallout in Q2 2019.</p>
+</div>
+</article>
+<article class="experience">
+<p class="date" data-start="2018-03" data-end="2018-05">Mar – May 2018</p>
+<div>
+<h3><bdi dir="ltr" lang="en" translate="no">Andrews Cooper</bdi></h3>
+<p class="role" data-i18n="roleIntern">Automation Technician Intern</p>
+<p class="location"><bdi dir="ltr" lang="en" translate="no">Corvallis, OR</bdi></p>
+<p class="description" data-i18n="work9">Assembled and tested custom manufacturing equipment for the Daimler electric truck and optical-alignment test cells for the Steam VR headset. Built control panels and wired complex connectors.</p>
+</div>
+</article>
+</section>
+<section id="education" aria-labelledby="education-heading">
+<h2 id="education-heading" data-i18n="education">Education</h2>
+<article class="experience">
+<p class="date" data-year-range="2016,2018">2016 – 2018</p>
+<div class="education-details">
+<h3><bdi dir="ltr" lang="en" translate="no">Linn-Benton Community College</bdi></h3>
+<p class="role" data-i18n="degree">A.A.S., Industrial Automation Technology</p>
+<p class="location" data-i18n="schoolLocation">Albany, OR · GPA 3.94 / 4.00</p>
+<p data-i18n="studies">Studied PLCs, electrical troubleshooting, industrial maintenance, hydraulics and pneumatics, process control, and electromechanical assembly.</p>
+<p data-i18n="capstone">For my capstone, I integrated two wafer-handling robot arms into a production-line prototype using Arduino UNOs, an Allen-Bradley ControlLogix 5000 Series PLC, C++, and ladder logic.</p>
+</div>
+</article>
+</section>
+<section id="projects" aria-labelledby="projects-heading">
+<h2 id="projects-heading" data-i18n="projects">Projects</h2>
+<p class="section-intro" data-i18n="projectsIntro">Open-source electrical and mechanical projects, with more than 100 pages of documentation, schematics, and CAD files. All projects are shared under the MIT License.</p>
+<article class="project">
+<h3 data-i18n="dosingTitle">Automatic Dosing Unit</h3>
+<p class="project-status" data-i18n="dosingStatus">Open source · Assembly &amp; testing</p>
+<p class="description" data-i18n="dosingDesc">An automated gravity-fed dosing system for hydroponics and other fluid-delivery applications. I designed, built, and tested the system, including a CAD assembly with more than 700 parts. Current work focuses on long-term component reliability.</p>
+<div class="project-links"><a href="https://kfost.com/docs/automatic-dosing-unit-v2.0.pdf" data-i18n="schematic">Electrical schematic (PDF)</a></div>
+</article>
+<article class="project">
+<h3 data-i18n="bearingTitle">Bearing Supply &amp; Placement Machine</h3>
+<p class="project-status" data-i18n="completeStatus">Academic project · Completed</p>
+<p class="description" data-i18n="bearingDesc">A pneumatic machine that sorts bearings by width, then places accepted bearings into housings on a conveyor. The system uses five directional control valves, five pneumatic cylinders, and twelve sensors.</p>
+<div class="project-links"><a href="https://kfost.com/docs/bearing-supply.pdf" data-i18n="documentation">Documentation (PDF)</a></div>
+</article>
+<article class="project">
+<h3 data-i18n="partsTitle">Automated Parts Transfer System</h3>
+<p class="project-status" data-i18n="completeStatus">Academic project · Completed</p>
+<p class="description" data-i18n="partsDesc">A prototype production line using two dual-axis wafer-handling robots, two Arduino UNOs, and an Allen-Bradley ControlLogix PLC. Developed as my industrial automation capstone.</p>
+<div class="project-links"><a href="https://kfost.com/docs/parts-transfer.pdf" data-i18n="documentation">Documentation (PDF)</a></div>
+</article>
+<article class="project">
+<h3 data-i18n="bikeTitle">Aluminum Mountain Bike Frame</h3>
+<p class="project-status" data-i18n="completeStatus">Academic project · Completed</p>
+<p class="description" data-i18n="bikeDesc">A functional 6061 aluminum mountain bike frame that I designed, built, and tested. The work combined reverse engineering, component design, and learning to TIG weld aluminum.</p>
+<div class="project-links"><a href="https://kfost.com/docs/mountain-bike.pdf" data-i18n="documentation">Documentation (PDF)</a></div>
+</article>
+<article class="project">
+<h3 data-i18n="binocularsTitle">Portable Meter-class Binoculars</h3>
+<p class="project-status" data-i18n="earlyStatus">Open source · Early design</p>
+<p class="description" data-i18n="binocularsDesc">A binocular telescope concept with an upright image for both eyes. The design combines concave primary and secondary mirrors with a Nasmyth-style tertiary mirror; a scaled-down model is the first optical test.</p>
+<div class="project-links"><a href="https://phydemo.app/ray-optics/simulator/#XQAAAALaCwAAAAAAAABFKcrGU8hqLFnplfssnTFrXtfVEiB24SmQ11hBHLnxmyapBp_cRg2rdIQs4cQZDY5GKRoRGMnC7GkNQnTvkCPwpSMISaL-OzcRBF-A18dm0AzBkYN819RCi1_Xw--2OhoC0JqbNzBBEEDMngn8zTuNtvIKKkPw3Jl0cXmK01zZrkKHsG5S7Ffvri8DK3wiq9uRsDuiih6KuFkqfWDDRVclsdi9GTZHo7zaO9IXjn42qFVn_iYzAzsUTMXfPpPvUwVLpw5hm2Ulb6prTwyMFydNKqlauc79EMU6WYWuwO2TDMmDDQbt5VXxXyK66m5mUBEYCRBaygybno8rQiAx_aX1CEN6QiWvdnRjOta3cmUQf-TzG8T426LqEuoglFkwQtkeCG2JDa14nPfO6_xrWrg9v0uAc_VRycdKmlowPW1R4hgwyFR_BsJe5JW3P3OtmBrE6AKexNgc6TXlZpRiqASOYjxKANFHUjOZo4G0w3p1ElOy5iMSdQQk_u-VqxYtinIsYqk3wWrn67iQC8_s52WQISIJSts0LjCnNE8RqqN3qkfg7KPt30dCJMaviPzLuJTgFy5X_42SsChlx9K2Xbi8wJ4DWRaG3DXGAGNddnEoSJLJN8JWZqk6qJxMtqEIV9KEM5G0-uHuGK0LaH_N45WxnXVxlF8zjJcrOYNWAw1RY5giC48uhTebCZfLZR0zeI_1z_TTqKhfIQjI_TGA6i5qNOM39HA-8SwtfZEx80OBNLWVvI-b9nrpWnUepM_I6ScCMZbhhPWoCTKnVMXKyZ29hEh6XMY-pikkinqD8AXRxfOkj5CG4nIy4p5z8THUhwDaDzRNGB34wI6LKymtnqieEMAHT3THEV7KGfMNo7PdwbnRhUeznSIL27BI5uFPevCnPl8ekPIztMGBWLAjnGHDiSeF5wPBqZthTs28Vb0pdvJseet-Nl9A4hmJbSOi3VfRfulcdZMHrKbeg-HUsZb1WG_6ke5q_BlamuAFdYOvqVh-ck9J6b-Rs10D_tDX4u6CDL6phcJh5buxDzehB6oX8UE0ZTIOmpiNE4PawydhMs1FdlsEG9UXbGLSw1iVmvt0G6Vb5IWup6Xa7Q5GjaCFQp2CsYjdvf_S-xThQmKDHSF-pV_WHI-qHNwiazdlXfxq0_qg6DUSX1s3E98jx05-OHJi_RosDtaZHtvJUk__r9ztPg" data-i18n="ray">Ray-trace model</a>
+<a href="https://kfost.com/docs/portable-meter-class-binoculars-v1.0.pdf" data-i18n="documentation">Documentation (PDF)</a></div>
+</article>
+<article class="project">
+<h3 data-i18n="telescopeTitle">Truss-style Newtonian Telescope</h3>
+<p class="project-status" data-i18n="cadStatus">Open source · CAD in progress</p>
+<p class="description" data-i18n="telescopeDesc">An 8-inch truss-style Newtonian telescope, including a hand-ground mirror, CNC-routed wood components, and an Onshape assembly with more than 80 parts. The CAD model is still being completed.</p>
+</article>
+</section>
+</main>
+<footer>
+<p><bdi dir="ltr" lang="en" translate="no">© 2026 Kurt J. Foster</bdi></p>
+<a href="#top" data-i18n="backTop">Back to top</a>
+</footer><p id="language-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+<script>     (() => {       const root = document.documentElement;       const controls = document.querySelector('.theme-controls');       const buttons = controls.querySelectorAll('button');       const system = window.matchMedia('(prefers-color-scheme: dark)');       let preference = root.dataset.theme || null;       const applyTheme = () => {         const theme = preference || (system.matches ? 'dark' : 'light');         root.dataset.theme = theme;         for (const button of buttons) {           button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));         }         document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#17191c' : '#fcfcfc';       };       for (const button of buttons) {         button.addEventListener('click', () => {           preference = button.dataset.themeChoice;           try { localStorage.setItem('kfost-theme', preference); } catch (_) {}           applyTheme();         });       }       system.addEventListener('change', () => { if (!preference) applyTheme(); });       window.addEventListener('storage', event => {         if (event.key === 'kfost-theme' || event.key === null) {           preference = event.newValue === 'dark' || event.newValue === 'light' ? event.newValue : null;           applyTheme();         }       });       applyTheme();       controls.hidden = false;     })();   </script>
+<script>
+  (() => {
+    'use strict';
+    // Complete, editable translations. No network request or translation API is used.
+    // English is also present in the HTML so the page remains readable without JavaScript.
+    const messages = {
+  "en": {
+    "skip": "Skip to content",
+    "theme": "Reading theme",
+    "light": "Light",
+    "dark": "Dark",
+    "subtitle": "Automation & equipment maintenance",
+    "about1": "I’m an automation and equipment maintenance specialist focused on repairing and improving manufacturing machinery.",
+    "about2": "I also design and build electrical and mechanical projects, from automated dosing systems to telescopes. Outside of work, I enjoy the outdoors, optics, and astronomy.",
+    "work": "Work experience",
+    "education": "Education",
+    "projects": "Projects",
+    "roleManufacturing": "Manufacturing Maintenance Technician",
+    "work1": "Maintained and repaired manufacturing and packaging equipment, including mechanical, electrical, and pneumatic systems. Supported preventive maintenance, machine changeovers, facility systems, and ammonia refrigeration.",
+    "rolePackaging": "Packaging Maintenance Technician",
+    "work2": "Troubleshot packaging equipment, made production adjustments, and improved preventive maintenance procedures. Kept operating procedures aligned with equipment changes and training needs.",
+    "roleEquipment": "Equipment Maintenance Technician",
+    "work3": "Maintained powertrain manufacturing equipment and more than 70 FANUC industrial robots on battery enclosure lines. Diagnosed machine faults and repaired electrical systems from 24 VDC to 480 VAC.",
+    "hp": "HP · Kforce contractor",
+    "roleRepair": "Repair and Maintenance Technician",
+    "work4": "Repaired industrial automation systems, edited PLC ladder logic, and diagnosed electrical and mechanical faults. Documented repairs, interpreted schematics, and supported spare-parts planning.",
+    "roleAutomation": "Automation Systems Technician",
+    "work5": "Designed, built, and tested automated gravity-fed nutrient dosing prototypes for hydroponics. Developed CAD models and electrical drawings, programmed PLCs and microcontrollers, and tested components for reliability.",
+    "work6": "Maintained automated equipment in powertrain manufacturing, including Model 3 drive unit assembly, test, and Raven lines. Diagnosed breakdowns and restored mechanical and electrical systems.",
+    "work7": "Developed nutrient dosing prototypes for automated farming. Created mechanical, electrical, and fluid drawings; assembled equipment; and wired and programmed process-control systems.",
+    "work8": "Supported the production ramp across Model 3 battery module and drive unit lines. Diagnosed equipment failures, repaired automated machinery, and helped recover more than 500 drive units from fallout in Q2 2019.",
+    "roleIntern": "Automation Technician Intern",
+    "work9": "Assembled and tested custom manufacturing equipment for the Daimler electric truck and optical-alignment test cells for the Steam VR headset. Built control panels and wired complex connectors.",
+    "degree": "A.A.S., Industrial Automation Technology",
+    "schoolLocation": "Albany, OR · GPA 3.94 / 4.00",
+    "studies": "Studied PLCs, electrical troubleshooting, industrial maintenance, hydraulics and pneumatics, process control, and electromechanical assembly.",
+    "capstone": "For my capstone, I integrated two wafer-handling robot arms into a production-line prototype using Arduino UNOs, an Allen-Bradley ControlLogix 5000 Series PLC, C++, and ladder logic.",
+    "projectsIntro": "Open-source electrical and mechanical projects, with more than 100 pages of documentation, schematics, and CAD files. All projects are shared under the MIT License.",
+    "dosingTitle": "Automatic Dosing Unit",
+    "dosingStatus": "Open source · Assembly & testing",
+    "dosingDesc": "An automated gravity-fed dosing system for hydroponics and other fluid-delivery applications. I designed, built, and tested the system, including a CAD assembly with more than 700 parts. Current work focuses on long-term component reliability.",
+    "schematic": "Electrical schematic (PDF)",
+    "bearingTitle": "Bearing Supply & Placement Machine",
+    "completeStatus": "Academic project · Completed",
+    "bearingDesc": "A pneumatic machine that sorts bearings by width, then places accepted bearings into housings on a conveyor. The system uses five directional control valves, five pneumatic cylinders, and twelve sensors.",
+    "documentation": "Documentation (PDF)",
+    "partsTitle": "Automated Parts Transfer System",
+    "partsDesc": "A prototype production line using two dual-axis wafer-handling robots, two Arduino UNOs, and an Allen-Bradley ControlLogix PLC. Developed as my industrial automation capstone.",
+    "bikeTitle": "Aluminum Mountain Bike Frame",
+    "bikeDesc": "A functional 6061 aluminum mountain bike frame that I designed, built, and tested. The work combined reverse engineering, component design, and learning to TIG weld aluminum.",
+    "binocularsTitle": "Portable Meter-class Binoculars",
+    "earlyStatus": "Open source · Early design",
+    "binocularsDesc": "A binocular telescope concept with an upright image for both eyes. The design combines concave primary and secondary mirrors with a Nasmyth-style tertiary mirror; a scaled-down model is the first optical test.",
+    "ray": "Ray-trace model",
+    "telescopeTitle": "Truss-style Newtonian Telescope",
+    "cadStatus": "Open source · CAD in progress",
+    "telescopeDesc": "An 8-inch truss-style Newtonian telescope, including a hand-ground mirror, CNC-routed wood components, and an Onshape assembly with more than 80 parts. The CAD model is still being completed.",
+    "backTop": "Back to top",
+    "meta": "Kurt J. Foster — automation and equipment maintenance specialist. Work experience, education, and open-source electrical and mechanical projects.",
+    "topLabel": "Kurt J. Foster, back to top",
+    "navLabel": "On this page",
+    "language": "Language",
+    "changed": "Language changed to English."
+  },
+  "zh-Hans": {
+    "skip": "跳转到正文",
+    "theme": "阅读主题",
+    "light": "浅色",
+    "dark": "深色",
+    "subtitle": "自动化与设备维护",
+    "about1": "我是一名自动化与设备维护专业人员，专注于生产制造设备的维修和改进。",
+    "about2": "我还设计和制作电气与机械项目，从自动配液系统到望远镜都有涉及。工作之余，我喜欢户外活动、光学和天文学。",
+    "work": "工作经历",
+    "education": "教育背景",
+    "projects": "项目",
+    "roleManufacturing": "生产设备维护技术员",
+    "work1": "维护和维修生产及包装设备，包括机械、电气和气动系统。参与预防性维护、设备换型、厂务系统维护及氨制冷系统维护。",
+    "rolePackaging": "包装设备维护技术员",
+    "work2": "排查包装设备故障，调整生产设备，并改进预防性维护规程。根据设备变更和培训需求，更新操作规程。",
+    "roleEquipment": "设备维护技术员",
+    "work3": "维护动力总成生产设备，以及电池壳体生产线上的70多台FANUC工业机器人。诊断设备故障，维修涉及24伏直流至480伏交流的电气系统。",
+    "hp": "HP · 通过Kforce派驻",
+    "roleRepair": "维修与维护技术员",
+    "work4": "维修工业自动化系统，修改PLC梯形图程序，诊断电气和机械故障。记录维修情况，解读原理图，并参与备件规划。",
+    "roleAutomation": "自动化系统技术员",
+    "work5": "设计、制作并测试用于水培的重力供液式自动营养液定量投加原型。建立CAD模型、绘制电气图纸，编写PLC和微控制器程序，并测试元件的可靠性。",
+    "work6": "维护动力总成制造中的自动化设备，包括Model 3驱动单元装配线、测试线及Raven生产线。诊断故障，恢复机械和电气系统运行。",
+    "work7": "为自动化农业开发营养液定量投加原型。绘制机械、电气和流体系统图纸，组装设备，并完成过程控制系统的接线与编程。",
+    "work8": "支持Model 3电池模组及驱动单元生产线的产能爬坡。诊断设备故障，维修自动化机械，并在2019年第二季度协助返修恢复了500多台生产中被判为不合格的驱动单元。",
+    "roleIntern": "自动化技术员实习生",
+    "work9": "组装和测试用于Daimler电动卡车的定制生产设备，以及用于Steam VR头显的光学对准测试单元。制作控制柜，并完成复杂连接器的接线。",
+    "degree": "工业自动化技术应用科学副学士（A.A.S.）",
+    "schoolLocation": "Albany, OR · 平均绩点：3.94 / 4.00",
+    "studies": "学习PLC、电气故障诊断、工业维护、液压与气动、过程控制以及机电装配。",
+    "capstone": "在毕业综合项目中，我使用Arduino UNO开发板、Allen-Bradley ControlLogix 5000系列PLC、C++和梯形图程序，将两台晶圆搬运机械臂集成到生产线原型中。",
+    "projectsIntro": "开源电气与机械项目，附有100多页文档、原理图和CAD文件。所有项目均以MIT许可证分享。",
+    "dosingTitle": "自动定量投加装置",
+    "dosingStatus": "开源 · 组装与测试中",
+    "dosingDesc": "一套用于水培及其他流体输送应用的重力供液式自动定量投加系统。我完成了系统的设计、制作与测试，包括包含700多个零件的CAD装配模型。目前的工作重点是元件的长期可靠性。",
+    "schematic": "电气原理图（PDF）",
+    "bearingTitle": "轴承供料与装配机",
+    "completeStatus": "课程项目 · 已完成",
+    "bearingDesc": "一台按宽度对轴承进行分选的气动设备，将合格轴承放入传送带上的轴承座。系统使用5个换向阀、5个气缸和12个传感器。",
+    "documentation": "项目文档（PDF）",
+    "partsTitle": "自动零件转运系统",
+    "partsDesc": "一套生产线原型，采用两台双轴晶圆搬运机器人、两块Arduino UNO开发板和一台Allen-Bradley ControlLogix PLC。这是我的工业自动化毕业综合项目。",
+    "bikeTitle": "铝合金山地自行车车架",
+    "bikeDesc": "一副可实际使用的6061铝合金山地自行车车架，由我设计、制作并测试。项目结合了逆向工程、零件设计以及铝材TIG焊接技术的学习。",
+    "binocularsTitle": "便携式米级口径双筒望远镜",
+    "earlyStatus": "开源 · 初期设计",
+    "binocularsDesc": "一项可为双眼提供正立图像的双筒望远镜概念设计。该设计结合了凹面主镜、凹面副镜和Nasmyth式第三反射镜；首轮光学测试采用缩小比例模型。",
+    "ray": "光线追迹模型",
+    "telescopeTitle": "桁架式牛顿望远镜",
+    "cadStatus": "开源 · CAD建模中",
+    "telescopeDesc": "一台8英寸桁架式牛顿望远镜，包括手工研磨的反射镜、CNC铣削木制部件，以及包含80多个零件的Onshape装配模型。CAD模型仍在完善中。",
+    "backTop": "返回顶部",
+    "meta": "Kurt J. Foster — 自动化与设备维护专业人员。工作经历、教育背景及开源电气与机械项目。",
+    "topLabel": "Kurt J. Foster，返回顶部",
+    "navLabel": "本页导航",
+    "language": "语言",
+    "changed": "语言已切换为简体中文。"
+  },
+  "hi": {
+    "skip": "मुख्य सामग्री पर जाएँ",
+    "theme": "पढ़ने की थीम",
+    "light": "हल्की",
+    "dark": "गहरी",
+    "subtitle": "स्वचालन और उपकरण रखरखाव",
+    "about1": "मैं स्वचालन और उपकरण रखरखाव का विशेषज्ञ हूँ। मेरा काम विनिर्माण मशीनों की मरम्मत करना और उन्हें बेहतर बनाना है।",
+    "about2": "मैं स्वचालित डोज़िंग प्रणालियों से लेकर दूरबीनों तक, विद्युत और यांत्रिक परियोजनाओं का डिज़ाइन और निर्माण भी करता हूँ। काम के अलावा मुझे प्रकृति में समय बिताना, प्रकाशिकी और खगोल विज्ञान पसंद हैं।",
+    "work": "कार्य अनुभव",
+    "education": "शिक्षा",
+    "projects": "परियोजनाएँ",
+    "roleManufacturing": "विनिर्माण उपकरण रखरखाव तकनीशियन",
+    "work1": "यांत्रिक, विद्युत और वायवीय प्रणालियों सहित विनिर्माण और पैकेजिंग उपकरणों का रखरखाव और मरम्मत की। निवारक रखरखाव, उत्पाद बदलने पर मशीनों की सेटिंग बदलने, संयंत्र की सहायक प्रणालियों और अमोनिया प्रशीतन से जुड़े कार्यों में सहयोग दिया।",
+    "rolePackaging": "पैकेजिंग उपकरण रखरखाव तकनीशियन",
+    "work2": "पैकेजिंग उपकरणों की खराबियों का निदान किया, उत्पादन के लिए समायोजन किए और निवारक रखरखाव की प्रक्रियाओं में सुधार किया। उपकरणों में बदलाव और प्रशिक्षण की ज़रूरतों के अनुसार संचालन प्रक्रियाएँ अद्यतन रखीं।",
+    "roleEquipment": "उपकरण रखरखाव तकनीशियन",
+    "work3": "पावरट्रेन निर्माण उपकरणों और बैटरी आवरण उत्पादन लाइनों पर 70 से अधिक FANUC औद्योगिक रोबोटों का रखरखाव किया। मशीनों की खराबियों का निदान किया और 24 वोल्ट डीसी से 480 वोल्ट एसी तक की विद्युत प्रणालियों की मरम्मत की।",
+    "hp": "HP · Kforce के माध्यम से अनुबंध पर कार्य",
+    "roleRepair": "मरम्मत और रखरखाव तकनीशियन",
+    "work4": "औद्योगिक स्वचालन प्रणालियों की मरम्मत की, PLC के लैडर लॉजिक प्रोग्राम में बदलाव किए और विद्युत तथा यांत्रिक खराबियों का निदान किया। मरम्मत का रिकॉर्ड रखा, परिपथ आरेखों को समझकर काम किया और स्पेयर पार्ट्स की योजना बनाने में सहयोग दिया।",
+    "roleAutomation": "स्वचालन प्रणाली तकनीशियन",
+    "work5": "हाइड्रोपोनिक्स के लिए गुरुत्वाकर्षण से पोषक घोल पहुँचाने वाले स्वचालित डोज़िंग प्रोटोटाइप डिज़ाइन किए, बनाए और परखे। CAD मॉडल और विद्युत ड्रॉइंग तैयार कीं, PLC और माइक्रोकंट्रोलर प्रोग्राम किए तथा पुर्ज़ों की विश्वसनीयता जाँची।",
+    "work6": "पावरट्रेन निर्माण में स्वचालित उपकरणों का रखरखाव किया, जिनमें Model 3 ड्राइव यूनिट की असेंबली और परीक्षण लाइनें तथा Raven लाइनें शामिल थीं। खराबियों का निदान करके यांत्रिक और विद्युत प्रणालियों को फिर चालू किया।",
+    "work7": "स्वचालित खेती के लिए पोषक घोल की नियंत्रित मात्रा देने वाले प्रोटोटाइप विकसित किए। यांत्रिक, विद्युत और द्रव-प्रवाह संबंधी ड्रॉइंग तैयार कीं; उपकरणों को असेंबल किया; तथा प्रक्रिया नियंत्रण प्रणालियों की वायरिंग और प्रोग्रामिंग की।",
+    "work8": "Model 3 बैटरी मॉड्यूल और ड्राइव यूनिट लाइनों पर उत्पादन बढ़ाने में सहयोग दिया। उपकरणों की खराबियों का निदान किया, स्वचालित मशीनों की मरम्मत की और 2019 की दूसरी तिमाही में उत्पादन के दौरान अस्वीकृत 500 से अधिक ड्राइव यूनिटों को पुनः उपयोग योग्य बनाने में मदद की।",
+    "roleIntern": "स्वचालन तकनीशियन प्रशिक्षु",
+    "work9": "Daimler के इलेक्ट्रिक ट्रक के लिए विशेष विनिर्माण उपकरण और Steam VR हेडसेट के लिए प्रकाशीय संरेखण परीक्षण सेल असेंबल किए और परखे। कंट्रोल पैनल बनाए और जटिल कनेक्टरों की वायरिंग की।",
+    "degree": "औद्योगिक स्वचालन प्रौद्योगिकी में एसोसिएट ऑफ़ एप्लाइड साइंस (A.A.S.)",
+    "schoolLocation": "Albany, OR · ग्रेड पॉइंट औसत (GPA): 3.94 / 4.00",
+    "studies": "PLC, विद्युत खराबियों का निदान, औद्योगिक रखरखाव, हाइड्रोलिक्स और न्यूमैटिक्स, प्रक्रिया नियंत्रण और विद्युत-यांत्रिक असेंबली का अध्ययन किया।",
+    "capstone": "अपने अंतिम शैक्षणिक प्रोजेक्ट में मैंने Arduino UNO बोर्ड, Allen-Bradley ControlLogix 5000 सीरीज़ PLC, C++ और लैडर लॉजिक की मदद से वेफ़र संभालने वाली दो रोबोटिक भुजाओं को एक उत्पादन लाइन के प्रोटोटाइप में एकीकृत किया।",
+    "projectsIntro": "खुले स्रोत वाली विद्युत और यांत्रिक परियोजनाएँ, जिनके साथ 100 से अधिक पृष्ठों का दस्तावेज़ीकरण, परिपथ आरेख और CAD फ़ाइलें उपलब्ध हैं। सभी परियोजनाएँ MIT लाइसेंस के अंतर्गत साझा की गई हैं।",
+    "dosingTitle": "स्वचालित डोज़िंग यूनिट",
+    "dosingStatus": "खुला स्रोत · असेंबली और परीक्षण",
+    "dosingDesc": "हाइड्रोपोनिक्स और द्रव पहुँचाने वाले अन्य उपयोगों के लिए गुरुत्वाकर्षण-आधारित स्वचालित डोज़िंग प्रणाली। मैंने इस प्रणाली को डिज़ाइन किया, बनाया और परखा, जिसमें 700 से अधिक पुर्ज़ों वाली CAD असेंबली भी शामिल है। वर्तमान काम पुर्ज़ों की दीर्घकालिक विश्वसनीयता पर केंद्रित है।",
+    "schematic": "विद्युत परिपथ आरेख (PDF)",
+    "bearingTitle": "बेयरिंग आपूर्ति और स्थापना मशीन",
+    "completeStatus": "शैक्षणिक परियोजना · पूर्ण",
+    "bearingDesc": "संपीड़ित हवा से चलने वाली मशीन, जो बेयरिंगों को उनकी चौड़ाई के अनुसार छाँटती है और स्वीकार्य बेयरिंगों को कन्वेयर पर रखे हाउसिंग में लगाती है। इस प्रणाली में पाँच दिशात्मक नियंत्रण वाल्व, पाँच वायवीय सिलिंडर और बारह सेंसर हैं।",
+    "documentation": "दस्तावेज़ीकरण (PDF)",
+    "partsTitle": "स्वचालित पुर्ज़ा स्थानांतरण प्रणाली",
+    "partsDesc": "उत्पादन लाइन का एक प्रोटोटाइप, जिसमें वेफ़र संभालने वाले दो द्वि-अक्षीय रोबोट, दो Arduino UNO बोर्ड और एक Allen-Bradley ControlLogix PLC का उपयोग किया गया है। यह मेरे औद्योगिक स्वचालन पाठ्यक्रम का अंतिम प्रोजेक्ट था।",
+    "bikeTitle": "एल्युमिनियम माउंटेन बाइक फ़्रेम",
+    "bikeDesc": "6061 एल्युमिनियम से बना एक उपयोग योग्य माउंटेन बाइक फ़्रेम, जिसे मैंने डिज़ाइन किया, बनाया और परखा। इस काम में रिवर्स इंजीनियरिंग, पुर्ज़ों का डिज़ाइन और एल्युमिनियम की TIG वेल्डिंग सीखना शामिल था।",
+    "binocularsTitle": "मीटर-श्रेणी के द्वारक वाली पोर्टेबल द्विनेत्री दूरबीन",
+    "earlyStatus": "खुला स्रोत · प्रारंभिक डिज़ाइन",
+    "binocularsDesc": "दोनों आँखों के लिए सीधा प्रतिबिंब देने वाली द्विनेत्री दूरबीन की अवधारणा। डिज़ाइन में अवतल प्राथमिक और द्वितीयक दर्पणों के साथ Nasmyth शैली का तृतीयक दर्पण है; पहला प्रकाशीय परीक्षण छोटे पैमाने के मॉडल पर किया जाता है।",
+    "ray": "किरण अनुरेखण मॉडल",
+    "telescopeTitle": "ट्रस संरचना वाली न्यूटोनियन दूरबीन",
+    "cadStatus": "खुला स्रोत · CAD मॉडल पर काम जारी",
+    "telescopeDesc": "ट्रस संरचना वाली 8 इंच की न्यूटोनियन दूरबीन, जिसमें हाथ से घिसकर बनाया गया दर्पण, CNC राउटर से बने लकड़ी के पुर्ज़े और 80 से अधिक पुर्ज़ों वाली Onshape असेंबली शामिल है। CAD मॉडल अभी पूरा किया जा रहा है।",
+    "backTop": "ऊपर लौटें",
+    "meta": "Kurt J. Foster — स्वचालन और उपकरण रखरखाव विशेषज्ञ। कार्य अनुभव, शिक्षा तथा खुले स्रोत वाली विद्युत और यांत्रिक परियोजनाएँ।",
+    "topLabel": "Kurt J. Foster, ऊपर लौटें",
+    "navLabel": "इस पृष्ठ पर",
+    "language": "भाषा",
+    "changed": "भाषा हिंदी कर दी गई है।"
+  },
+  "es": {
+    "skip": "Saltar al contenido",
+    "theme": "Tema de lectura",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "subtitle": "Automatización y mantenimiento de equipos",
+    "about1": "Soy especialista en automatización y mantenimiento de equipos, centrado en reparar y mejorar maquinaria de fabricación.",
+    "about2": "También diseño y construyo proyectos eléctricos y mecánicos, desde sistemas de dosificación automatizados hasta telescopios. Fuera del trabajo, disfruto de las actividades al aire libre, la óptica y la astronomía.",
+    "work": "Experiencia laboral",
+    "education": "Formación",
+    "projects": "Proyectos",
+    "roleManufacturing": "Técnico de mantenimiento de equipos de fabricación",
+    "work1": "Mantuve y reparé equipos de fabricación y envasado, incluidos sistemas mecánicos, eléctricos y neumáticos. Colaboré en el mantenimiento preventivo, los cambios de formato de las máquinas, los sistemas de las instalaciones y la refrigeración con amoníaco.",
+    "rolePackaging": "Técnico de mantenimiento de equipos de envasado",
+    "work2": "Diagnostiqué averías en equipos de envasado, realicé ajustes de producción y mejoré los procedimientos de mantenimiento preventivo. Actualicé los procedimientos operativos de acuerdo con los cambios en los equipos y las necesidades de formación.",
+    "roleEquipment": "Técnico de mantenimiento de equipos",
+    "work3": "Mantuve equipos de fabricación de sistemas de propulsión y más de 70 robots industriales FANUC en líneas de carcasas de baterías. Diagnostiqué fallos de máquinas y reparé sistemas eléctricos desde 24 V de corriente continua hasta 480 V de corriente alterna.",
+    "hp": "HP · Contratista a través de Kforce",
+    "roleRepair": "Técnico de reparación y mantenimiento",
+    "work4": "Reparé sistemas de automatización industrial, modifiqué programas de PLC en lenguaje de contactos y diagnostiqué fallos eléctricos y mecánicos. Documenté reparaciones, interpreté esquemas y colaboré en la planificación de repuestos.",
+    "roleAutomation": "Técnico de sistemas de automatización",
+    "work5": "Diseñé, construí y probé prototipos automatizados de dosificación de nutrientes por gravedad para hidroponía. Desarrollé modelos CAD y planos eléctricos, programé PLC y microcontroladores y probé la fiabilidad de los componentes.",
+    "work6": "Mantuve equipos automatizados de fabricación de sistemas de propulsión, incluidas las líneas de montaje y ensayo de unidades de propulsión del Model 3 y las líneas Raven. Diagnostiqué averías y restablecí el funcionamiento de sistemas mecánicos y eléctricos.",
+    "work7": "Desarrollé prototipos de dosificación de nutrientes para agricultura automatizada. Elaboré planos mecánicos, eléctricos y de circuitos de fluidos; monté equipos; y cableé y programé sistemas de control de procesos.",
+    "work8": "Contribuí al aumento de producción en las líneas de módulos de batería y unidades de propulsión del Model 3. Diagnostiqué fallos de equipos, reparé maquinaria automatizada y ayudé a recuperar más de 500 unidades de propulsión rechazadas en producción durante el segundo trimestre de 2019.",
+    "roleIntern": "Técnico de automatización en prácticas",
+    "work9": "Monté y probé equipos de fabricación a medida para el camión eléctrico de Daimler y celdas de ensayo de alineación óptica para el visor Steam VR. Construí cuadros de control y cableé conectores complejos.",
+    "degree": "Título de Associate of Applied Science (A.A.S.) en Tecnología de Automatización Industrial",
+    "schoolLocation": "Albany, OR · Promedio académico: 3,94 / 4,00",
+    "studies": "Estudié PLC, diagnóstico de fallos eléctricos, mantenimiento industrial, hidráulica y neumática, control de procesos y montaje electromecánico.",
+    "capstone": "En mi proyecto final, integré dos brazos robóticos de manipulación de obleas en un prototipo de línea de producción mediante placas Arduino UNO, un PLC Allen-Bradley ControlLogix de la serie 5000, C++ y lenguaje de contactos.",
+    "projectsIntro": "Proyectos eléctricos y mecánicos de código abierto, con más de 100 páginas de documentación, esquemas y archivos CAD. Todos los proyectos se comparten bajo la licencia MIT.",
+    "dosingTitle": "Unidad de dosificación automática",
+    "dosingStatus": "Código abierto · Montaje y pruebas",
+    "dosingDesc": "Un sistema automatizado de dosificación por gravedad para hidroponía y otras aplicaciones de suministro de fluidos. Diseñé, construí y probé el sistema, incluido un conjunto CAD con más de 700 piezas. El trabajo actual se centra en la fiabilidad de los componentes a largo plazo.",
+    "schematic": "Esquema eléctrico (PDF)",
+    "bearingTitle": "Máquina de alimentación y colocación de rodamientos",
+    "completeStatus": "Proyecto académico · Finalizado",
+    "bearingDesc": "Una máquina neumática que clasifica rodamientos por su anchura y coloca los aceptados en alojamientos sobre un transportador. El sistema utiliza cinco válvulas de control direccional, cinco cilindros neumáticos y doce sensores.",
+    "documentation": "Documentación (PDF)",
+    "partsTitle": "Sistema automatizado de transferencia de piezas",
+    "partsDesc": "Un prototipo de línea de producción con dos robots de dos ejes para manipulación de obleas, dos placas Arduino UNO y un PLC Allen-Bradley ControlLogix. Desarrollado como proyecto final de automatización industrial.",
+    "bikeTitle": "Cuadro de aluminio para bicicleta de montaña",
+    "bikeDesc": "Un cuadro funcional de aluminio 6061 para bicicleta de montaña que diseñé, construí y probé. El trabajo combinó ingeniería inversa, diseño de componentes y el aprendizaje de la soldadura TIG de aluminio.",
+    "binocularsTitle": "Telescopio binocular portátil de apertura métrica",
+    "earlyStatus": "Código abierto · Diseño preliminar",
+    "binocularsDesc": "Un concepto de telescopio binocular que ofrece una imagen derecha para ambos ojos. El diseño combina espejos primario y secundario cóncavos con un espejo terciario de tipo Nasmyth; un modelo a escala reducida constituye la primera prueba óptica.",
+    "ray": "Modelo de trazado de rayos",
+    "telescopeTitle": "Telescopio newtoniano con estructura de celosía",
+    "cadStatus": "Código abierto · Modelo CAD en desarrollo",
+    "telescopeDesc": "Un telescopio newtoniano de 8 pulgadas con estructura de celosía, un espejo tallado a mano, componentes de madera fresados por CNC y un conjunto en Onshape con más de 80 piezas. El modelo CAD aún está en desarrollo.",
+    "backTop": "Volver arriba",
+    "meta": "Kurt J. Foster — especialista en automatización y mantenimiento de equipos. Experiencia laboral, formación y proyectos eléctricos y mecánicos de código abierto.",
+    "topLabel": "Kurt J. Foster, volver arriba",
+    "navLabel": "En esta página",
+    "language": "Idioma",
+    "changed": "El idioma se ha cambiado a español."
+  },
+  "ar": {
+    "skip": "الانتقال إلى المحتوى",
+    "theme": "نمط القراءة",
+    "light": "فاتح",
+    "dark": "داكن",
+    "subtitle": "الأتمتة وصيانة المعدات",
+    "about1": "أنا متخصص في الأتمتة وصيانة المعدات، وأركز على إصلاح آلات التصنيع وتحسينها.",
+    "about2": "أصمم أيضًا مشاريع كهربائية وميكانيكية وأنفذها، بدءًا من أنظمة الجرعات الآلية وصولًا إلى التلسكوبات. وخارج العمل، أستمتع بالأنشطة في الهواء الطلق والبصريات وعلم الفلك.",
+    "work": "الخبرة المهنية",
+    "education": "التعليم",
+    "projects": "المشاريع",
+    "roleManufacturing": "فني صيانة معدات التصنيع",
+    "work1": "توليت صيانة معدات التصنيع والتعبئة وإصلاحها، بما فيها الأنظمة الميكانيكية والكهربائية وأنظمة الهواء المضغوط. ساهمت في الصيانة الوقائية وتهيئة الآلات عند تغيير المنتجات، وصيانة أنظمة المرافق والتبريد بالأمونيا.",
+    "rolePackaging": "فني صيانة معدات التعبئة والتغليف",
+    "work2": "شخّصت أعطال معدات التعبئة والتغليف، وأجريت تعديلات على إعدادات الإنتاج، وحسّنت إجراءات الصيانة الوقائية. حدّثت إجراءات التشغيل بما يتوافق مع تغييرات المعدات واحتياجات التدريب.",
+    "roleEquipment": "فني صيانة المعدات",
+    "work3": "توليت صيانة معدات تصنيع منظومات الدفع وأكثر من 70 روبوتًا صناعيًا من FANUC على خطوط تصنيع حاويات البطاريات. شخّصت أعطال الآلات وأصلحت أنظمة كهربائية تتراوح من 24 فولت تيار مستمر إلى 480 فولت تيار متردد.",
+    "hp": "HP · متعاقد عبر Kforce",
+    "roleRepair": "فني الإصلاح والصيانة",
+    "work4": "أصلحت أنظمة الأتمتة الصناعية، وعدّلت برامج وحدات التحكم المنطقية القابلة للبرمجة (PLC) بلغة المخططات السلمية، وشخّصت الأعطال الكهربائية والميكانيكية. وثّقت الإصلاحات وقرأت المخططات وساهمت في تخطيط احتياجات قطع الغيار.",
+    "roleAutomation": "فني أنظمة الأتمتة",
+    "work5": "صممت وبنيت واختبرت نماذج أولية آلية لضبط جرعات المغذيات بالتغذية بالجاذبية للزراعة المائية. طوّرت نماذج تصميم بمساعدة الحاسوب (CAD) ورسومات كهربائية، وبرمجت وحدات PLC والمتحكمات الدقيقة، واختبرت موثوقية المكونات.",
+    "work6": "توليت صيانة المعدات الآلية في تصنيع منظومات الدفع، بما فيها خطوط تجميع وحدات الدفع واختبارها لطراز Model 3 وخطوط Raven. شخّصت الأعطال وأعدت تشغيل الأنظمة الميكانيكية والكهربائية.",
+    "work7": "طوّرت نماذج أولية لضبط جرعات المغذيات للزراعة الآلية. أعددت رسومات ميكانيكية وكهربائية ومخططات دوائر الموائع، وجمّعت المعدات، ووصلت أسلاك أنظمة التحكم في العمليات وبرمجتها.",
+    "work8": "ساهمت في زيادة الإنتاج على خطوط وحدات البطاريات ووحدات الدفع لطراز Model 3. شخّصت أعطال المعدات وأصلحت الآلات الآلية وساعدت في استعادة أكثر من 500 وحدة دفع مرفوضة أثناء الإنتاج خلال الربع الثاني من عام 2019.",
+    "roleIntern": "متدرب فني أتمتة",
+    "work9": "جمّعت واختبرت معدات تصنيع مخصصة لشاحنة Daimler الكهربائية وخلايا اختبار المحاذاة البصرية لنظارة Steam VR. بنيت لوحات التحكم ووصلت أسلاك الموصلات المعقدة.",
+    "degree": "درجة الزمالة في العلوم التطبيقية (A.A.S.)، تخصص تكنولوجيا الأتمتة الصناعية",
+    "schoolLocation": "Albany, OR · المعدل التراكمي: 3.94 / 4.00",
+    "studies": "درست وحدات PLC وتشخيص الأعطال الكهربائية والصيانة الصناعية والأنظمة الهيدروليكية وأنظمة الهواء المضغوط والتحكم في العمليات والتجميع الكهروميكانيكي.",
+    "capstone": "في مشروع التخرج، دمجت ذراعين روبوتيتين لمناولة الرقائق في نموذج أولي لخط إنتاج باستخدام لوحات Arduino UNO ووحدة PLC من طراز Allen-Bradley ControlLogix سلسلة 5000 ولغة C++ ولغة المخططات السلمية.",
+    "projectsIntro": "مشاريع كهربائية وميكانيكية مفتوحة المصدر، مع أكثر من 100 صفحة من الوثائق والمخططات وملفات CAD. تُشارك جميع المشاريع بموجب ترخيص MIT.",
+    "dosingTitle": "وحدة جرعات آلية",
+    "dosingStatus": "مفتوح المصدر · التجميع والاختبار",
+    "dosingDesc": "نظام آلي لضبط الجرعات بالتغذية بالجاذبية للزراعة المائية وغيرها من تطبيقات توصيل الموائع. صممت النظام وبنيته واختبرته، بما في ذلك نموذج تجميعي باستخدام CAD يضم أكثر من 700 قطعة. يركز العمل الحالي على موثوقية المكونات على المدى الطويل.",
+    "schematic": "المخطط الكهربائي (PDF)",
+    "bearingTitle": "آلة تغذية المحامل وتركيبها",
+    "completeStatus": "مشروع دراسي · مكتمل",
+    "bearingDesc": "آلة تعمل بالهواء المضغوط وتفرز المحامل حسب العرض، ثم تضع المحامل المقبولة داخل مبيتات على ناقل. يستخدم النظام خمسة صمامات للتحكم في الاتجاه وخمس أسطوانات هوائية واثني عشر مستشعرًا.",
+    "documentation": "الوثائق (PDF)",
+    "partsTitle": "نظام آلي لنقل القطع",
+    "partsDesc": "نموذج أولي لخط إنتاج يستخدم روبوتين ثنائيي المحور لمناولة الرقائق، ولوحتي Arduino UNO، ووحدة PLC من طراز Allen-Bradley ControlLogix. طوّرته ضمن مشروع تخرجي في الأتمتة الصناعية.",
+    "bikeTitle": "هيكل دراجة جبلية من الألومنيوم",
+    "bikeDesc": "هيكل دراجة جبلية قابل للاستخدام من سبيكة الألومنيوم 6061، صممته وبنيته واختبرته. جمع العمل بين الهندسة العكسية وتصميم المكونات وتعلّم لحام الألومنيوم بتقنية TIG.",
+    "binocularsTitle": "تلسكوب ثنائي العينين محمول بفتحة من فئة المتر",
+    "earlyStatus": "مفتوح المصدر · تصميم أولي",
+    "binocularsDesc": "تصور لتلسكوب ثنائي العينين يقدم صورة معتدلة الاتجاه لكلتا العينين. يجمع التصميم بين مرآتين أولية وثانوية مقعرتين ومرآة ثالثية على نمط Nasmyth؛ ويُستخدم نموذج مصغّر لإجراء أول اختبار بصري.",
+    "ray": "نموذج تتبّع الأشعة",
+    "telescopeTitle": "تلسكوب نيوتوني بهيكل شبكي",
+    "cadStatus": "مفتوح المصدر · نمذجة CAD قيد التنفيذ",
+    "telescopeDesc": "تلسكوب نيوتوني بقطر 8 بوصات وهيكل شبكي، يضم مرآة جرى تجليخها يدويًا، ومكونات خشبية مشغّلة بالتفريز باستخدام CNC، ونموذجًا تجميعيًا على Onshape يضم أكثر من 80 قطعة. لا يزال نموذج CAD قيد الإكمال.",
+    "backTop": "العودة إلى أعلى الصفحة",
+    "meta": "Kurt J. Foster — متخصص في الأتمتة وصيانة المعدات. الخبرة المهنية والتعليم والمشاريع الكهربائية والميكانيكية مفتوحة المصدر.",
+    "topLabel": "Kurt J. Foster، العودة إلى أعلى الصفحة",
+    "navLabel": "في هذه الصفحة",
+    "language": "اللغة",
+    "changed": "تم تغيير اللغة إلى العربية."
+  },
+  "fr": {
+    "skip": "Aller au contenu",
+    "theme": "Thème de lecture",
+    "light": "Clair",
+    "dark": "Sombre",
+    "subtitle": "Automatisation et maintenance des équipements",
+    "about1": "Je suis spécialiste de l’automatisation et de la maintenance des équipements, avec une activité centrée sur la réparation et l’amélioration des machines de production.",
+    "about2": "Je conçois et réalise également des projets électriques et mécaniques, des systèmes de dosage automatisés aux télescopes. En dehors du travail, j’aime les activités de plein air, l’optique et l’astronomie.",
+    "work": "Expérience professionnelle",
+    "education": "Formation",
+    "projects": "Projets",
+    "roleManufacturing": "Technicien de maintenance des équipements de production",
+    "work1": "Maintenance et réparation des équipements de production et de conditionnement, notamment des systèmes mécaniques, électriques et pneumatiques. Participation à la maintenance préventive, aux changements de format des machines, à l’entretien des installations techniques et à la réfrigération à l’ammoniac.",
+    "rolePackaging": "Technicien de maintenance des équipements de conditionnement",
+    "work2": "Diagnostic des pannes des équipements de conditionnement, réglages de production et amélioration des procédures de maintenance préventive. Mise à jour des procédures d’exploitation en fonction des modifications des équipements et des besoins de formation.",
+    "roleEquipment": "Technicien de maintenance des équipements",
+    "work3": "Maintenance des équipements de fabrication de groupes motopropulseurs et de plus de 70 robots industriels FANUC sur les lignes de boîtiers de batteries. Diagnostic des pannes des machines et réparation de systèmes électriques allant de 24 V en courant continu à 480 V en courant alternatif.",
+    "hp": "HP · Prestataire via Kforce",
+    "roleRepair": "Technicien de réparation et de maintenance",
+    "work4": "Réparation de systèmes d’automatisation industrielle, modification de programmes d’automates programmables (PLC) en langage à contacts et diagnostic de défauts électriques et mécaniques. Documentation des réparations, lecture de schémas et participation à la planification des pièces de rechange.",
+    "roleAutomation": "Technicien en systèmes d’automatisation",
+    "work5": "Conception, réalisation et essais de prototypes de dosage automatisé de nutriments par gravité pour l’hydroponie. Élaboration de modèles CAO et de plans électriques, programmation d’automates et de microcontrôleurs, et essais de fiabilité des composants.",
+    "work6": "Maintenance des équipements automatisés de fabrication de groupes motopropulseurs, notamment sur les lignes d’assemblage et d’essai des unités de propulsion du Model 3 et les lignes Raven. Diagnostic des pannes et remise en état des systèmes mécaniques et électriques.",
+    "work7": "Développement de prototypes de dosage de nutriments pour l’agriculture automatisée. Réalisation de plans mécaniques, électriques et de circuits de fluides ; assemblage des équipements ; câblage et programmation des systèmes de contrôle de procédés.",
+    "work8": "Accompagnement de la montée en cadence des lignes de modules de batteries et d’unités de propulsion du Model 3. Diagnostic des défaillances, réparation des machines automatisées et contribution à la récupération de plus de 500 unités de propulsion écartées en production au deuxième trimestre 2019.",
+    "roleIntern": "Stagiaire technicien en automatisation",
+    "work9": "Assemblage et essais d’équipements de production sur mesure pour le camion électrique Daimler et de cellules d’essai d’alignement optique pour le casque Steam VR. Réalisation d’armoires de commande et câblage de connecteurs complexes.",
+    "degree": "Associate of Applied Science (A.A.S.) en technologie de l’automatisation industrielle",
+    "schoolLocation": "Albany, OR · Moyenne générale (GPA) : 3,94 / 4,00",
+    "studies": "Étude des automates programmables, du diagnostic de pannes électriques, de la maintenance industrielle, de l’hydraulique et de la pneumatique, du contrôle de procédés et de l’assemblage électromécanique.",
+    "capstone": "Pour mon projet de fin d’études, j’ai intégré deux bras robotisés de manipulation de plaquettes dans un prototype de ligne de production à l’aide de cartes Arduino UNO, d’un automate Allen-Bradley ControlLogix série 5000, de C++ et du langage à contacts.",
+    "projectsIntro": "Projets électriques et mécaniques open source, accompagnés de plus de 100 pages de documentation, de schémas et de fichiers CAO. Tous les projets sont partagés sous licence MIT.",
+    "dosingTitle": "Unité de dosage automatique",
+    "dosingStatus": "Open source · Assemblage et essais",
+    "dosingDesc": "Un système de dosage automatisé par gravité pour l’hydroponie et d’autres applications d’alimentation en fluides. J’ai conçu, réalisé et testé le système, y compris un assemblage CAO de plus de 700 pièces. Les travaux actuels portent sur la fiabilité à long terme des composants.",
+    "schematic": "Schéma électrique (PDF)",
+    "bearingTitle": "Machine d’alimentation et de placement de roulements",
+    "completeStatus": "Projet d’études · Terminé",
+    "bearingDesc": "Une machine pneumatique qui trie les roulements selon leur largeur, puis place les roulements acceptés dans des logements sur un convoyeur. Le système utilise cinq distributeurs pneumatiques, cinq vérins pneumatiques et douze capteurs.",
+    "documentation": "Documentation (PDF)",
+    "partsTitle": "Système automatisé de transfert de pièces",
+    "partsDesc": "Un prototype de ligne de production utilisant deux robots à deux axes pour la manipulation de plaquettes, deux cartes Arduino UNO et un automate Allen-Bradley ControlLogix. Réalisé dans le cadre de mon projet de fin d’études en automatisation industrielle.",
+    "bikeTitle": "Cadre de VTT en aluminium",
+    "bikeDesc": "Un cadre fonctionnel de VTT en aluminium 6061 que j’ai conçu, réalisé et testé. Le projet associait rétro-ingénierie, conception de composants et apprentissage du soudage TIG de l’aluminium.",
+    "binocularsTitle": "Télescope binoculaire portable de classe métrique",
+    "earlyStatus": "Open source · Conception préliminaire",
+    "binocularsDesc": "Un concept de télescope binoculaire offrant une image redressée pour les deux yeux. La conception associe des miroirs primaire et secondaire concaves à un miroir tertiaire de type Nasmyth ; un modèle réduit sert de premier essai optique.",
+    "ray": "Modèle de tracé de rayons",
+    "telescopeTitle": "Télescope de Newton à structure en treillis",
+    "cadStatus": "Open source · Modélisation CAO en cours",
+    "telescopeDesc": "Un télescope de Newton de 8 pouces à structure en treillis, comprenant un miroir taillé à la main, des pièces en bois fraisées par CNC et un assemblage Onshape de plus de 80 pièces. Le modèle CAO est encore en cours de réalisation.",
+    "backTop": "Retour en haut",
+    "meta": "Kurt J. Foster — spécialiste de l’automatisation et de la maintenance des équipements. Expérience professionnelle, formation et projets électriques et mécaniques open source.",
+    "topLabel": "Kurt J. Foster, retour en haut",
+    "navLabel": "Sur cette page",
+    "language": "Langue",
+    "changed": "La langue a été changée en français."
+  },
+  "bn": {
+    "skip": "মূল বিষয়বস্তুতে যান",
+    "theme": "পড়ার থিম",
+    "light": "হালকা",
+    "dark": "গাঢ়",
+    "subtitle": "অটোমেশন ও যন্ত্রপাতি রক্ষণাবেক্ষণ",
+    "about1": "আমি অটোমেশন ও যন্ত্রপাতি রক্ষণাবেক্ষণে বিশেষজ্ঞ। উৎপাদনযন্ত্র মেরামত ও উন্নত করাই আমার কাজের মূল লক্ষ্য।",
+    "about2": "স্বয়ংক্রিয় ডোজিং ব্যবস্থা থেকে দূরবীন পর্যন্ত নানা বৈদ্যুতিক ও যান্ত্রিক প্রকল্পের নকশা ও নির্মাণও করি। কাজের বাইরে প্রকৃতির মাঝে সময় কাটানো, আলোকবিজ্ঞান ও জ্যোতির্বিজ্ঞান আমার পছন্দ।",
+    "work": "কাজের অভিজ্ঞতা",
+    "education": "শিক্ষা",
+    "projects": "প্রকল্প",
+    "roleManufacturing": "উৎপাদনযন্ত্র রক্ষণাবেক্ষণ টেকনিশিয়ান",
+    "work1": "যান্ত্রিক, বৈদ্যুতিক ও বায়ুচালিত ব্যবস্থাসহ উৎপাদন ও প্যাকেজিং যন্ত্রপাতি রক্ষণাবেক্ষণ ও মেরামত করেছি। প্রতিরোধমূলক রক্ষণাবেক্ষণ, পণ্য পরিবর্তনের জন্য যন্ত্রের সেটিং বদলানো, কারখানার সহায়ক ব্যবস্থা ও অ্যামোনিয়া রেফ্রিজারেশনের কাজে সহায়তা করেছি।",
+    "rolePackaging": "প্যাকেজিং যন্ত্রপাতি রক্ষণাবেক্ষণ টেকনিশিয়ান",
+    "work2": "প্যাকেজিং যন্ত্রপাতির ত্রুটি নির্ণয় করেছি, উৎপাদনের জন্য প্রয়োজনীয় সমন্বয় করেছি এবং প্রতিরোধমূলক রক্ষণাবেক্ষণ পদ্ধতি উন্নত করেছি। যন্ত্রপাতির পরিবর্তন ও প্রশিক্ষণের চাহিদার সঙ্গে সামঞ্জস্য রেখে পরিচালন পদ্ধতি হালনাগাদ রেখেছি।",
+    "roleEquipment": "যন্ত্রপাতি রক্ষণাবেক্ষণ টেকনিশিয়ান",
+    "work3": "পাওয়ারট্রেন তৈরির যন্ত্রপাতি এবং ব্যাটারির আবরণ তৈরির লাইনে ৭০টিরও বেশি FANUC শিল্প রোবট রক্ষণাবেক্ষণ করেছি। যন্ত্রের ত্রুটি নির্ণয় করেছি এবং ২৪ ভোল্ট ডিসি থেকে ৪৮০ ভোল্ট এসি পর্যন্ত বৈদ্যুতিক ব্যবস্থা মেরামত করেছি।",
+    "hp": "HP · Kforce-এর মাধ্যমে চুক্তিভিত্তিক কাজ",
+    "roleRepair": "মেরামত ও রক্ষণাবেক্ষণ টেকনিশিয়ান",
+    "work4": "শিল্প অটোমেশন ব্যবস্থা মেরামত করেছি, PLC-এর ল্যাডার লজিক প্রোগ্রাম সম্পাদনা করেছি এবং বৈদ্যুতিক ও যান্ত্রিক ত্রুটি নির্ণয় করেছি। মেরামতের তথ্য নথিবদ্ধ করেছি, সার্কিট চিত্র পড়ে কাজ করেছি এবং খুচরা যন্ত্রাংশের পরিকল্পনায় সহায়তা করেছি।",
+    "roleAutomation": "অটোমেশন সিস্টেম টেকনিশিয়ান",
+    "work5": "হাইড্রোপনিক্সের জন্য মাধ্যাকর্ষণনির্ভর স্বয়ংক্রিয় পুষ্টিদ্রবণ ডোজিং প্রোটোটাইপের নকশা, নির্মাণ ও পরীক্ষা করেছি। CAD মডেল ও বৈদ্যুতিক নকশা তৈরি করেছি, PLC ও মাইক্রোকন্ট্রোলার প্রোগ্রাম করেছি এবং যন্ত্রাংশের নির্ভরযোগ্যতা পরীক্ষা করেছি।",
+    "work6": "পাওয়ারট্রেন উৎপাদনে ব্যবহৃত স্বয়ংক্রিয় যন্ত্রপাতি রক্ষণাবেক্ষণ করেছি, যার মধ্যে Model 3 ড্রাইভ ইউনিটের সংযোজন ও পরীক্ষার লাইন এবং Raven লাইন ছিল। ত্রুটি নির্ণয় করে যান্ত্রিক ও বৈদ্যুতিক ব্যবস্থা আবার সচল করেছি।",
+    "work7": "স্বয়ংক্রিয় কৃষির জন্য পুষ্টিদ্রবণ ডোজিং প্রোটোটাইপ তৈরি করেছি। যান্ত্রিক, বৈদ্যুতিক ও প্রবাহী ব্যবস্থার নকশা এঁকেছি; যন্ত্রপাতি সংযোজন করেছি; এবং প্রক্রিয়া নিয়ন্ত্রণ ব্যবস্থায় তার সংযোগ ও প্রোগ্রামিং করেছি।",
+    "work8": "Model 3 ব্যাটারি মডিউল ও ড্রাইভ ইউনিটের লাইনে উৎপাদন বাড়াতে সহায়তা করেছি। যন্ত্রপাতির ত্রুটি নির্ণয় করেছি, স্বয়ংক্রিয় যন্ত্র মেরামত করেছি এবং ২০১৯ সালের দ্বিতীয় ত্রৈমাসিকে উৎপাদনে বাতিল হওয়া ৫০০টিরও বেশি ড্রাইভ ইউনিট পুনরুদ্ধারে সহায়তা করেছি।",
+    "roleIntern": "অটোমেশন টেকনিশিয়ান ইন্টার্ন",
+    "work9": "Daimler-এর বৈদ্যুতিক ট্রাকের জন্য বিশেষভাবে তৈরি উৎপাদনযন্ত্র এবং Steam VR হেডসেটের জন্য আলোকীয় অ্যালাইনমেন্ট পরীক্ষার সেল সংযোজন ও পরীক্ষা করেছি। কন্ট্রোল প্যানেল তৈরি করেছি এবং জটিল কানেক্টরে তার সংযোগ করেছি।",
+    "degree": "ইন্ডাস্ট্রিয়াল অটোমেশন টেকনোলজিতে অ্যাসোসিয়েট অব অ্যাপ্লায়েড সায়েন্স (A.A.S.)",
+    "schoolLocation": "Albany, OR · গড় গ্রেড পয়েন্ট (GPA): ৩.৯৪ / ৪.০০",
+    "studies": "PLC, বৈদ্যুতিক ত্রুটি নির্ণয়, শিল্প রক্ষণাবেক্ষণ, হাইড্রলিক্স ও নিউম্যাটিক্স, প্রক্রিয়া নিয়ন্ত্রণ এবং বৈদ্যুতিক-যান্ত্রিক সংযোজন নিয়ে পড়াশোনা করেছি।",
+    "capstone": "আমার সমাপনী প্রকল্পে Arduino UNO বোর্ড, Allen-Bradley ControlLogix 5000 সিরিজের PLC, C++ ও ল্যাডার লজিক ব্যবহার করে ওয়েফার ওঠানো-সরানোর দুটি রোবটিক বাহুকে একটি উৎপাদন লাইনের প্রোটোটাইপে একীভূত করেছি।",
+    "projectsIntro": "উন্মুক্ত উৎসের বৈদ্যুতিক ও যান্ত্রিক প্রকল্প, সঙ্গে ১০০টিরও বেশি পৃষ্ঠার নথি, সার্কিট চিত্র ও CAD ফাইল। সব প্রকল্প MIT লাইসেন্সের অধীনে শেয়ার করা হয়েছে।",
+    "dosingTitle": "স্বয়ংক্রিয় ডোজিং ইউনিট",
+    "dosingStatus": "উন্মুক্ত উৎস · সংযোজন ও পরীক্ষা",
+    "dosingDesc": "হাইড্রোপনিক্স ও অন্যান্য প্রবাহী সরবরাহের কাজে ব্যবহারের জন্য মাধ্যাকর্ষণনির্ভর স্বয়ংক্রিয় ডোজিং ব্যবস্থা। আমি ব্যবস্থাটির নকশা, নির্মাণ ও পরীক্ষা করেছি, যার মধ্যে ৭০০টিরও বেশি যন্ত্রাংশের একটি CAD অ্যাসেম্বলি রয়েছে। বর্তমানে যন্ত্রাংশের দীর্ঘমেয়াদি নির্ভরযোগ্যতা নিয়ে কাজ চলছে।",
+    "schematic": "বৈদ্যুতিক সার্কিট চিত্র (PDF)",
+    "bearingTitle": "বেয়ারিং সরবরাহ ও স্থাপন যন্ত্র",
+    "completeStatus": "শিক্ষামূলক প্রকল্প · সম্পন্ন",
+    "bearingDesc": "একটি বায়ুচালিত যন্ত্র, যা বেয়ারিংকে প্রস্থ অনুযায়ী বাছাই করে এবং গ্রহণযোগ্য বেয়ারিংগুলো কনভেয়রের ওপর থাকা হাউজিংয়ে বসায়। ব্যবস্থাটিতে পাঁচটি দিকনিয়ন্ত্রণ ভালভ, পাঁচটি বায়ুচালিত সিলিন্ডার ও বারোটি সেন্সর রয়েছে।",
+    "documentation": "প্রকল্পের নথি (PDF)",
+    "partsTitle": "স্বয়ংক্রিয় যন্ত্রাংশ স্থানান্তর ব্যবস্থা",
+    "partsDesc": "একটি উৎপাদন লাইনের প্রোটোটাইপ, যাতে ওয়েফার ওঠানো-সরানোর দুটি দ্বি-অক্ষীয় রোবট, দুটি Arduino UNO বোর্ড ও একটি Allen-Bradley ControlLogix PLC ব্যবহৃত হয়েছে। এটি আমার ইন্ডাস্ট্রিয়াল অটোমেশন শিক্ষাক্রমের সমাপনী প্রকল্প।",
+    "bikeTitle": "অ্যালুমিনিয়ামের মাউন্টেন বাইক ফ্রেম",
+    "bikeDesc": "৬০৬১ অ্যালুমিনিয়ামের তৈরি একটি ব্যবহারযোগ্য মাউন্টেন বাইক ফ্রেম, যার নকশা, নির্মাণ ও পরীক্ষা আমি করেছি। এই কাজে রিভার্স ইঞ্জিনিয়ারিং, যন্ত্রাংশের নকশা এবং অ্যালুমিনিয়ামের TIG ওয়েল্ডিং শেখার সমন্বয় ঘটেছে।",
+    "binocularsTitle": "মিটার-শ্রেণির অ্যাপারচারযুক্ত বহনযোগ্য দ্বিনেত্র দূরবীন",
+    "earlyStatus": "উন্মুক্ত উৎস · প্রাথমিক নকশা",
+    "binocularsDesc": "দুই চোখের জন্য সোজা প্রতিবিম্ব দেয় এমন একটি দ্বিনেত্র দূরবীনের ধারণা। নকশায় অবতল প্রাথমিক ও গৌণ দর্পণের সঙ্গে Nasmyth ধরনের তৃতীয় দর্পণ যুক্ত করা হয়েছে; প্রথম আলোকীয় পরীক্ষার জন্য ছোট আকারের মডেল ব্যবহার করা হয়।",
+    "ray": "রশ্মি অনুসরণের মডেল",
+    "telescopeTitle": "ট্রাস কাঠামোর নিউটনীয় দূরবীন",
+    "cadStatus": "উন্মুক্ত উৎস · CAD মডেল তৈরির কাজ চলছে",
+    "telescopeDesc": "ট্রাস কাঠামোর একটি ৮ ইঞ্চি নিউটনীয় দূরবীন, যাতে হাতে ঘষে তৈরি দর্পণ, CNC রাউটারে তৈরি কাঠের অংশ এবং ৮০টিরও বেশি অংশের একটি Onshape অ্যাসেম্বলি রয়েছে। CAD মডেল সম্পূর্ণ করার কাজ এখনও চলছে।",
+    "backTop": "ওপরে ফিরুন",
+    "meta": "Kurt J. Foster — অটোমেশন ও যন্ত্রপাতি রক্ষণাবেক্ষণ বিশেষজ্ঞ। কাজের অভিজ্ঞতা, শিক্ষা এবং উন্মুক্ত উৎসের বৈদ্যুতিক ও যান্ত্রিক প্রকল্প।",
+    "topLabel": "Kurt J. Foster, ওপরে ফিরুন",
+    "navLabel": "এই পৃষ্ঠায়",
+    "language": "ভাষা",
+    "changed": "ভাষা বাংলায় পরিবর্তন করা হয়েছে।"
+  },
+  "pt": {
+    "skip": "Ir para o conteúdo",
+    "theme": "Tema de leitura",
+    "light": "Claro",
+    "dark": "Escuro",
+    "subtitle": "Automação e manutenção de equipamentos",
+    "about1": "Sou especialista em automação e manutenção de equipamentos, com foco no reparo e na melhoria de máquinas de produção.",
+    "about2": "Também desenvolvo e construo projetos elétricos e mecânicos, de sistemas automatizados de dosagem a telescópios. Fora do trabalho, gosto de atividades ao ar livre, óptica e astronomia.",
+    "work": "Experiência profissional",
+    "education": "Formação",
+    "projects": "Projetos",
+    "roleManufacturing": "Técnico de manutenção de equipamentos de produção",
+    "work1": "Realizei manutenção e reparos em equipamentos de fabricação e embalagem, incluindo sistemas mecânicos, elétricos e pneumáticos. Apoiei a manutenção preventiva, as mudanças de formato das máquinas, os sistemas das instalações e a refrigeração com amônia.",
+    "rolePackaging": "Técnico de manutenção de equipamentos de embalagem",
+    "work2": "Diagnostiquei falhas em equipamentos de embalagem, fiz ajustes de produção e melhorei os procedimentos de manutenção preventiva. Mantive os procedimentos operacionais alinhados às alterações nos equipamentos e às necessidades de treinamento.",
+    "roleEquipment": "Técnico de manutenção de equipamentos",
+    "work3": "Realizei a manutenção de equipamentos de fabricação de conjuntos de propulsão e de mais de 70 robôs industriais FANUC em linhas de carcaças de baterias. Diagnostiquei falhas nas máquinas e reparei sistemas elétricos de 24 V em corrente contínua a 480 V em corrente alternada.",
+    "hp": "HP · Prestador de serviços via Kforce",
+    "roleRepair": "Técnico de reparo e manutenção",
+    "work4": "Reparei sistemas de automação industrial, editei programas de CLPs em linguagem ladder e diagnostiquei falhas elétricas e mecânicas. Documentei reparos, interpretei diagramas e apoiei o planejamento de peças de reposição.",
+    "roleAutomation": "Técnico de sistemas de automação",
+    "work5": "Projetei, construí e testei protótipos automatizados de dosagem de nutrientes por gravidade para hidroponia. Desenvolvi modelos CAD e desenhos elétricos, programei CLPs e microcontroladores e testei a confiabilidade dos componentes.",
+    "work6": "Realizei a manutenção de equipamentos automatizados na fabricação de conjuntos de propulsão, incluindo as linhas de montagem e teste das unidades de propulsão do Model 3 e as linhas Raven. Diagnostiquei falhas e restabeleci o funcionamento de sistemas mecânicos e elétricos.",
+    "work7": "Desenvolvi protótipos de dosagem de nutrientes para agricultura automatizada. Elaborei desenhos mecânicos, elétricos e de circuitos de fluidos; montei equipamentos; e fiz a fiação e a programação de sistemas de controle de processos.",
+    "work8": "Apoiei o aumento da produção nas linhas de módulos de bateria e unidades de propulsão do Model 3. Diagnostiquei falhas em equipamentos, reparei máquinas automatizadas e ajudei a recuperar mais de 500 unidades de propulsão rejeitadas na produção no segundo trimestre de 2019.",
+    "roleIntern": "Estagiário de técnico em automação",
+    "work9": "Montei e testei equipamentos de fabricação personalizados para o caminhão elétrico da Daimler e células de teste de alinhamento óptico para o visor Steam VR. Construí painéis de controle e fiz a fiação de conectores complexos.",
+    "degree": "Associate of Applied Science (A.A.S.) em Tecnologia de Automação Industrial",
+    "schoolLocation": "Albany, OR · Média acadêmica (GPA): 3,94 / 4,00",
+    "studies": "Estudei CLPs, diagnóstico de falhas elétricas, manutenção industrial, hidráulica e pneumática, controle de processos e montagem eletromecânica.",
+    "capstone": "No meu projeto de conclusão de curso, integrei dois braços robóticos de manuseio de wafers a um protótipo de linha de produção usando placas Arduino UNO, um CLP Allen-Bradley ControlLogix série 5000, C++ e linguagem ladder.",
+    "projectsIntro": "Projetos elétricos e mecânicos de código aberto, com mais de 100 páginas de documentação, diagramas e arquivos CAD. Todos os projetos são compartilhados sob a licença MIT.",
+    "dosingTitle": "Unidade de dosagem automática",
+    "dosingStatus": "Código aberto · Montagem e testes",
+    "dosingDesc": "Um sistema automatizado de dosagem por gravidade para hidroponia e outras aplicações de fornecimento de fluidos. Projetei, construí e testei o sistema, incluindo um conjunto CAD com mais de 700 peças. O trabalho atual se concentra na confiabilidade dos componentes a longo prazo.",
+    "schematic": "Diagrama elétrico (PDF)",
+    "bearingTitle": "Máquina de alimentação e posicionamento de rolamentos",
+    "completeStatus": "Projeto acadêmico · Concluído",
+    "bearingDesc": "Uma máquina pneumática que classifica rolamentos pela largura e coloca os aprovados em alojamentos sobre um transportador. O sistema utiliza cinco válvulas de controle direcional, cinco cilindros pneumáticos e doze sensores.",
+    "documentation": "Documentação (PDF)",
+    "partsTitle": "Sistema automatizado de transferência de peças",
+    "partsDesc": "Um protótipo de linha de produção que utiliza dois robôs de dois eixos para manuseio de wafers, duas placas Arduino UNO e um CLP Allen-Bradley ControlLogix. Desenvolvido como meu projeto de conclusão de curso em automação industrial.",
+    "bikeTitle": "Quadro de alumínio para mountain bike",
+    "bikeDesc": "Um quadro funcional de alumínio 6061 para mountain bike que projetei, construí e testei. O trabalho combinou engenharia reversa, projeto de componentes e aprendizado de soldagem TIG de alumínio.",
+    "binocularsTitle": "Telescópio binocular portátil de abertura métrica",
+    "earlyStatus": "Código aberto · Projeto inicial",
+    "binocularsDesc": "Um conceito de telescópio binocular que fornece uma imagem direita para ambos os olhos. O projeto combina espelhos primário e secundário côncavos com um espelho terciário do tipo Nasmyth; um modelo em escala reduzida serve como primeiro teste óptico.",
+    "ray": "Modelo de traçado de raios",
+    "telescopeTitle": "Telescópio newtoniano com estrutura treliçada",
+    "cadStatus": "Código aberto · Modelo CAD em desenvolvimento",
+    "telescopeDesc": "Um telescópio newtoniano de 8 polegadas com estrutura treliçada, incluindo um espelho desbastado à mão, peças de madeira fresadas por CNC e um conjunto no Onshape com mais de 80 peças. O modelo CAD ainda está sendo concluído.",
+    "backTop": "Voltar ao topo",
+    "meta": "Kurt J. Foster — especialista em automação e manutenção de equipamentos. Experiência profissional, formação e projetos elétricos e mecânicos de código aberto.",
+    "topLabel": "Kurt J. Foster, voltar ao topo",
+    "navLabel": "Nesta página",
+    "language": "Idioma",
+    "changed": "O idioma foi alterado para português."
+  },
+  "id": {
+    "skip": "Langsung ke konten",
+    "theme": "Tema tampilan",
+    "light": "Terang",
+    "dark": "Gelap",
+    "subtitle": "Otomasi dan pemeliharaan peralatan",
+    "about1": "Saya adalah spesialis otomasi dan pemeliharaan peralatan yang berfokus pada perbaikan dan peningkatan mesin manufaktur.",
+    "about2": "Saya juga merancang dan membuat proyek kelistrikan dan mekanik, mulai dari sistem penakaran otomatis hingga teleskop. Di luar pekerjaan, saya menyukai kegiatan di alam terbuka, optika, dan astronomi.",
+    "work": "Pengalaman kerja",
+    "education": "Pendidikan",
+    "projects": "Proyek",
+    "roleManufacturing": "Teknisi Pemeliharaan Peralatan Manufaktur",
+    "work1": "Memelihara dan memperbaiki peralatan manufaktur dan pengemasan, termasuk sistem mekanik, listrik, dan pneumatik. Mendukung pemeliharaan preventif, pergantian konfigurasi mesin untuk produksi, sistem fasilitas, dan sistem refrigerasi amonia.",
+    "rolePackaging": "Teknisi Pemeliharaan Peralatan Pengemasan",
+    "work2": "Mendiagnosis gangguan peralatan pengemasan, melakukan penyesuaian produksi, dan menyempurnakan prosedur pemeliharaan preventif. Menyesuaikan prosedur operasi dengan perubahan peralatan dan kebutuhan pelatihan.",
+    "roleEquipment": "Teknisi Pemeliharaan Peralatan",
+    "work3": "Memelihara peralatan manufaktur sistem penggerak dan lebih dari 70 robot industri FANUC pada lini produksi rumah baterai. Mendiagnosis kerusakan mesin dan memperbaiki sistem listrik dari 24 VDC hingga 480 VAC.",
+    "hp": "HP · Kontraktor melalui Kforce",
+    "roleRepair": "Teknisi Perbaikan dan Pemeliharaan",
+    "work4": "Memperbaiki sistem otomasi industri, menyunting program PLC dalam bahasa ladder, dan mendiagnosis gangguan listrik serta mekanik. Mendokumentasikan perbaikan, membaca diagram skematik, dan mendukung perencanaan suku cadang.",
+    "roleAutomation": "Teknisi Sistem Otomasi",
+    "work5": "Merancang, membuat, dan menguji prototipe penakaran nutrisi otomatis dengan aliran gravitasi untuk hidroponik. Mengembangkan model CAD dan gambar kelistrikan, memprogram PLC serta mikrokontroler, dan menguji keandalan komponen.",
+    "work6": "Memelihara peralatan otomatis dalam manufaktur sistem penggerak, termasuk lini perakitan dan pengujian unit penggerak Model 3 serta lini Raven. Mendiagnosis kerusakan dan memulihkan fungsi sistem mekanik dan listrik.",
+    "work7": "Mengembangkan prototipe penakaran nutrisi untuk pertanian otomatis. Membuat gambar mekanik, kelistrikan, dan sistem fluida; merakit peralatan; serta memasang kabel dan memprogram sistem kendali proses.",
+    "work8": "Mendukung peningkatan kapasitas produksi pada lini modul baterai dan unit penggerak Model 3. Mendiagnosis kerusakan peralatan, memperbaiki mesin otomatis, dan membantu memulihkan lebih dari 500 unit penggerak yang ditolak dalam proses produksi pada kuartal kedua 2019.",
+    "roleIntern": "Teknisi Otomasi Magang",
+    "work9": "Merakit dan menguji peralatan manufaktur khusus untuk truk listrik Daimler serta sel uji penyelarasan optik untuk headset Steam VR. Membuat panel kontrol dan memasang kabel pada konektor yang kompleks.",
+    "degree": "Associate of Applied Science (A.A.S.), Teknologi Otomasi Industri",
+    "schoolLocation": "Albany, OR · IPK 3,94 / 4,00",
+    "studies": "Mempelajari PLC, diagnosis gangguan listrik, pemeliharaan industri, hidraulika dan pneumatika, kendali proses, serta perakitan elektromekanik.",
+    "capstone": "Untuk proyek akhir, saya mengintegrasikan dua lengan robot penanganan wafer ke dalam prototipe lini produksi menggunakan papan Arduino UNO, PLC Allen-Bradley ControlLogix seri 5000, C++, dan bahasa ladder.",
+    "projectsIntro": "Proyek kelistrikan dan mekanik sumber terbuka, disertai lebih dari 100 halaman dokumentasi, diagram skematik, dan berkas CAD. Semua proyek dibagikan di bawah Lisensi MIT.",
+    "dosingTitle": "Unit Penakaran Otomatis",
+    "dosingStatus": "Sumber terbuka · Perakitan dan pengujian",
+    "dosingDesc": "Sistem penakaran otomatis dengan aliran gravitasi untuk hidroponik dan aplikasi penyaluran fluida lainnya. Saya merancang, membuat, dan menguji sistem ini, termasuk rakitan CAD dengan lebih dari 700 komponen. Pekerjaan saat ini berfokus pada keandalan komponen dalam jangka panjang.",
+    "schematic": "Diagram kelistrikan (PDF)",
+    "bearingTitle": "Mesin Pengumpan dan Penempatan Bantalan",
+    "completeStatus": "Proyek akademik · Selesai",
+    "bearingDesc": "Mesin pneumatik yang memilah bantalan berdasarkan lebarnya, lalu menempatkan bantalan yang lolos seleksi ke dalam rumah bantalan di atas konveyor. Sistem ini menggunakan lima katup pengarah, lima silinder pneumatik, dan dua belas sensor.",
+    "documentation": "Dokumentasi (PDF)",
+    "partsTitle": "Sistem Pemindahan Komponen Otomatis",
+    "partsDesc": "Prototipe lini produksi yang menggunakan dua robot penanganan wafer dua sumbu, dua papan Arduino UNO, dan PLC Allen-Bradley ControlLogix. Dikembangkan sebagai proyek akhir otomasi industri saya.",
+    "bikeTitle": "Rangka Sepeda Gunung Aluminium",
+    "bikeDesc": "Rangka sepeda gunung fungsional berbahan aluminium 6061 yang saya rancang, buat, dan uji. Pekerjaan ini memadukan rekayasa balik, perancangan komponen, dan pembelajaran pengelasan TIG aluminium.",
+    "binocularsTitle": "Teleskop Binokular Portabel Kelas Meter",
+    "earlyStatus": "Sumber terbuka · Desain awal",
+    "binocularsDesc": "Konsep teleskop binokular dengan citra tegak untuk kedua mata. Desainnya menggabungkan cermin primer dan sekunder cekung dengan cermin tersier bergaya Nasmyth; model berskala kecil digunakan untuk pengujian optik pertama.",
+    "ray": "Model pelacakan sinar",
+    "telescopeTitle": "Teleskop Newtonian dengan Rangka Batang",
+    "cadStatus": "Sumber terbuka · Pemodelan CAD berlangsung",
+    "telescopeDesc": "Teleskop Newtonian 8 inci dengan rangka batang, termasuk cermin yang digerinda secara manual, komponen kayu yang difrais menggunakan CNC, dan rakitan Onshape dengan lebih dari 80 komponen. Model CAD masih dalam proses penyelesaian.",
+    "backTop": "Kembali ke atas",
+    "meta": "Kurt J. Foster — spesialis otomasi dan pemeliharaan peralatan. Pengalaman kerja, pendidikan, serta proyek kelistrikan dan mekanik sumber terbuka.",
+    "topLabel": "Kurt J. Foster, kembali ke atas",
+    "navLabel": "Di halaman ini",
+    "language": "Bahasa",
+    "changed": "Bahasa telah diubah ke bahasa Indonesia."
+  },
+  "ur": {
+    "skip": "مرکزی مواد پر جائیں",
+    "theme": "مطالعے کی تھیم",
+    "light": "روشن",
+    "dark": "تاریک",
+    "subtitle": "خودکاری اور آلات کی دیکھ بھال",
+    "about1": "میں خودکاری اور آلات کی دیکھ بھال کا ماہر ہوں۔ میری توجہ پیداواری مشینری کی مرمت اور بہتری پر ہے۔",
+    "about2": "میں خودکار ڈوزنگ نظاموں سے لے کر دوربینوں تک برقی اور میکانی منصوبوں کا ڈیزائن اور تعمیر بھی کرتا ہوں۔ کام کے علاوہ مجھے کھلی فضا میں سرگرمیاں، بصریات اور فلکیات پسند ہیں۔",
+    "work": "پیشہ ورانہ تجربہ",
+    "education": "تعلیم",
+    "projects": "منصوبے",
+    "roleManufacturing": "پیداواری آلات کی دیکھ بھال کا ٹیکنیشن",
+    "work1": "پیداواری اور پیکیجنگ آلات کی دیکھ بھال اور مرمت کی، جن میں میکانی، برقی اور ہوا کے دباؤ سے چلنے والے نظام شامل تھے۔ احتیاطی دیکھ بھال، مصنوعات بدلنے پر مشینوں کی ترتیب تبدیل کرنے، عمارت کی معاون تنصیبات اور امونیا ریفریجریشن کے کاموں میں تعاون کیا۔",
+    "rolePackaging": "پیکیجنگ آلات کی دیکھ بھال کا ٹیکنیشن",
+    "work2": "پیکیجنگ آلات کی خرابیوں کی تشخیص کی، پیداوار کے لیے ضروری ردوبدل کیے اور احتیاطی دیکھ بھال کے طریقے بہتر بنائے۔ آلات میں تبدیلیوں اور تربیتی ضروریات کے مطابق عملی طریقۂ کار کو تازہ رکھا۔",
+    "roleEquipment": "آلات کی دیکھ بھال کا ٹیکنیشن",
+    "work3": "پاورٹرین بنانے والے آلات اور بیٹریوں کے خول بنانے والی لائنوں پر 70 سے زیادہ FANUC صنعتی روبوٹوں کی دیکھ بھال کی۔ مشینوں کی خرابیوں کی تشخیص کی اور 24 وولٹ ڈی سی سے 480 وولٹ اے سی تک کے برقی نظاموں کی مرمت کی۔",
+    "hp": "HP · Kforce کے ذریعے معاہدے پر کام",
+    "roleRepair": "مرمت اور دیکھ بھال کا ٹیکنیشن",
+    "work4": "صنعتی خودکاری کے نظاموں کی مرمت کی، PLC کے لیڈر لاجک پروگراموں میں تبدیلیاں کیں اور برقی و میکانی خرابیوں کی تشخیص کی۔ مرمت کا ریکارڈ رکھا، برقی خاکوں کو سمجھ کر کام کیا اور فاضل پرزوں کی منصوبہ بندی میں تعاون کیا۔",
+    "roleAutomation": "خودکار نظاموں کا ٹیکنیشن",
+    "work5": "ہائیڈروپونکس کے لیے کششِ ثقل سے غذائی محلول پہنچانے والے خودکار ڈوزنگ نمونوں کا ڈیزائن، تعمیر اور تجربہ کیا۔ CAD ماڈل اور برقی نقشے تیار کیے، PLC اور مائیکروکنٹرولر پروگرام کیے اور پرزوں کی قابلِ اعتماد کارکردگی آزمائی۔",
+    "work6": "پاورٹرین کی تیاری میں خودکار آلات کی دیکھ بھال کی، جن میں Model 3 ڈرائیو یونٹ کی اسمبلنگ اور جانچ کی لائنیں اور Raven لائنیں شامل تھیں۔ خرابیوں کی تشخیص کی اور میکانی و برقی نظاموں کو دوبارہ فعال کیا۔",
+    "work7": "خودکار کاشت کاری کے لیے غذائی محلول کی مقررہ مقدار فراہم کرنے والے ابتدائی نمونے تیار کیے۔ میکانی، برقی اور سیالی نظاموں کے نقشے بنائے؛ آلات جوڑے؛ اور عمل پر قابو پانے والے نظاموں کی وائرنگ اور پروگرامنگ کی۔",
+    "work8": "Model 3 بیٹری ماڈیول اور ڈرائیو یونٹ کی لائنوں پر پیداوار بڑھانے میں تعاون کیا۔ آلات کی خرابیوں کی تشخیص کی، خودکار مشینری کی مرمت کی اور 2019 کی دوسری سہ ماہی میں پیداوار کے دوران مسترد ہونے والے 500 سے زیادہ ڈرائیو یونٹ دوبارہ قابلِ استعمال بنانے میں مدد کی۔",
+    "roleIntern": "زیرِ تربیت آٹومیشن ٹیکنیشن",
+    "work9": "Daimler کے برقی ٹرک کے لیے خصوصی پیداواری آلات اور Steam VR ہیڈسیٹ کے لیے بصری سیدھ جانچنے والے ٹیسٹ سیل جوڑے اور آزمائے۔ کنٹرول پینل بنائے اور پیچیدہ کنیکٹروں کی وائرنگ کی۔",
+    "degree": "صنعتی خودکاری کی ٹیکنالوجی میں ایسوسی ایٹ آف اپلائیڈ سائنس (A.A.S.)",
+    "schoolLocation": "Albany, OR · مجموعی گریڈ پوائنٹ اوسط (GPA): 3.94 / 4.00",
+    "studies": "PLC، برقی خرابیوں کی تشخیص، صنعتی دیکھ بھال، ہائیڈرولکس اور نیومیٹکس، عمل کے کنٹرول اور برقی و میکانی اسمبلنگ کا مطالعہ کیا۔",
+    "capstone": "اپنے اختتامی تعلیمی منصوبے میں Arduino UNO بورڈ، Allen-Bradley ControlLogix 5000 سیریز کے PLC، C++ اور لیڈر لاجک کی مدد سے ویفر سنبھالنے والے دو روبوٹک بازوؤں کو ایک پیداواری لائن کے ابتدائی نمونے میں یکجا کیا۔",
+    "projectsIntro": "کھلے ماخذ کے برقی اور میکانی منصوبے، جن کے ساتھ 100 سے زیادہ صفحات کی دستاویزات، برقی خاکے اور CAD فائلیں موجود ہیں۔ تمام منصوبے MIT لائسنس کے تحت فراہم کیے گئے ہیں۔",
+    "dosingTitle": "خودکار ڈوزنگ یونٹ",
+    "dosingStatus": "کھلا ماخذ · اسمبلنگ اور جانچ",
+    "dosingDesc": "ہائیڈروپونکس اور سیال پہنچانے کے دیگر استعمالات کے لیے کششِ ثقل پر مبنی خودکار ڈوزنگ نظام۔ میں نے اس نظام کا ڈیزائن، تعمیر اور جانچ کی، جس میں 700 سے زیادہ پرزوں کی CAD اسمبلی بھی شامل ہے۔ موجودہ کام پرزوں کی طویل مدتی قابلِ اعتماد کارکردگی پر مرکوز ہے۔",
+    "schematic": "برقی خاکہ (PDF)",
+    "bearingTitle": "بیئرنگ کی فراہمی اور تنصیب کی مشین",
+    "completeStatus": "تعلیمی منصوبہ · مکمل",
+    "bearingDesc": "ہوا کے دباؤ سے چلنے والی مشین جو بیئرنگ کو چوڑائی کے مطابق چھانٹتی ہے اور قابلِ قبول بیئرنگ کنویئر پر موجود ہاؤسنگ میں رکھتی ہے۔ نظام میں بہاؤ کی سمت قابو کرنے والے پانچ والو، پانچ نیومیٹک سلنڈر اور بارہ سینسر ہیں۔",
+    "documentation": "دستاویزات (PDF)",
+    "partsTitle": "پرزوں کی منتقلی کا خودکار نظام",
+    "partsDesc": "ایک پیداواری لائن کا ابتدائی نمونہ جس میں ویفر سنبھالنے والے دو دو-محوری روبوٹ، دو Arduino UNO بورڈ اور ایک Allen-Bradley ControlLogix PLC استعمال کیے گئے ہیں۔ یہ صنعتی خودکاری کی تعلیم کا میرا اختتامی منصوبہ تھا۔",
+    "bikeTitle": "ایلومینیم ماؤنٹین بائیک فریم",
+    "bikeDesc": "6061 ایلومینیم کا ایک قابلِ استعمال ماؤنٹین بائیک فریم، جس کا ڈیزائن، تعمیر اور جانچ میں نے کی۔ اس کام میں ریورس انجینئرنگ، پرزوں کا ڈیزائن اور ایلومینیم کی TIG ویلڈنگ سیکھنا شامل تھا۔",
+    "binocularsTitle": "میٹر درجے کے دہانے والی قابلِ حمل دوچشمی دوربین",
+    "earlyStatus": "کھلا ماخذ · ابتدائی ڈیزائن",
+    "binocularsDesc": "دوچشمی دوربین کا ایک تصور جو دونوں آنکھوں کو سیدھی تصویر دکھاتا ہے۔ ڈیزائن میں مقعر بنیادی اور ثانوی آئینوں کے ساتھ Nasmyth طرز کا تیسرا آئینہ شامل ہے؛ پہلے بصری تجربے کے لیے چھوٹے پیمانے کا ماڈل استعمال کیا جاتا ہے۔",
+    "ray": "شعاعوں کے راستے کا ماڈل",
+    "telescopeTitle": "جالی دار ڈھانچے والی نیوٹنی دوربین",
+    "cadStatus": "کھلا ماخذ · CAD ماڈل پر کام جاری",
+    "telescopeDesc": "جالی دار ڈھانچے والی 8 انچ کی نیوٹنی دوربین، جس میں ہاتھ سے گھسا ہوا آئینہ، CNC راؤٹر سے بنے لکڑی کے پرزے اور 80 سے زیادہ پرزوں کی Onshape اسمبلی شامل ہے۔ CAD ماڈل ابھی مکمل کیا جا رہا ہے۔",
+    "backTop": "صفحے کے اوپر واپس جائیں",
+    "meta": "Kurt J. Foster — خودکاری اور آلات کی دیکھ بھال کے ماہر۔ پیشہ ورانہ تجربہ، تعلیم اور کھلے ماخذ کے برقی و میکانی منصوبے۔",
+    "topLabel": "Kurt J. Foster، صفحے کے اوپر واپس جائیں",
+    "navLabel": "اس صفحے پر",
+    "language": "زبان",
+    "changed": "زبان اردو میں تبدیل کر دی گئی ہے۔"
+  }
+};
+    const languages = {
+  "en": {
+    "name": "English",
+    "short": "EN"
+  },
+  "zh-Hans": {
+    "name": "简体中文",
+    "short": "ZH"
+  },
+  "hi": {
+    "name": "हिन्दी",
+    "short": "HI"
+  },
+  "es": {
+    "name": "Español",
+    "short": "ES"
+  },
+  "ar": {
+    "name": "العربية",
+    "short": "AR",
+    "dir": "rtl"
+  },
+  "fr": {
+    "name": "Français",
+    "short": "FR"
+  },
+  "bn": {
+    "name": "বাংলা",
+    "short": "BN"
+  },
+  "pt": {
+    "name": "Português",
+    "short": "PT"
+  },
+  "id": {
+    "name": "Bahasa Indonesia",
+    "short": "ID"
+  },
+  "ur": {
+    "name": "اردو",
+    "short": "UR",
+    "dir": "rtl"
+  }
+};
+    const storageKey = 'kfost-language';
+    const root = document.documentElement;
+    const widget = document.querySelector('.language-widget');
+    const select = document.getElementById('language-select');
+    const codeLabel = document.getElementById('language-code');
+    const status = document.getElementById('language-status');
+    const textNodes = Array.from(document.querySelectorAll('[data-i18n]'));
+    const ariaNodes = Array.from(document.querySelectorAll('[data-i18n-aria-label]'));
+    const metaNodes = Array.from(document.querySelectorAll('[data-i18n-content]'));
+    const dateNodes = Array.from(document.querySelectorAll('[data-start], [data-year-range]'));
+    const originalDates = new Map(dateNodes.map(node => [node, node.textContent]));
+    const supported = code => Object.prototype.hasOwnProperty.call(messages, code);
+    const savedLanguage = () => {
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (supported(saved)) return saved;
+      } catch (_) { /* Switching still works if storage is blocked. */ }
+      return 'en';
+    };
+    // Isolate Latin identifiers and measurements inside right-to-left prose.
+    // DOM text nodes keep translations as text; no translated HTML is evaluated.
+    const writeText = (node, text, rtl) => {
+      node.textContent = '';
+      if (!rtl) { node.textContent = text; return; }
+      const parts = text.split(/([A-Za-z0-9][A-Za-z0-9 .,+/()\-]*[A-Za-z0-9+]|[A-Za-z0-9])/g);
+      for (let i = 0; i < parts.length; i++) {
+        if (i % 2) {
+          const isolate = document.createElement('bdi');
+          isolate.dir = 'ltr';
+          isolate.textContent = parts[i];
+          node.appendChild(isolate);
+        } else { node.appendChild(document.createTextNode(parts[i])); }
       }
-      system.addEventListener('change', () => { if (!preference) applyTheme(); });
-      window.addEventListener('storage', event => {
-        if (event.key === 'kfost-theme' || event.key === null) {
-          preference = event.newValue === 'dark' || event.newValue === 'light' ? event.newValue : null;
-          applyTheme();
-        }
+    };
+    const applyLanguage = (requested, announce = false) => {
+      const code = supported(requested) ? requested : 'en';
+      const strings = messages[code];
+      const rtl = languages[code].dir === 'rtl';
+      const text = key => strings[key] ?? messages.en[key] ?? '';
+      root.lang = code;
+      root.dir = rtl ? 'rtl' : 'ltr';
+      for (const node of textNodes) writeText(node, text(node.dataset.i18n), rtl);
+      for (const node of ariaNodes) {
+        const label = text(node.dataset.i18nAriaLabel);
+        node.setAttribute('aria-label', label);
+        if (node.matches('[data-theme-choice]')) node.title = label;
+      }
+      for (const node of metaNodes) node.content = text(node.dataset.i18nContent);
+      const dateFormat = new Intl.DateTimeFormat(code, {
+        month: 'short', year: 'numeric', calendar: 'gregory', timeZone: 'UTC'
       });
-      applyTheme();
-      controls.hidden = false;
-    })();
-  </script>
+      const numberFormat = new Intl.NumberFormat(code, {useGrouping: false});
+      for (const node of dateNodes) {
+        if (code === 'en') { node.textContent = originalDates.get(node); continue; }
+        if (node.dataset.yearRange) {
+          const range = node.dataset.yearRange.split(',').map(year => numberFormat.format(Number(year))).join(' – ');
+          const isolate = document.createElement('bdi');
+          isolate.dir = 'ltr';
+          isolate.textContent = range;
+          node.replaceChildren(isolate);
+        } else {
+          const start = new Date(node.dataset.start + '-01T12:00:00Z');
+          const end = new Date(node.dataset.end + '-01T12:00:00Z');
+          node.textContent = typeof dateFormat.formatRange === 'function'
+            ? dateFormat.formatRange(start, end)
+            : dateFormat.format(start) + ' – ' + dateFormat.format(end);
+        }
+      }
+      select.value = code;
+      codeLabel.textContent = languages[code].short;
+      select.title = text('language') + ': ' + languages[code].name;
+      if (announce) status.textContent = text('changed');
+      else status.textContent = '';
+    };
+    select.addEventListener('change', () => {
+      applyLanguage(select.value, true);
+      try { localStorage.setItem(storageKey, select.value); } catch (_) {}
+    });
+    window.addEventListener('storage', event => {
+      if (event.key === storageKey || event.key === null) applyLanguage(savedLanguage());
+    });
+    applyLanguage(savedLanguage());
+    widget.hidden = false;
+  })();
+</script>
 </body>
-</html>
+</html> 
