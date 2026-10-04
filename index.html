@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurt J. Foster</title>
-
     <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <!-- Google Fonts: Inter (body), Space Grotesk (display), JetBrains Mono (technical readouts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS Reset & Base Styles --- */
         :root {
             --bg-color: #0a0d0e;
             --bg-color-raised: #0e1214;
@@ -26,7 +20,7 @@
             --border-color-strong: #333c40;
             --primary-text-color: #eef2f2;
             --secondary-text-color: #92999c;
-            --accent-color: #2DD4BF; /* Teal accent */
+            --accent-color: #2DD4BF;
             --accent-color-dim: rgba(45, 212, 191, 0.14);
             --status-progress: #60a5fa;
             --status-done: #34d399;
@@ -37,7 +31,7 @@
             --font-display: 'Space Grotesk', 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
 
-            --avatar-size: 96px;     /* change to taste (orginally 72px)*/
+            --avatar-size: 96px;
             --avatar-border: 4px;
             --gap: 1rem;
             --nav-height: 68px;
@@ -86,7 +80,6 @@
             padding: 0 var(--container-padding);
         }
 
-        /* Anchor targets sit below the sticky nav */
         section[id] {
             scroll-margin-top: var(--nav-height);
         }
@@ -152,7 +145,6 @@
             border-radius: 4px;
         }
 
-        /* --- Sticky Nav --- */
         .site-nav {
             position: sticky;
             top: 0;
@@ -239,8 +231,7 @@
         .nav-links a.active {
             color: var(--accent-color);
         }
-
-        /* --- Nav Icon Links (email / resume / LinkedIn / blog) --- */
+		
         .nav-icons {
             display: flex;
             align-items: center;
@@ -345,8 +336,7 @@
                 display: none;
             }
         }
-
-        /* --- Header / Hero Section --- */
+		
         .hero {
             position: relative;
             min-height: calc(100dvh - var(--nav-height));
@@ -358,7 +348,6 @@
             isolation: isolate;
         }
 
-        /* Decorative schematic grid, kept on its own layer so it never fades page text */
         .hero::before {
             content: '';
             position: absolute;
@@ -411,27 +400,23 @@
             flex-wrap: wrap;
         }
 
-        /* Container aligns avatar to the left of the name and centers vertically */
         .profile{
             display: inline-flex;
             align-items: center;
             gap: var(--gap);
-            /* adjust spacing/flow for small screens */
             flex-wrap: nowrap;
         }
 
-        /* Circular face image with consistent cropping and accent border */
         .avatar{
             width: var(--avatar-size);
             height: var(--avatar-size);
             border-radius: 50%;
             border: var(--avatar-border) solid var(--accent-color);
-            object-fit: cover;          /* crop to fill circle */
+            object-fit: cover;
             display: block;
-            background-color: #f3f4f6;  /* subtle fallback bg if image has transparency */
+            background-color: #f3f4f6;
         }
 
-        /* Name styles — adapt to your site's type scale */
         .name{
             margin: 0;
             font-size: 1.125rem;
@@ -439,13 +424,11 @@
             line-height: 1;
         }
 
-        /* Responsive: reduce avatar on narrow screens */
         @media (max-width: 420px){
             :root { --avatar-size: 56px; --avatar-border: 3px; --gap: 0.6rem; }
             .name{ font-size: 1rem; }
         }
 
-        /* Optional: use keyboard-focus-visible outline on avatar if clickable later */
         .avatar:focus{
             outline: 2px solid rgba(45,212,191,0.25);
             outline-offset: 3px;
@@ -477,15 +460,13 @@
             transform: translateY(-1px);
         }
 
-        /* --- Grid Layout for Cards --- */
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Always one column */
+            grid-template-columns: 1fr;
             gap: 1rem;
             margin-top: 2rem;
         }
-
-        /* --- Card Styling --- */
+		
         .card {
             position: relative;
             background-color: var(--card-color);
@@ -507,7 +488,6 @@
         }
 
         .card::after {
-            /* Small expand/collapse indicator, mirrors an HMI toggle affordance */
             content: '+';
             position: absolute;
             top: 1.4rem;
@@ -546,7 +526,7 @@
             width: 52px;
             height: 52px;
             border-radius: 8px;
-            background-color: #2c2c2c; /* Placeholder for logo */
+            background-color: #2c2c2c;
             flex-shrink: 0;
             border: 1px solid var(--border-color);
         }
@@ -577,7 +557,6 @@
             margin-bottom: 1rem;
         }
 
-        /* --- Status readouts (HMI-style indicator for project state) --- */
         .status {
             display: inline-flex;
             align-items: center;
@@ -636,7 +615,6 @@
             50% { opacity: 0.4; }
         }
         
-        /* --- Card Expansion on Click --- */
         .card .details {
             max-height: 0;
             opacity: 0;
@@ -646,9 +624,9 @@
         }
 
         .card.expanded .details {
-            max-height: 900px; /* Adjust as needed for content */
+            max-height: 900px;
             opacity: 1;
-            margin-top: 1.5rem; /* Add space when expanded */
+            margin-top: 1.5rem;
         }
 
         .card .details ul {
@@ -661,7 +639,6 @@
             color: var(--secondary-text-color);
         }
         
-        /* --- "View More" Functionality --- */
         .view-more-container {
             text-align: center;
             margin-top: 2rem;
@@ -681,8 +658,6 @@
             display: none;
         }
         
-        /* --- Animations for Showing/Hiding Cards --- */
-        /* ADDED: Keyframes for both fade-in and fade-out animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -693,17 +668,14 @@
             to { opacity: 0; transform: translateY(20px); }
         }
 
-        /* Class to trigger the fade-in animation */
         .card.revealed {
             animation: fadeIn 0.6s ease-out forwards;
         }
 
-        /* ADDED: Class to trigger the fade-out animation */
         .card.hiding {
             animation: fadeOut 0.6s ease-out forwards;
         }
         
-        /* --- Footer --- */
         .footer {
             text-align: center;
             padding: 3.5rem 2rem 2.5rem;
@@ -730,7 +702,6 @@
             color: #5c6366;
         }
 
-        /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
             :root {
                 --container-padding: 1.25rem;
@@ -790,14 +761,12 @@
 </head>
 <body>
 
-    <!-- Sticky Nav -->
     <nav class="site-nav" id="site-nav">
         <div class="container">
             <a href="#" class="nav-brand">Kurt J. Foster <span class="nav-brand-tag">// INDUSTRIAL AUTOMATION</span></a>
         </div>
     </nav>
-
-    <!-- Hero Section -->
+	
     <header class="hero container">
         <div class="profile">
             <h1 class="name" style="font-size: 36px;">Kurt J. Foster</h1>
@@ -815,42 +784,10 @@
     </header>
 
     <main>
-        <!-- Work History Section -->
         <section id="work" class="container">
             <h2>Work History</h2>
             <p>Detailed Work History</p>
             <div class="card-grid" id="work-grid">
-            <!--
-                <div class="card">
-                    <div class="card-main-info">
-                        <div class="card-logo">
-							<img src="images/tesla-logo.jpg" alt="Tesla Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-						</div>
-                        <div class="card-text-content">
-                            <h3>Equipment Maintenance Technician<span class="badge-current"><span class="status-dot"></span>Current</span></h3>
-                            <p class="company">Tesla, Inc. · Full-time</p>
-                            <p class="date">Sep 2026 - Present · 1 mos <br> Sparks, Nevada, United States</p>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <p>Responsible for repairing manufacturing equipment in Battery Manufacturing.</p><br>
-						<p>Applied technical skills to install, maintain and repair high-speed high-volume mechanical and electrical systems, factory automation and robotics.</p><br>
-                        <ul>
-                            <li>First responding problem-solver managing machine breakdowns and full recovery.</li>
-							<li>Diagnosing machine faults and laying out plan to execute repair or escalation procedure.</li>
-							<li>Electrical systems ranging from 24VDC to 480VAC 3-phase.</li>
-							<li>Repaired automated machinery, requiring full knowledge of the functional operation.</li>
-							<li>Communicated with supervisors and management for fast repair execution.</li>
-							<li>Talked with production associates on production ergonomics and improving machine output.</li>
-                        </ul><br>
-						<p><b>Work History:</b></p><br>
-						<p>
-							Sep—Present 2026 • 1 mos<br>
-							Energy Production Lines<br><br>
-						</p>
-                    </div>
-                </div>
-            -->
                 <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -900,7 +837,6 @@
                     </div>
                 </div>
 
-                <!-- Hidden Cards -->
                 <div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -1116,7 +1052,6 @@
 
 		<br><br><br>
 
-        <!-- Education Section -->
         <section id="education" class="container">
             <h2>Education</h2>
 			<p>My Completed Education</p>
@@ -1152,12 +1087,10 @@
 		
 		<br><br><br>
 
-        <!-- Projects Section -->
         <section id="projects" class="container">
             <h2>Projects</h2>
             <p>My projects showcase electro-mechanical designs with 100+ pages of documentation, schematics, and CAD files, including an assembly with 700+ parts. All projects are open-source under the MIT License for unrestricted use.</p>
             <div class="card-grid" id="project-grid">
-                <!-- CHANGED: Made 3 cards visible initially -->
                 <div class="card">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -1213,7 +1146,6 @@
                     </div>
                 </div>
 
-                <!-- Hidden Cards -->
 				<div class="card hidden">
                     <div class="card-main-info">
                         <div class="card-logo">
@@ -1289,8 +1221,7 @@
 		<br><br><br>
 
     </main>
-
-    <!-- Footer Section -->
+	
     <footer class="footer">
         <p class="footer-tools">Tools I Use: Onshape for 3D CAD, Graebert Ares Commander for 2D CAD, various IDE's for microcontroller programming. Thank you for visiting my site.</p>
         <p class="copyright">&copy; 2026 by Kurt J. Foster</p>
@@ -1299,7 +1230,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // --- Mobile Nav Toggle ---
             const siteNav = document.getElementById('site-nav');
             const navToggle = document.getElementById('nav-toggle');
             const navLinks = document.getElementById('nav-links');
@@ -1310,7 +1240,6 @@
                     navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                 });
 
-                // Close the mobile menu after a nav link is tapped
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         siteNav.classList.remove('open');
@@ -1319,7 +1248,6 @@
                 });
             }
 
-            // --- Scroll-spy: highlight the current section in the nav ---
             const navAnchors = navLinks ? Array.from(navLinks.querySelectorAll('a')) : [];
             const spySections = navAnchors
                 .map(a => document.querySelector(a.getAttribute('href')))
@@ -1340,7 +1268,6 @@
                 spySections.forEach(section => spyObserver.observe(section));
             }
 
-            // --- Card Click-to-Toggle Functionality ---
             const allCards = document.querySelectorAll('.card');
             allCards.forEach(card => {
                 card.addEventListener('click', function(event) {
@@ -1352,18 +1279,14 @@
                 });
             });
 
-            // --- "View More" Button Functionality ---
-            // CHANGED: Rewrote this section to handle the new fade-out animation
             const viewMoreButtons = document.querySelectorAll('.view-more-btn');
             viewMoreButtons.forEach(button => {
                 const targetGridId = button.getAttribute('data-target');
                 const grid = document.getElementById(targetGridId);
                 if (!grid) return;
 
-                // Select only the cards that are initially hidden
                 const cardsToToggle = grid.querySelectorAll('.card.hidden');
                 
-                // If there are no hidden cards, hide the button entirely
                 if (cardsToToggle.length === 0) {
                     if(button.parentNode) {
                         button.parentNode.style.display = 'none';
@@ -1375,30 +1298,24 @@
                     const isExpanded = this.textContent.trim() === 'View Less';
 
                     if (isExpanded) {
-                        // --- HIDE CARDS (View Less) ---
                         this.textContent = 'View More';
                         this.classList.remove('is-expanded');
                         cardsToToggle.forEach(card => {
-                            card.classList.remove('expanded'); // Collapse details
-                            card.classList.remove('revealed'); // This class has the fadeIn animation
-                            card.classList.add('hiding');      // This class triggers the fadeOut animation
-
-                            // Use an event listener to set display:none after the animation finishes
+                            card.classList.remove('expanded');
+                            card.classList.remove('revealed');
+                            card.classList.add('hiding');
                             card.addEventListener('animationend', (e) => {
-                                // Check if the animation that ended is the fadeOut
                                 if (e.animationName === 'fadeOut') {
-                                    card.style.display = 'none'; // Hide the element
-                                    card.classList.remove('hiding'); // Clean up class
+                                    card.style.display = 'none';
+                                    card.classList.remove('hiding');
                                 }
-                            }, { once: true }); // Listener runs once and removes itself
+                            }, { once: true });
                         });
                     } else {
-                        // --- SHOW CARDS (View More) ---
                         this.textContent = 'View Less';
                         this.classList.add('is-expanded');
                         cardsToToggle.forEach((card, index) => {
-                            card.style.display = 'flex'; // Make element visible to animate it
-                            // Stagger the animation for a nice effect
+                            card.style.display = 'flex';
                             setTimeout(() => {
                                 card.classList.add('revealed');
                             }, index * 100); 
